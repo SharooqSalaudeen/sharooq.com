@@ -21,14 +21,14 @@ export const sourceImages: boolean = false
 export const rssFeed: boolean = true
 
 // Ghost Member Subscriptions
-export const memberSubscriptions: boolean = true
+export const memberSubscriptions: boolean = false
 
 // Commenting system
 export type CommentingSystem = 'commento' | 'disqus' | null
 export const commenting: CommentingSystem = null
 
 export const commentoUrl: string = 'https://cdn.commento.io' // 'https://commento.your-blog.com'
-export const disqusShortname: string = 'short-name-goes-here'
+export const disqusShortname: string = 'short-name-here'
 
 // PrismJS
 export const prism: boolean = true
