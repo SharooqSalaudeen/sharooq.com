@@ -31,15 +31,15 @@ export const commentoUrl: string = 'https://cdn.commento.io' // 'https://comment
 export const disqusShortname: string = 'short-name-oes-here'
 
 // PrismJS
-export const prism: boolean = true
-export const prismIgnoreMissing: boolean = true
+export const prism: boolean = false
+export const prismIgnoreMissing: boolean = false
 
 // Contact Page
-export const contactPage: boolean = true
+export const contactPage: boolean = false
 export const customPage = {}
 
 // Table of Contents
-export const toc: boolean = true
+export const toc: boolean = false
 export const maxDepth: number = 2
 
 // Custom site navigation (default: [], label is case sensitive)
