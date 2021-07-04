@@ -18,7 +18,7 @@ export const imageQuality: number = 80
 export const sourceImages: boolean = false
 
 // RSS
-export const rssFeed: boolean = true
+export const rssFeed: boolean = false
 
 // Ghost Member Subscriptions
 export const memberSubscriptions: boolean = false
