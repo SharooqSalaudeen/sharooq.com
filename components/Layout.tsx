@@ -3,8 +3,8 @@ import Link from 'next/link'
 
 import { DocumentHead } from '@components/DocumentHead'
 import { StickyNav } from '@components/StickyNav'
-import { SubscribeOverlay } from '@components/SubscribeOverlay'
-import { SubscribeSuccess } from '@components/SubscribeSuccess'
+// import { SubscribeOverlay } from '@components/SubscribeOverlay'
+// import { SubscribeSuccess } from '@components/SubscribeSuccess'
 
 import { getLang, get } from '@utils/use-lang'
 import { GhostSettings } from '@lib/ghost'
@@ -90,10 +90,10 @@ export const Layout = ({ settings, header, children, isHome, sticky, previewPost
         </footer>
       </div>
 
-      {memberSubscriptions && <SubscribeSuccess {...{ title, lang }} />}
+      {/* {memberSubscriptions && <SubscribeSuccess {...{ title }} />} */}
 
       {/* The big email subscribe modal content */}
-      {memberSubscriptions && <SubscribeOverlay {...{ settings }} />}
+      {/* {memberSubscriptions && <SubscribeOverlay {...{ settings }} />} */}
     </>
   )
 }
