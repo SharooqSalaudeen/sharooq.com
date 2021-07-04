@@ -1,4 +1,4 @@
-import { GhostPostOrPage } from "./ghost"
+import { GhostPostOrPage } from './ghost'
 import { ServiceConfig } from '@components/contact/ContactForm'
 
 export interface ContactPage extends GhostPostOrPage {
@@ -24,7 +24,7 @@ export const defaultPage: ContactPage = {
     url: 'https://static.gotsby.org/v1/assets/images/gatsby-ghost-contact.png',
     dimensions: {
       width: 1040,
-      height: 250
-    }
-  }
+      height: 250,
+    },
+  },
 }
