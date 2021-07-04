@@ -118,7 +118,7 @@ export const Post = ({ cmsData }: PostProps) => {
                   </div>
                 </header>
 
-                {featImg &&
+                {/* {featImg &&
                   (nextImages.feature && featImg.dimensions ? (
                     <figure className="post-full-image" style={{ display: 'inherit' }}>
                       <Image
@@ -142,7 +142,7 @@ export const Post = ({ cmsData }: PostProps) => {
                         <img src={post.feature_image} alt={title} />
                       </figure>
                     )
-                  ))}
+                  ))} */}
 
                 <section className="post-full-content">
                   {toc.enable && !!post.toc && <TableOfContents {...{ toc: post.toc, url: resolveUrl({ cmsUrl, collectionPath, slug, url }), maxDepth: toc.maxDepth }} />}

@@ -32,8 +32,10 @@ export const PostCard = ({ settings, post, num, isHome }: PostCardProps) => {
   const authors = post?.authors?.filter((_, i) => (i < 2 ? true : false))
 
   return (
-    <article className={`post-card ${postClass} ${large}`}>
-      {featImg && (
+    //Sharooq Commented
+    // <article className={`post-card ${postClass} ${large}`}>
+    <article className={`post-card ${postClass}`}>
+      {/* {featImg && (
         <Link href={url}>
           <a className="post-card-image-link" aria-label={post.title}>
             {nextImages.feature ? (
@@ -52,7 +54,7 @@ export const PostCard = ({ settings, post, num, isHome }: PostCardProps) => {
             )}
           </a>
         </Link>
-      )}
+      )} */}
 
       <div className="post-card-content">
         <Link href={url}>
