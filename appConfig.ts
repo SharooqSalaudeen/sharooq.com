@@ -18,7 +18,7 @@ export const imageQuality: number = 80
 export const sourceImages: boolean = false
 
 // RSS
-export const rssFeed: boolean = false
+export const rssFeed: boolean = true
 
 // Ghost Member Subscriptions
 export const memberSubscriptions: boolean = false
@@ -31,15 +31,15 @@ export const commentoUrl: string = 'https://cdn.commento.io' // 'https://comment
 export const disqusShortname: string = 'short-name-oes-here'
 
 // PrismJS
-export const prism: boolean = false
-export const prismIgnoreMissing: boolean = false
+export const prism: boolean = true
+export const prismIgnoreMissing: boolean = true
 
 // Contact Page
-export const contactPage: boolean = false
+export const contactPage: boolean = true
 export const customPage = {}
 
 // Table of Contents
-export const toc: boolean = false
+export const toc: boolean = true
 export const maxDepth: number = 2
 
 // Custom site navigation (default: [], label is case sensitive)
