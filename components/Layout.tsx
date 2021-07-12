@@ -81,7 +81,7 @@ export const Layout = ({ settings, header, children, isHome, sticky, previewPost
                   Twitter
                 </a>
               )}
-              <a href="https://www.sharooqsalaudeen.github.io" target="_blank" rel="noopener noreferrer">
+              <a href="https://sharooqsalaudeen.github.io" target="_blank" rel="noopener noreferrer">
                 Sharooq Salaudeen
               </a>
             </nav>
