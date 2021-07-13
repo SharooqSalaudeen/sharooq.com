@@ -35,7 +35,7 @@ export const prism: boolean = true
 export const prismIgnoreMissing: boolean = true
 
 // Contact Page
-export const contactPage: boolean = true
+export const contactPage: boolean = false
 export const customPage = {}
 
 // Table of Contents
