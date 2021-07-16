@@ -1,2 +1,3 @@
 1. React in 1 minute (updated-2)
 2. TypeScript with React?
+3. Docker in 1 minute
