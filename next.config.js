@@ -16,6 +16,8 @@ module.exports = withBundleAnalyzer({
       'repository-images.githubusercontent.com',
       'www.gravatar.com',
       'github.githubassets.com',
+      'res.cloudinary.com',
+      'sharooq.com',
       ...(process.env.IMAGE_DOMAINS || '').split(','),
     ],
   },
