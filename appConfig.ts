@@ -53,6 +53,6 @@ export const customNavigation: NavItem[] = [{ label: 'Contact', url: '/contact' 
 
 // Incremental Static Regenerations (ISR)
 // Disable ISR when using `next export`, otherwise enable it
-export const isr: boolean = !!!process.env.IS_EXPORT
+export const isr: boolean = !!!process.env.IS_EXPORT || true
 export const maxNumberOfPosts: number = 20
 export const maxNumberOfPages: number = 20
