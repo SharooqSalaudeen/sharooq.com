@@ -1,6 +1,0 @@
-1. React in 1 minute (updated-2)
-2. TypeScript with React? (updated-6)
-3. Docker in 1 minute
-4. GraphQL in 1 minute
-5. Next.js in 1 minute
-8. Machine Learning in 1 minute

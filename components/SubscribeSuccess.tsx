@@ -22,9 +22,11 @@ export const SubscribeSuccess = ({ title, lang }: { title: string; lang?: string
   return (
     <div className={`subscribe-notification subscribe-${type}-message${closeState}`}>
       <style jsx>{`
-        opacity: ${showBanner ? 1 : 0};
-        @media (max-width: 368px) {
-          padding: 5.5rem 0 2rem;
+        div {
+          opacity: ${showBanner ? 1 : 0};
+          @media (max-width: 368px) {
+            padding: 5.5rem 0 2rem;
+          }
         }
         a {
           left: unset;
