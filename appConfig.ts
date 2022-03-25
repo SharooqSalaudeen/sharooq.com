@@ -49,7 +49,9 @@ export const maxDepth: number = 2
 // Override: [{ label: 'Home', url: '/' }]
 // Add new: [{ label: 'Contact', url: '/contact' }]
 import { NavItem } from '@lib/ghost'
-export const customNavigation: NavItem[] = [{ label: 'Contact', url: '/contact' }]
+export const customNavigation: NavItem[] = [
+  // { label: 'Contact', url: '/contact' }
+]
 
 // Incremental Static Regenerations (ISR)
 // Disable ISR when using `next export`, otherwise enable it
