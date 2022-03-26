@@ -2,8 +2,8 @@ import * as appConfig from '@appConfig'
 import { NavItem } from '@lib/ghost'
 
 // siteUrl, platform, ghostAPIUrl, ghostAPIKey must be defined here
-export const ghostAPIUrl = process.env.CMS_GHOST_API_URL || 'https://cms.gotsby.org'
-export const ghostAPIKey = process.env.CMS_GHOST_API_KEY || '387f956eaa95345f7bb484d0b8'
+export const ghostAPIUrl = process.env.CMS_GHOST_API_URL || 'http://localhost:5000'
+export const ghostAPIKey = process.env.CMS_GHOST_API_KEY || '67ca9bdf1c292a6ad846b8a0d4'
 
 const siteUrl = process.env.SITE_URL || (process.env.VERCEL_URL && `https://${process.env.VERCEL_URL}`) || process.env.URL || 'http://localhost:3000'
 
@@ -68,6 +68,8 @@ export interface ProcessEnvProps {
     maxNumberOfPosts: number
     maxNumberOfPages: number
   }
+  staticProfilePic: string
+  staticProfilePicBadge: string
 }
 
 export const processEnv: ProcessEnvProps = {
@@ -106,4 +108,6 @@ export const processEnv: ProcessEnvProps = {
     maxNumberOfPosts: resolveNumber(process.env.JAMIFY_NEXT_ISR_MAX_NUMBER_POSTS, appConfig.maxNumberOfPosts),
     maxNumberOfPages: resolveNumber(process.env.JAMIFY_NEXT_ISR_MAX_NUMBER_PAGES, appConfig.maxNumberOfPages),
   },
+  staticProfilePic: process.env.JAMIFY_NEXT_STATIC_PROFILE_PIC || appConfig.staticProfilePic,
+  staticProfilePicBadge: process.env.JAMIFY_NEXT_STATIC_PROFILE_PIC_BADGE || appConfig.staticProfilePicBadge,
 }

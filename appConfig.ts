@@ -58,3 +58,7 @@ export const customNavigation: NavItem[] = [
 export const isr: boolean = !!!process.env.IS_EXPORT || true
 export const maxNumberOfPosts: number = 20
 export const maxNumberOfPages: number = 20
+
+// Author Profile Picture
+export const staticProfilePic: string = 'https://res.cloudinary.com/sharooq/image/upload/v1648315218/Blog/app/ProPic-Avatar_fr2lmc.jpg'
+export const staticProfilePicBadge: string = 'https://res.cloudinary.com/sharooq/image/upload/v1648319850/Blog/app/ProPic-badge_luboem.jpg'

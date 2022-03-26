@@ -14,6 +14,8 @@ interface HeaderAuthorProps {
 
 export const HeaderAuthor = ({ settings, author }: HeaderAuthorProps) => {
   const { nextImages } = settings.processEnv
+  const { staticProfilePic } = settings.processEnv
+
   const text = get(getLang(settings.lang))
   const twitterUrl = author.twitter ? `https://twitter.com/${author.twitter.replace(/^@/, ``)}` : null
   const facebookUrl = author.facebook ? `https://www.facebook.com/${author.facebook.replace(/^\//, ``)}` : null
@@ -33,7 +35,11 @@ export const HeaderAuthor = ({ settings, author }: HeaderAuthorProps) => {
       <HeaderBackground srcImg={coverImg}>
         <div className="inner">
           <div className="site-header-content author-header">
-            {profileImg && nextImages.feature ? (
+            {staticProfilePic ? (
+              <div className="author-profile-image">
+                <Image className="author-profile-image" src={staticProfilePic} alt={author.name} layout="responsive" quality={nextImages.quality} width={500} height={500} />
+              </div>
+            ) : profileImg && nextImages.feature ? (
               <div className="author-profile-image">
                 <Image className="author-profile-image" src={profileImg.url} alt={author.name} layout="responsive" quality={nextImages.quality} {...profileImg.dimensions} />
               </div>

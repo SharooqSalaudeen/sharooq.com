@@ -7,3 +7,4 @@ Host: https://sharooq.com
 
 # Sitemaps
 Sitemap: https://sharooq.com/sitemap.xml
+Sitemap: https://sharooq.com/sitemap-0.xml

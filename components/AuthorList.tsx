@@ -18,6 +18,7 @@ interface AuthorListProps {
 export const AuthorList = ({ settings, authors, isPost }: AuthorListProps) => {
   const text = get(getLang(settings.lang))
   const { nextImages } = settings.processEnv
+  const { staticProfilePicBadge } = settings.processEnv
   const { url: cmsUrl } = settings
 
   return (
@@ -36,7 +37,17 @@ export const AuthorList = ({ settings, authors, isPost }: AuthorListProps) => {
                 {isPost && (
                   <div className={`author-card ${hover.state.currentClass}`}>
                     <div className="author-profile-image">
-                      {profileImg && nextImages.feature ? (
+                      {staticProfilePicBadge ? (
+                        <Image
+                          className="author-profile-image"
+                          src={staticProfilePicBadge}
+                          alt={author.name}
+                          layout="responsive"
+                          quality={nextImages.quality}
+                          width={200}
+                          height={200}
+                        />
+                      ) : profileImg && nextImages.feature ? (
                         <Image
                           className="author-profile-image"
                           src={profileImg.url}
@@ -77,7 +88,11 @@ export const AuthorList = ({ settings, authors, isPost }: AuthorListProps) => {
                   </div>
                 )}
                 <Link href={url}>
-                  {profileImg && nextImages.feature ? (
+                  {staticProfilePicBadge ? (
+                    <a className={`${(isPost && `author`) || `static`}-avatar`} aria-label={author.name}>
+                      <Image src={staticProfilePicBadge} alt={author.name} layout="responsive" quality={nextImages.quality} width={200} height={200} />
+                    </a>
+                  ) : profileImg && nextImages.feature ? (
                     <a className={`${(isPost && `author`) || `static`}-avatar`} aria-label={author.name}>
                       <Image src={profileImg.url} alt={author.name} layout="responsive" quality={nextImages.quality} {...profileImg.dimensions} />
                     </a>
