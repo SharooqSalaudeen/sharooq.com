@@ -72,18 +72,21 @@ export const Layout = ({ settings, header, children, isHome, sticky, previewPost
               <Link href="/">
                 <a>{text(`LATEST_POSTS`)}</a>
               </Link>
-              {site.facebook && (
+              {/* {site.facebook && (
                 <a href={facebookUrl} target="_blank" rel="noopener noreferrer">
                   Facebook
                 </a>
-              )}
-              {site.twitter && (
+              )} */}
+              {/* {site.twitter && (
                 <a href={twitterUrl} target="_blank" rel="noopener noreferrer">
                   Twitter
                 </a>
-              )}
+              )} */}
+              <a href="https://github.com/SharooqSalaudeen" target="_blank" rel="noopener noreferrer">
+                Github
+              </a>
               <a href="https://sharooqsalaudeen.github.io" target="_blank" rel="noopener noreferrer">
-                Sharooq Salaudeen
+                Portfolio
               </a>
             </nav>
           </div>
