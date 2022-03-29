@@ -14,7 +14,7 @@ export const SocialLinks = ({ siteUrl, site }: SocialLinkProps) => {
   const facebookUrl = site.facebook && `https://www.facebook.com/${site.facebook.replace(/^\//, ``)}`
 
   const { processEnv } = site
-  const { memberSubscriptions } = processEnv
+  const { memberSubscriptions, feedlyRss } = processEnv
 
   return (
     <>
@@ -28,7 +28,7 @@ export const SocialLinks = ({ siteUrl, site }: SocialLinkProps) => {
           <TwitterIcon />
         </a>
       )}
-      {!memberSubscriptions && <SocialRss {...{ siteUrl }} />}
+      {!memberSubscriptions && feedlyRss && <SocialRss {...{ siteUrl }} />}
     </>
   )
 }

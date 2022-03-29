@@ -7,6 +7,7 @@
 export const fileCache: boolean = true
 
 // Google analytics tracking ID (now called measurement ID in version 4)
+export const googleAnalytics: boolean = false
 export const gaMeasurementId: string = 'UA-XXXXXXX_or_G-XXXXXXX'
 
 // Dark mode
@@ -22,6 +23,7 @@ export const sourceImages: boolean = false
 
 // RSS
 export const rssFeed: boolean = true
+export const feedlyRss: boolean = false
 
 // Ghost Member Subscriptions
 export const memberSubscriptions: boolean = false
@@ -60,5 +62,5 @@ export const maxNumberOfPosts: number = 20
 export const maxNumberOfPages: number = 20
 
 // Author Profile Picture
-export const staticProfilePic: string = 'https://res.cloudinary.com/sharooq/image/upload/v1648315218/Blog/app/ProPic-Avatar_fr2lmc.jpg'
-export const staticProfilePicBadge: string = 'https://res.cloudinary.com/sharooq/image/upload/v1648319850/Blog/app/ProPic-badge_luboem.jpg'
+export const staticProfilePic: string = ''
+export const staticProfilePicBadge: string = ''

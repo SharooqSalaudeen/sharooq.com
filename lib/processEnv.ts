@@ -35,6 +35,7 @@ function reolveJSON<T>(value: string | undefined, defaultValue: T) {
 export interface ProcessEnvProps {
   siteUrl: string
   platform: string
+  googleAnalytics: boolean
   gaMeasurementId: string
   darkMode: {
     defaultMode: appConfig.DarkMode
@@ -47,6 +48,7 @@ export interface ProcessEnvProps {
     source: boolean
   }
   rssFeed: boolean
+  feedlyRss: boolean
   memberSubscriptions: boolean
   commenting: {
     system: appConfig.CommentingSystem
@@ -75,6 +77,7 @@ export interface ProcessEnvProps {
 export const processEnv: ProcessEnvProps = {
   siteUrl,
   platform,
+  googleAnalytics: resolveBool(process.env.JAMIFY_GOOGLE_ANALYTICS, appConfig.googleAnalytics),
   gaMeasurementId: process.env.JAMIFY_GA_MEASUREMENT_ID || appConfig.gaMeasurementId,
   darkMode: {
     defaultMode: resolveDarkMode(process.env.JAMIFY_DARK_MODE_DEFAULT, appConfig.defaultMode),
@@ -87,6 +90,7 @@ export const processEnv: ProcessEnvProps = {
     source: resolveBool(process.env.JAMIFY_NEXT_SOURCE_IMAGES, appConfig.sourceImages),
   },
   rssFeed: resolveBool(process.env.JAMIFY_RSS_FEED, appConfig.rssFeed),
+  feedlyRss: resolveBool(process.env.JAMIFY_FEEDLY_RSS, appConfig.feedlyRss),
   memberSubscriptions: resolveBool(process.env.JAMIFY_MEMBER_SUBSCRIPTIONS, appConfig.memberSubscriptions),
   commenting: {
     system: (process.env.JAMIFY_COMMENTING_SYSTEM as appConfig.CommentingSystem) || appConfig.commenting,

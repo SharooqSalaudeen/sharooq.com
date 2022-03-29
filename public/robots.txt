@@ -3,8 +3,8 @@ User-agent: *
 Allow: /
 
 # Host
-Host: https://sharooq.com
+Host: https://www.sharooq.com
 
 # Sitemaps
-Sitemap: https://sharooq.com/sitemap.xml
-Sitemap: https://sharooq.com/sitemap-0.xml
+Sitemap: https://www.sharooq.com/sitemap.xml
+Sitemap: https://www.sharooq.com/sitemap-0.xml
