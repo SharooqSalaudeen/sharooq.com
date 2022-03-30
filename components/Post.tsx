@@ -89,7 +89,11 @@ export const Post = ({ cmsData }: PostProps) => {
                     {title}
                   </h1>
 
-                  {post.custom_excerpt && <p className="post-full-custom-excerpt">{post.custom_excerpt}</p>}
+                  {post.custom_excerpt && (
+                    <p className="post-full-custom-excerpt">
+                      <strong>{post.custom_excerpt}</strong>
+                    </p>
+                  )}
 
                   <div className="post-full-byline">
                     <section className="post-full-byline-content">

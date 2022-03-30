@@ -66,6 +66,17 @@ export const Layout = ({ settings, header, children, isHome, sticky, previewPost
           <div className="site-footer-content inner">
             <section className="copyright">
               <a href={resolve(siteUrl, '')}>{title}</a> &copy; {new Date().getFullYear()}
+              <div>
+                Built with{' '}
+                <a href="https://nextjs.org" target="_blank" rel="noopener noreferrer">
+                  Next.js
+                </a>{' '}
+                and{' '}
+                <a href="https://ghost.org" target="_blank" rel="noopener noreferrer">
+                  Ghost
+                </a>
+                .
+              </div>
             </section>
 
             <nav className="site-footer-nav">

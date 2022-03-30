@@ -40,3 +40,6 @@ yarn-error.log*
 
 # cache
 /.cache
+
+# Local Netlify folder
+.netlify

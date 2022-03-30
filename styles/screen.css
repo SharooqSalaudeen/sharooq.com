@@ -2854,6 +2854,7 @@ html.casper .site-footer-nav a:first-of-type:before {
 @media (max-width: 650px) {
   html.casper .site-footer-content {
     flex-direction: column;
+    text-align: center;
   }
 
   html.casper .site-footer-nav a:first-child {
