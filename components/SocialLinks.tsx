@@ -1,7 +1,7 @@
 import { TwitterIcon } from '@icons/TwitterIcon'
 import { FacebookIcon } from '@icons/FacebookIcon'
 
-import { SocialRss } from '@components/SocialRss'
+// import { SocialRss } from '@components/SocialRss'
 import { GhostSettings } from '@lib/ghost'
 
 interface SocialLinkProps {
@@ -28,7 +28,7 @@ export const SocialLinks = ({ siteUrl, site }: SocialLinkProps) => {
           <TwitterIcon />
         </a>
       )}
-      {!memberSubscriptions && feedlyRss && <SocialRss {...{ siteUrl }} />}
+      {/* {!memberSubscriptions && feedlyRss && <SocialRss {...{ siteUrl }} />} */}
     </>
   )
 }

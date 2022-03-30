@@ -13,9 +13,9 @@ import { HeaderPost } from '@components/HeaderPost'
 import { AuthorList } from '@components/AuthorList'
 import { PreviewPosts } from '@components/PreviewPosts'
 import { RenderContent } from '@components/RenderContent'
-import { CommentoComments } from '@components/CommentoComments'
-import { DisqusComments } from '@components/DisqusComments'
-import { Subscribe } from '@components/Subscribe'
+// import { CommentoComments } from '@components/CommentoComments'
+// import { DisqusComments } from '@components/DisqusComments'
+// import { Subscribe } from '@components/Subscribe'
 import { TableOfContents } from '@components/toc/TableOfContents'
 
 import { StickyNavContainer } from '@effects/StickyNavContainer'
@@ -90,8 +90,8 @@ export const Post = ({ cmsData }: PostProps) => {
                   </h1>
 
                   {post.custom_excerpt && (
-                    <p className="post-full-custom-excerpt">
-                      <strong>{post.custom_excerpt}</strong>
+                    <p>
+                      <strong className="post-full-custom-excerpt">{post.custom_excerpt}</strong>
                     </p>
                   )}
 
@@ -156,11 +156,11 @@ export const Post = ({ cmsData }: PostProps) => {
                   </div>
                 </section>
 
-                {memberSubscriptions && <Subscribe {...{ settings }} />}
+                {/* {memberSubscriptions && <Subscribe {...{ settings }} />} */}
 
-                {commenting.system === 'commento' && <CommentoComments {...{ id: post.id, url: commenting.commentoUrl }} />}
+                {/* {commenting.system === 'commento' && <CommentoComments {...{ id: post.id, url: commenting.commentoUrl }} />} */}
 
-                {commenting.system === 'disqus' && <DisqusComments {...{ post, shortname: commenting.disqusShortname, siteUrl: processEnv.siteUrl }} />}
+                {/* {commenting.system === 'disqus' && <DisqusComments {...{ post, shortname: commenting.disqusShortname, siteUrl: processEnv.siteUrl }} />} */}
               </article>
             </div>
           </Layout>
