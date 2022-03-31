@@ -1,0 +1,39 @@
+@import 'global.css';
+
+html.casper .search-container {
+  position: relative;
+  margin-top: 2rem;
+  max-width: 600px;
+  margin: 2rem auto 2px;
+}
+
+html.casper .searchbar {
+  box-sizing: border-box;
+  font-size: 18px;
+  padding: 18px;
+  -webkit-appearance: none;
+  line-height: 1.1;
+  background: #ffffff;
+  border: 1px solid var(--lightgrey);
+  color: var(--darkgrey);
+  border-radius: 8px;
+  width: 100%;
+}
+
+html.casper .searchbar:hover,
+html.casper .searchbar:active,
+html.casper .searchbar:focus {
+  border-color: var(--blue);
+}
+
+html.casper .searchbar:focus {
+  outline: none;
+  box-shadow: 1px 1px 1px var(--blue);
+  filter: brightness(1.1);
+}
+
+/* Dark mode */
+html.casper body.dark .searchbar {
+  color: #bbb;
+  background: color-mod(var(--darkgrey) alpha(0.6));
+}

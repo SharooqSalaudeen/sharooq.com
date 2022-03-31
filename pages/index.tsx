@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { GetStaticProps } from 'next'
 import { useRouter } from 'next/router'
 
@@ -12,6 +13,7 @@ import { getAllPosts, getAllSettings, GhostPostOrPage, GhostPostsOrPages, GhostS
 import { seoImage, ISeoImage } from '@meta/seoImage'
 
 import { BodyClass } from '@helpers/BodyClass'
+import { Search } from '@components/search/search'
 
 /**
  * Main index page (home page)
@@ -39,6 +41,7 @@ export default function Index({ cmsData }: IndexProps) {
   if (router.isFallback) return <div>Loading...</div>
 
   const { settings, posts, seoImage, bodyClass } = cmsData
+  const [filteredPosts, setFilteredPosts] = useState<GhostPostsOrPages>(posts)
 
   return (
     <>
@@ -48,7 +51,8 @@ export default function Index({ cmsData }: IndexProps) {
         activeClass="fixed-nav-active"
         render={(sticky) => (
           <Layout {...{ bodyClass, sticky, settings, isHome: true }} header={<HeaderIndex {...{ settings }} />}>
-            <PostView {...{ settings, posts, isHome: true }} />
+            <Search {...{ posts, setFilteredPosts }} />
+            <PostView {...{ settings, posts: filteredPosts, isHome: true }} />
           </Layout>
         )}
       />
