@@ -19,6 +19,9 @@ html.casper .searchbar {
   border-radius: 8px;
   width: 100%;
 }
+html.casper .searchbar::placeholder {
+  color: var(--midgrey);
+}
 
 html.casper .searchbar:hover,
 html.casper .searchbar:active,
@@ -36,4 +39,7 @@ html.casper .searchbar:focus {
 html.casper body.dark .searchbar {
   color: #bbb;
   background: color-mod(var(--darkgrey) alpha(0.6));
+}
+html.casper body.dark .searchbar::placeholder {
+  color: var(--lightgrey);
 }
