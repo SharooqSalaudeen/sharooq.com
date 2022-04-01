@@ -14,7 +14,7 @@ html.casper .searchbar {
   -webkit-appearance: none;
   line-height: 1.1;
   background: #ffffff;
-  border: 1px solid var(--lightgrey);
+  border: 1px solid var(--midgrey);
   color: var(--darkgrey);
   border-radius: 8px;
   width: 100%;
