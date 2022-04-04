@@ -1,5 +1,5 @@
 import { parse as urlParse } from 'url'
-import GhostContentAPI, { Params, PostOrPage, SettingsResponse, Pagination, PostsOrPages, Tag, Author } from '@tryghost/content-api'
+import GhostContentAPI, { Nullable, Params, PostOrPage, SettingsResponse, Pagination, PostsOrPages, Tag, Author } from '@tryghost/content-api'
 import { normalizePost } from '@lib/ghost-normalize'
 import { Node } from 'unist'
 import { collections as config } from '@routesConfig'
@@ -23,6 +23,21 @@ export interface NavItem {
 
 interface BrowseResults<T> extends Array<T> {
   meta: { pagination: Pagination }
+}
+
+interface OptimizedPost {
+  id: string
+  authors: Author[] | undefined
+  excerpt: string | undefined
+  featured: boolean | undefined
+  primary_tag: Nullable<Tag> | undefined
+  published_at: Nullable<string> | undefined
+  reading_time: number | undefined
+  slug: string | undefined
+  tags: Tag[] | undefined
+  title: string | undefined
+  url: string | undefined
+  feature_image: Nullable<string> | undefined
 }
 
 export interface GhostSettings extends SettingsResponse {
@@ -52,6 +67,8 @@ export interface GhostPostsOrPages extends BrowseResults<GhostPostOrPage> {}
 export interface GhostTags extends BrowseResults<GhostTag> {}
 
 export interface GhostAuthors extends BrowseResults<GhostAuthor> {}
+
+export interface OptimizedPosts extends Array<OptimizedPost> {}
 
 const api = new GhostContentAPI({
   url: ghostAPIUrl,
@@ -115,6 +132,24 @@ async function createNextProfileImagesFromPosts(nodes: BrowseResults<PostOrPage>
   return Object.assign(results, { meta })
 }
 
+export async function createoptimizedAllPosts(nodes: GhostPostsOrPages): Promise<OptimizedPosts> {
+  const result = nodes.map((node, i) => ({
+    id: node.id,
+    authors: node.authors,
+    excerpt: node.excerpt,
+    featured: node.featured,
+    primary_tag: node.primary_tag,
+    published_at: node.published_at,
+    reading_time: node.reading_time,
+    slug: node.slug,
+    tags: node.tags,
+    title: node.title,
+    url: node.url,
+    feature_image: node.feature_image,
+  }))
+  return result
+}
+
 export async function getAllSettings(): Promise<GhostSettings> {
   //const cached = getCache<SettingsResponse>('settings')
   //if (cached) return cached
@@ -154,6 +189,11 @@ export async function getAllPosts(props?: { limit: number }): Promise<GhostPosts
   })
   const results = await createNextProfileImagesFromPosts(posts)
   return await createNextFeatureImages(results)
+}
+
+export async function getOptimizedAllPosts(props?: { limit: number }): Promise<OptimizedPosts> {
+  const allPosts = await getAllPosts(props && { ...props })
+  return await createoptimizedAllPosts(allPosts)
 }
 
 export async function getAllPostSlugs(): Promise<string[]> {

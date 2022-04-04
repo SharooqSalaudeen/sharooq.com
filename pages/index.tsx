@@ -9,7 +9,7 @@ import { StickyNavContainer } from '@effects/StickyNavContainer'
 import { SEO } from '@meta/seo'
 
 import { processEnv } from '@lib/processEnv'
-import { getAllPosts, getAllSettings, GhostPostOrPage, GhostPostsOrPages, GhostSettings } from '@lib/ghost'
+import { getAllSettings, getOptimizedAllPosts, GhostPostOrPage, GhostPostsOrPages, GhostSettings, OptimizedPosts } from '@lib/ghost'
 import { seoImage, ISeoImage } from '@meta/seoImage'
 
 import { BodyClass } from '@helpers/BodyClass'
@@ -42,6 +42,7 @@ export default function Index({ cmsData }: IndexProps) {
 
   const { settings, posts, seoImage, bodyClass } = cmsData
   const [filteredPosts, setFilteredPosts] = useState<GhostPostsOrPages>(posts)
+  console.log(posts)
 
   return (
     <>
@@ -62,11 +63,11 @@ export default function Index({ cmsData }: IndexProps) {
 
 export const getStaticProps: GetStaticProps = async () => {
   let settings
-  let posts: GhostPostsOrPages | []
+  let posts: OptimizedPosts | []
 
   try {
     settings = await getAllSettings()
-    posts = await getAllPosts()
+    posts = await getOptimizedAllPosts()
   } catch (error) {
     throw new Error('Index creation failed.')
   }
