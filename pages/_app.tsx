@@ -1,7 +1,7 @@
-import { useEffect } from 'react'
+// import { useEffect } from 'react'
 import Script from 'next/script'
 import { AppProps } from 'next/app'
-import { useRouter } from 'next/router'
+// import { useRouter } from 'next/router'
 import { OverlayProvider } from '@components/contexts/overlayProvider'
 import { ThemeProvider } from '@components/contexts/themeProvider'
 import { processEnv } from '@lib/processEnv'
@@ -15,20 +15,20 @@ import '@styles/toc.css'
 import '@styles/search.css'
 
 function App({ Component, pageProps }: AppProps) {
-  const router = useRouter()
+  // const router = useRouter()
   const { googleAnalytics } = processEnv
 
-  useEffect(() => {
-    const handleRouteChange = (url: string) => {
-      if (googleAnalytics) {
-        gtag.pageview(url)
-      }
-    }
-    router.events.on('routeChangeComplete', handleRouteChange)
-    return () => {
-      router.events.off('routeChangeComplete', handleRouteChange)
-    }
-  }, [router.events])
+  // useEffect(() => {
+  //   const handleRouteChange = (url: string) => {
+  //     if (googleAnalytics) {
+  //       gtag.pageview(url)
+  //     }
+  //   }
+  //   router.events.on('routeChangeComplete', handleRouteChange)
+  //   return () => {
+  //     router.events.off('routeChangeComplete', handleRouteChange)
+  //   }
+  // }, [router.events])
 
   return (
     <ThemeProvider {...processEnv.darkMode}>
@@ -46,9 +46,7 @@ function App({ Component, pageProps }: AppProps) {
                 function gtag(){dataLayer.push(arguments);}
                 gtag('js', new Date());
 
-                gtag('config', '${gtag.GA_TRACKING_ID}', {
-                  page_path: window.location.pathname,
-                });
+                gtag('config', '${gtag.GA_TRACKING_ID}');
               `,
               }}
             />

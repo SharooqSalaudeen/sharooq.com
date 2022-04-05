@@ -43,9 +43,10 @@ interface PostProps {
 
 export const Post = ({ cmsData }: PostProps) => {
   const { post, settings, seoImage, previewPosts, prevPost, nextPost, bodyClass } = cmsData
-  const { slug, url, meta_description, excerpt, title } = post
+  const { slug, url, meta_description, excerpt, title: t, meta_title } = post
   const { url: cmsUrl } = settings
   const description = meta_description || excerpt
+  const title = meta_title || t
 
   const { processEnv } = settings
   const { nextImages, toc, memberSubscriptions, commenting } = processEnv

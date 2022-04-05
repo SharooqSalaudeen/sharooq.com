@@ -42,7 +42,6 @@ export default function Index({ cmsData }: IndexProps) {
 
   const { settings, posts, seoImage, bodyClass } = cmsData
   const [filteredPosts, setFilteredPosts] = useState<GhostPostsOrPages>(posts)
-  console.log(posts)
 
   return (
     <>

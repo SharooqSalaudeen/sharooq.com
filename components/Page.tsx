@@ -29,7 +29,9 @@ interface PageProps {
 
 export const Page = ({ cmsData }: PageProps) => {
   const { page, settings, seoImage, bodyClass } = cmsData
-  const { meta_title, meta_description } = page
+  const { meta_description, excerpt, title: t, meta_title } = page
+  const description = meta_description || excerpt
+  const title = meta_title || t
   const { nextImages } = settings.processEnv
 
   const featImg = page.featureImage
@@ -39,7 +41,7 @@ export const Page = ({ cmsData }: PageProps) => {
 
   return (
     <>
-      <SEO {...{ settings, meta_title, meta_description, seoImage }} />
+      <SEO {...{ description, settings, seoImage, title }} />
       <Layout {...{ settings, bodyClass }} header={<HeaderPage {...{ settings }} />}>
         <div className="inner">
           <article className={`post-full ${postClass}`}>

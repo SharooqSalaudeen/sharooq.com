@@ -8,7 +8,7 @@ export const fileCache: boolean = true
 
 // Google analytics tracking ID (now called measurement ID in version 4)
 export const googleAnalytics: boolean = true
-export const gaMeasurementId: string = 'UA-XXXXXXX_or_G-XXXXXXX'
+export const gaMeasurementId: string = 'G-C64LCMV4CL'
 
 // Dark mode
 export type DarkMode = 'dark' | 'light' | null
