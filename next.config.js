@@ -19,7 +19,7 @@ const defaultOptions = withBundleAnalyzer({
       'www.gravatar.com',
       'github.githubassets.com',
       'res.cloudinary.com',
-      'sharooq.com',
+      'www.sharooq.com',
       ...(process.env.IMAGE_DOMAINS || '').split(','),
     ],
   },

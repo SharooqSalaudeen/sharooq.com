@@ -9,7 +9,7 @@ import { StickyNavContainer } from '@effects/StickyNavContainer'
 import { SEO } from '@meta/seo'
 
 import { processEnv } from '@lib/processEnv'
-import { getAllSettings, getOptimizedAllPosts, GhostPostOrPage, GhostPostsOrPages, GhostSettings, OptimizedPosts } from '@lib/ghost'
+import { getOptimizedAllPosts, getOptimizedAllSettings, GhostPostOrPage, GhostPostsOrPages, GhostSettings, OptimizedPosts } from '@lib/ghost'
 import { seoImage, ISeoImage } from '@meta/seoImage'
 
 import { BodyClass } from '@helpers/BodyClass'
@@ -65,7 +65,7 @@ export const getStaticProps: GetStaticProps = async () => {
   let posts: OptimizedPosts | []
 
   try {
-    settings = await getAllSettings()
+    settings = await getOptimizedAllSettings()
     posts = await getOptimizedAllPosts()
   } catch (error) {
     throw new Error('Index creation failed.')

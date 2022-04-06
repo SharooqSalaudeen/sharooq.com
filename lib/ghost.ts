@@ -9,7 +9,7 @@ import { ghostAPIUrl, ghostAPIKey, processEnv, ProcessEnvProps } from '@lib/proc
 import { imageDimensions, normalizedImageUrl, Dimensions } from '@lib/images'
 import { IToC } from '@lib/toc'
 
-import { contactPage } from '@appConfig'
+import { contactPage, DarkMode } from '@appConfig'
 
 export interface NextImage {
   url: string
@@ -38,6 +38,45 @@ interface OptimizedPost {
   title: string | undefined
   url: string | undefined
   feature_image: Nullable<string> | undefined
+}
+
+interface OptimizedSettings {
+  processEnv: {
+    nextImages: {
+      feature: boolean
+      inline: boolean
+      quality: number
+      source: boolean
+    }
+    staticProfilePicBadge: string
+    siteUrl: string
+    memberSubscriptions: boolean
+    customNavigation: NavItem[]
+    darkMode: {
+      defaultMode: DarkMode
+      overrideOS: boolean
+    }
+  }
+  lang: string | undefined
+  url: string | undefined
+  cover_image: string | undefined
+  title: string | undefined
+  description: string | undefined
+  secondary_navigation: NavItem[] | undefined
+  navigation:
+    | {
+        label: string
+        url: string
+      }[]
+    | undefined
+  twitter: string | undefined
+  facebook: string | undefined
+  meta_title: Nullable<string> | undefined
+  meta_description: Nullable<string> | undefined
+  logo: string | undefined
+  iconImage?: NextImage | undefined
+  logoImage?: NextImage | undefined
+  coverImage?: NextImage | undefined
 }
 
 export interface GhostSettings extends SettingsResponse {
@@ -132,7 +171,7 @@ async function createNextProfileImagesFromPosts(nodes: BrowseResults<PostOrPage>
   return Object.assign(results, { meta })
 }
 
-export async function createoptimizedAllPosts(nodes: GhostPostsOrPages): Promise<OptimizedPosts> {
+export async function createOptimizedAllPosts(nodes: GhostPostsOrPages): Promise<OptimizedPosts> {
   const result = nodes.map((node, i) => ({
     id: node.id,
     authors: node.authors,
@@ -171,6 +210,48 @@ export async function getAllSettings(): Promise<GhostSettings> {
   return result
 }
 
+export async function createoptimizedAllSettings(settings: GhostSettings): Promise<OptimizedSettings> {
+  const iconImage = settings.iconImage || null
+  const logoImage = settings.logoImage || null
+  const coverImage = settings.coverImage || null
+
+  return {
+    processEnv: {
+      nextImages: {
+        feature: settings.processEnv.nextImages.feature,
+        inline: settings.processEnv.nextImages.inline,
+        quality: settings.processEnv.nextImages.quality,
+        source: settings.processEnv.nextImages.source,
+      },
+      staticProfilePicBadge: settings.processEnv.staticProfilePicBadge,
+      siteUrl: settings.processEnv.siteUrl,
+      memberSubscriptions: settings.processEnv.memberSubscriptions,
+      customNavigation: settings.processEnv.customNavigation,
+      darkMode: settings.processEnv.darkMode,
+    },
+    lang: settings.lang,
+    url: settings.url,
+    cover_image: settings.cover_image,
+    title: settings.title,
+    description: settings.description,
+    secondary_navigation: settings.secondary_navigation,
+    navigation: settings.navigation,
+    twitter: settings.twitter,
+    facebook: settings.facebook,
+    meta_title: settings.meta_title,
+    meta_description: settings.meta_description,
+    logo: settings.logo,
+    ...(iconImage && { iconImage }),
+    ...(logoImage && { logoImage }),
+    ...(coverImage && { coverImage }),
+  }
+}
+
+export async function getOptimizedAllSettings(): Promise<OptimizedSettings> {
+  const allSettings = await getAllSettings()
+  return await createoptimizedAllSettings(allSettings)
+}
+
 export async function getAllTags(): Promise<GhostTags> {
   const tags = await api.tags.browse(tagAndAuthorFetchOptions)
   return await createNextFeatureImages(tags)
@@ -193,7 +274,7 @@ export async function getAllPosts(props?: { limit: number }): Promise<GhostPosts
 
 export async function getOptimizedAllPosts(props?: { limit: number }): Promise<OptimizedPosts> {
   const allPosts = await getAllPosts(props && { ...props })
-  return await createoptimizedAllPosts(allPosts)
+  return await createOptimizedAllPosts(allPosts)
 }
 
 export async function getAllPostSlugs(): Promise<string[]> {
