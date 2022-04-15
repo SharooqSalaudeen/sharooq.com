@@ -21,13 +21,14 @@ const getPublicTags = (tags: Tag[] | undefined) => (tags ? tags.filter((tag) => 
 
 export const SEO = (props: SEOProps) => {
   const { title: t, description: d, seoImage, settings, article } = props
+
   const { og_title, og_description, published_at, updated_at, primary_author, primary_tag, twitter_title, twitter_description } = article || {}
   const type = article ? 'article' : 'website'
   const facebook = primary_author?.facebook
 
   const router = useRouter()
   const siteUrl = settings.processEnv.siteUrl
-  const canonical = url.resolve(siteUrl, router.asPath)
+  const canonical = url.resolve(siteUrl, `${router.basePath}${router.asPath}`)
 
   const { twitter, title: settingsTitle, description: settingsDescription, meta_title, meta_description } = settings
   const title = t || meta_title || settingsTitle || siteTitleMeta

@@ -140,7 +140,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
         bodyClass: BodyClass({ isPost, page: contactPage || page || undefined, tags }),
       },
     },
-    ...(processEnv.isr.enable && { revalidate: 1 }), // re-generate at most once every second
+    ...(processEnv.isr.enable && { revalidate: processEnv.isr.revalidate }), // re-generate at most once every second
   }
 }
 

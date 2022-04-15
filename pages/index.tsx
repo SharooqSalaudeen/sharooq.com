@@ -82,6 +82,6 @@ export const getStaticProps: GetStaticProps = async () => {
     props: {
       cmsData,
     },
-    ...(processEnv.isr.enable && { revalidate: 1 }), // re-generate at most once every second
+    ...(processEnv.isr.enable && { revalidate: processEnv.isr.revalidate }), // re-generate at most once every second
   }
 }
