@@ -20,11 +20,11 @@ const defaultOptions = withBundleAnalyzer({
       'github.githubassets.com',
       'res.cloudinary.com',
       'www.sharooq.com',
+      'sharooq.com',
       ...(process.env.IMAGE_DOMAINS || '').split(','),
     ],
   },
   reactStrictMode: true,
-  experimental: { esmExternals: true },
 })
 
 /**

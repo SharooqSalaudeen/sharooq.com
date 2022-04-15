@@ -57,10 +57,14 @@ export const customNavigation: NavItem[] = [
 
 // Incremental Static Regenerations (ISR)
 // Disable ISR when using `next export`, otherwise enable it
-export const isr: boolean = !!!process.env.IS_EXPORT || true
+// export const isr: boolean = true
+export const isr: boolean = false
 export const maxNumberOfPosts: number = 20
 export const maxNumberOfPages: number = 20
 
 // Author Profile Picture
 export const staticProfilePic: string = ''
 export const staticProfilePicBadge: string = ''
+
+// Site-meta picture
+export const staticSiteMetaImage: string = 'https://res.cloudinary.com/sharooq/image/upload/v1649626966/Blog/app/site-meta_vin5iz.png'
