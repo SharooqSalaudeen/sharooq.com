@@ -666,6 +666,16 @@ html.casper .post-card-primary-tag {
   text-transform: uppercase;
 }
 
+html.casper .post-card-tag {
+  margin: 0 0.2em 0.2em;
+  color: var(--blue);
+  font-size: 1.2rem;
+  font-weight: 500;
+  letter-spacing: 0.2px;
+  text-transform: uppercase;
+  display: inline-block;
+}
+
 html.casper .post-card-title {
   margin: 0 0 0.4em;
   line-height: 1.15em;
@@ -933,8 +943,19 @@ html.casper .post-full-header {
   border-top-right-radius: 3px;
 }
 
-html.casper .post-full-tags {
+html.casper .post-primary-tag {
   display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  color: var(--midgrey);
+  font-size: 1.3rem;
+  line-height: 1.4em;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+html.casper .post-full-tags {
+  display: inline-block;
   justify-content: flex-start;
   align-items: center;
   color: var(--midgrey);

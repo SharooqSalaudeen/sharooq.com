@@ -11,6 +11,7 @@ import { AuthorList } from '@components/AuthorList'
 import { PostClass } from '@helpers/PostClass'
 import { collections } from '@lib/collections'
 import { GhostPostOrPage, GhostSettings } from '@lib/ghost'
+import { table } from 'console'
 
 interface PostCardProps {
   settings: GhostSettings
@@ -60,7 +61,12 @@ export const PostCard = ({ settings, post, num, isHome }: PostCardProps) => {
         <Link href={url}>
           <a className="post-card-content-link">
             <header className="post-card-header">
-              {post.primary_tag && <div className="post-card-primary-tag">{post.primary_tag.name}</div>}
+              {/* {post.primary_tag && <div className="post-card-primary-tag">{post.primary_tag.name}</div>} */}
+              {post.tags &&
+                post.tags.slice(0, 3).map((tag, idx) => {
+                  return <div key={tag.id} className="post-card-tag">{`${tag.name} ${post.tags && idx + 1 < post.tags?.slice(0, 3).length ? '-' : ''}`}</div>
+                })}
+
               <h2 className="post-card-title">{post.title}</h2>
             </header>
             <section className="post-card-excerpt">

@@ -78,13 +78,22 @@ export const Post = ({ cmsData }: PostProps) => {
             <div className="inner">
               <article className={`post-full ${postClass}`}>
                 <header className="post-full-header">
-                  {post.primary_tag && (
-                    <section className="post-full-tags">
+                  {/* {post.primary_tag && (
+                    <section className="post-primary-tag">
                       <Link href={resolveUrl({ cmsUrl, slug: post.primary_tag.slug, url: post.primary_tag.url })}>
                         <a>{post.primary_tag.name}</a>
                       </Link>
                     </section>
-                  )}
+                  )} */}
+                  {post.tags?.map((tag, idx) => (
+                    <section key={tag.id} className="post-full-tags">
+                      <Link href={resolveUrl({ cmsUrl, slug: tag.slug, url: tag.url })}>
+                        <a>
+                          {tag.name} {`${post.tags && idx + 1 < post.tags?.length ? ' - ' : ''}`}
+                        </a>
+                      </Link>
+                    </section>
+                  ))}
 
                   <h1 ref={sticky && sticky.anchorRef} className="post-full-title">
                     {title}
