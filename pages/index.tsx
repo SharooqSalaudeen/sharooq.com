@@ -14,6 +14,7 @@ import { seoImage, ISeoImage } from '@meta/seoImage'
 
 import { BodyClass } from '@helpers/BodyClass'
 import { Search } from '@components/search/search'
+import { TagFilter } from '@components/filters/TagFilter'
 
 /**
  * Main index page (home page)
@@ -52,6 +53,7 @@ export default function Index({ cmsData }: IndexProps) {
         render={(sticky) => (
           <Layout {...{ bodyClass, sticky, settings, isHome: true }} header={<HeaderIndex {...{ settings }} />}>
             <Search {...{ posts, setFilteredPosts }} />
+            <TagFilter {...{ posts, setFilteredPosts }} />
             <PostView {...{ settings, posts: filteredPosts, isHome: true }} />
           </Layout>
         )}
