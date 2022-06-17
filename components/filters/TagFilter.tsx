@@ -6,10 +6,11 @@ interface TagFilterProps {
   posts: GhostPostsOrPages
 }
 
+const filters: string[] = ['Machine Learning', 'JavaScript', 'TypeScript', 'ReactJS', '1 minute reads']
+
 export function TagFilter(props: TagFilterProps) {
   const [filter, setFilter] = useState<string | null>(null)
   const { posts, setFilteredPosts } = props
-  console.log('posts', posts)
 
   const handleChange = (value: string) => {
     if (filter === value) {
@@ -36,12 +37,12 @@ export function TagFilter(props: TagFilterProps) {
   }, [filter])
 
   return (
-    <div style={{ display: 'flex', justifyContent: 'center', margin: '10px 0' }}>
-      <button onClick={() => handleChange('Machine Learning')}>Machine Learning</button>
-      <button onClick={() => handleChange('JavaScript')}>JavaScript</button>
-      <button onClick={() => handleChange('TypeScript')}>TypeScript</button>
-      <button onClick={() => handleChange('ReactJS')}>ReactJS</button>
-      <button onClick={() => handleChange('1 minute reads')}>1 Minute Reads</button>
+    <div className="tag-filter-container">
+      {filters.map((item, idx) => (
+        <button key={idx} className={`tag-filter ${filter === item ? 'tag-filter-active' : ''}`} onClick={() => handleChange(item)}>
+          {item}
+        </button>
+      ))}
     </div>
   )
 }

@@ -13,6 +13,7 @@ import '@styles/dark-mode.css'
 import '@styles/prism.css'
 import '@styles/toc.css'
 import '@styles/search.css'
+import '@styles/tagfilter.css'
 
 function App({ Component, pageProps }: AppProps) {
   // const router = useRouter()

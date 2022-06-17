@@ -1,0 +1,20 @@
+@import 'global.css';
+
+.tag-filter-container {
+  display: flex;
+  justify-content: center;
+  margin: 10px 0;
+}
+
+.tag-filter {
+  border: 1px solid transparent;
+  border-radius: 100px;
+  padding: 2px 13px;
+  font-size: 12px;
+  margin: 0 4px;
+  text-transform: capitalize;
+}
+
+.tag-filter-active {
+  border-color: var(--blue);
+}
