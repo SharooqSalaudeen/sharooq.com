@@ -1,9 +1,9 @@
 @import 'global.css';
 
 .tag-filter-container {
-  display: flex;
-  justify-content: center;
-  margin: 10px 0;
+  display: block;
+  margin: 8px auto 0;
+  text-align: center;
 }
 
 .tag-filter {
@@ -11,10 +11,24 @@
   border-radius: 100px;
   padding: 2px 13px;
   font-size: 12px;
-  margin: 0 4px;
+  margin: 4px 4px;
   text-transform: capitalize;
+  background-color: var(--whitegrey);
+  /* white-space: initial; */
+}
+
+body.dark .tag-filter {
+  background-color: var(--midgrey);
+}
+
+.tag-filter:hover {
+  background-color: var(--lightgrey);
 }
 
 .tag-filter-active {
   border-color: var(--blue);
+  background-color: var(--lightgrey);
+}
+
+@media (max-width: 500px) {
 }
