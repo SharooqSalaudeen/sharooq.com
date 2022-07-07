@@ -30,5 +30,8 @@ body.dark .tag-filter {
   background-color: var(--lightgrey);
 }
 
-@media (max-width: 500px) {
+@media (max-width: 1024px) {
+  .tag-filter:hover {
+    background-color: var(--whitegrey);
+  }
 }
