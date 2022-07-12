@@ -6,7 +6,7 @@ interface TagFilterProps {
   posts: GhostPostsOrPages
 }
 
-const filters: string[] = ['JavaScript', 'TypeScript', 'Machine Learning', 'ReactJS', '1 minute reads']
+const filters: string[] = ['AWS', 'Machine Learning', 'JavaScript', 'TypeScript', 'ReactJS', '1 minute reads']
 
 export function TagFilter(props: TagFilterProps) {
   const [filter, setFilter] = useState<string | null>(null)
