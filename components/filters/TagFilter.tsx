@@ -1,12 +1,11 @@
 import { GhostPostsOrPages } from '@lib/ghost'
 import React, { Dispatch, useState, useEffect } from 'react'
+import { filters } from '@appConfig'
 
 interface TagFilterProps {
   setFilteredPosts: Dispatch<any>
   posts: GhostPostsOrPages
 }
-
-const filters: string[] = ['AWS', 'Machine Learning', 'JavaScript', 'TypeScript', 'ReactJS', '1 minute reads']
 
 export function TagFilter(props: TagFilterProps) {
   const [filter, setFilter] = useState<string | null>(null)

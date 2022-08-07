@@ -1,0 +1,4 @@
+.bookmark-fix-wrapper > div > span {
+  width: 100% !important;
+  height: 100% !important;
+}

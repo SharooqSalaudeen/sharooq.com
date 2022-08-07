@@ -5,7 +5,6 @@ import { Dimensions } from '@lib/images'
 import Zoom from 'react-medium-image-zoom'
 import 'react-medium-image-zoom/dist/styles.css'
 
-
 interface PropertyProps {
   src: string
   className?: string[]
@@ -22,7 +21,11 @@ export const NextImage = (props: ComponentPropsWithNode) => {
   const imageNode = node as ImageNode
   const imageDimensions = imageNode.imageDimensions
   const { src, className: classArray } = imageNode.properties
-  const className = classArray?.join(' ')
+  let className = classArray?.join(' ')
+
+  if (!classArray) {
+    className = 'bookmark-fix-wrapper'
+  }
 
   return (
     <div className="next-image-wrapper">
