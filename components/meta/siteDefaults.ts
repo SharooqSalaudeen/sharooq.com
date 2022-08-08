@@ -4,5 +4,6 @@ export const siteDescriptionMeta = "This blog is a compendium of the things I've
 
 // Defaults, if not configured in CMS
 // Images can be fund in the /public folder
+export const siteStaticLogo = 'logo.png'
 export const siteIcon = 'favicon.png'
 export const siteImage = 'site-meta.png'

@@ -9,6 +9,7 @@ import { DarkMode } from '@components/DarkMode'
 import { SubscribeButton } from '@components/SubscribeButton'
 import { getLang, get } from '@utils/use-lang'
 import { GhostSettings, NavItem, NextImage } from '@lib/ghost'
+import { siteStaticLogo } from './meta/siteDefaults'
 
 export interface SiteNavProps {
   settings: GhostSettings
@@ -78,6 +79,11 @@ export const SiteNav = ({ settings, className, postTitle }: SiteNavProps) => {
             ) : site.logo ? (
               <a className="site-nav-logo">
                 <img src={site.logo} alt={title} />
+              </a>
+            ) : siteStaticLogo ? (
+              <a className="site-nav-logo site-nav-static-logo">
+                {/* eslint-disable @next/next/no-img-element */}
+                <img src={siteStaticLogo} alt={title} />
               </a>
             ) : (
               <a className="site-nav-logo">{title}</a>

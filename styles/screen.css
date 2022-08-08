@@ -356,6 +356,10 @@ html.casper .site-nav-logo {
   text-transform: none;
 }
 
+html.casper .site-nav-static-logo {
+  padding: 4px 0 !important;
+}
+
 html.casper .site-nav-logo:hover {
   text-decoration: none;
 }
@@ -364,6 +368,10 @@ html.casper .site-nav-logo img {
   display: block;
   width: auto;
   height: 21px;
+}
+
+html.casper .site-nav-static-logo img {
+  height: 36px !important;
 }
 
 html.casper .site-home-header .site-nav-logo {

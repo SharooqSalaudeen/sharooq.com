@@ -1,6 +1,7 @@
 import Document, { Html, Head, Main, NextScript, DocumentContext } from 'next/document'
 import { resolve } from 'url'
 import { processEnv } from '@lib/processEnv'
+import { siteIcon } from '@components/meta/siteDefaults'
 
 export default class MyDocument extends Document {
   static async getInitialProps(ctx: DocumentContext) {
@@ -15,7 +16,10 @@ export default class MyDocument extends Document {
 
     return (
       <Html {...{ lang, className: 'casper' }}>
-        <Head>{!process.env.IS_EXPORT && <link rel="alternate" type="application/rss+xml" title="Jamify RSS Feed" href={`${resolve(processEnv.siteUrl, 'rss.xml')}`} />}</Head>
+        <Head>
+          {!process.env.IS_EXPORT && <link rel="alternate" type="application/rss+xml" title="Sharooq RSS Feed" href={`${resolve(processEnv.siteUrl, 'rss.xml')}`} />}
+          <link rel="shortcut icon" href={siteIcon} />
+        </Head>
         <body {...{ className: bodyClass }}>
           <script
             dangerouslySetInnerHTML={{
