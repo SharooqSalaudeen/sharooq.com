@@ -131,9 +131,9 @@ const postAndPageSlugOptions: Params = {
   fields: 'slug',
 }
 
-const excludePostOrPageBySlug = () => {
-  if (!contactPage) return ''
-  return 'slug:-contact'
+const excludePostOrPageBySlug = (filter?: string) => {
+  if (!contactPage) return `${filter ?? ''}`
+  return `slug:-contact, ${filter ?? ''}`
 }
 
 // helpers
@@ -171,7 +171,7 @@ async function createNextProfileImagesFromPosts(nodes: BrowseResults<PostOrPage>
   return Object.assign(results, { meta })
 }
 
-export async function createOptimizedAllPosts(nodes: GhostPostsOrPages): Promise<OptimizedPosts> {
+export async function createOptimizedPosts(nodes: GhostPostsOrPages): Promise<OptimizedPosts> {
   const result = nodes.map((node, i) => ({
     id: node.id,
     authors: node.authors,
@@ -274,7 +274,37 @@ export async function getAllPosts(props?: { limit: number }): Promise<GhostPosts
 
 export async function getOptimizedAllPosts(props?: { limit: number }): Promise<OptimizedPosts> {
   const allPosts = await getAllPosts(props && { ...props })
-  return await createOptimizedAllPosts(allPosts)
+  return await createOptimizedPosts(allPosts)
+}
+
+export async function getAllDeveloperPosts(props?: { limit: number }): Promise<GhostPostsOrPages> {
+  const posts = await api.posts.browse({
+    ...postAndPageFetchOptions,
+    filter: excludePostOrPageBySlug('tag:-book-summary'),
+    ...(props && { ...props }),
+  })
+  const results = await createNextProfileImagesFromPosts(posts)
+  return await createNextFeatureImages(results)
+}
+
+export async function getOptimizedAllDeveloperPosts(props?: { limit: number }): Promise<OptimizedPosts> {
+  const allPosts = await getAllDeveloperPosts(props && { ...props })
+  return await createOptimizedPosts(allPosts)
+}
+
+export async function getAllBookSummaries(props?: { limit: number }): Promise<GhostPostsOrPages> {
+  const posts = await api.posts.browse({
+    ...postAndPageFetchOptions,
+    filter: excludePostOrPageBySlug('tag:book-summary'),
+    ...(props && { ...props }),
+  })
+  const results = await createNextProfileImagesFromPosts(posts)
+  return await createNextFeatureImages(results)
+}
+
+export async function getOptimizedAllBookSummaries(props?: { limit: number }): Promise<OptimizedPosts> {
+  const bookSummaries = await getAllBookSummaries(props && { ...props })
+  return await createOptimizedPosts(bookSummaries)
 }
 
 export async function getAllPostSlugs(): Promise<string[]> {
