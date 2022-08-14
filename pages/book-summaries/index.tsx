@@ -52,7 +52,7 @@ export default function Index({ cmsData }: IndexProps) {
         activeClass="fixed-nav-active"
         render={(sticky) => (
           <Layout {...{ bodyClass, sticky, settings, isHome: true }} header={<HeaderIndex {...{ settings }} />}>
-            <Search {...{ posts, setFilteredPosts }} />
+            <Search {...{ posts, setFilteredPosts }} placeholder="Search books..." />
             <PostView {...{ settings, posts: filteredPosts, isHome: true }} />
           </Layout>
         )}

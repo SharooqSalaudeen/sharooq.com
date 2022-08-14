@@ -5,6 +5,7 @@ import { Index } from 'flexsearch'
 interface SearchProps {
   setFilteredPosts: Dispatch<any>
   posts: GhostPostsOrPages
+  placeholder: string
 }
 
 export function Search(props: SearchProps) {
@@ -41,7 +42,7 @@ export function Search(props: SearchProps) {
 
   return (
     <div className="search-container" ref={searchRef}>
-      <input className="searchbar" onChange={(e) => setQuery(e.target.value)} placeholder="Search articles..." type="text" value={query} />
+      <input className="searchbar" onChange={(e) => setQuery(e.target.value)} placeholder={props.placeholder} type="text" value={query} />
     </div>
   )
 }
