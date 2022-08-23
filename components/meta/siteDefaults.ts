@@ -7,3 +7,4 @@ export const siteDescriptionMeta = "This blog is a compendium of the things I've
 export const siteStaticLogo = '/logo.png'
 export const siteIcon = '/favicon.png'
 export const siteImage = '/site-meta.png'
+export const siteCover = '/site-cover.jpg'
