@@ -628,7 +628,7 @@ html.casper .post-card {
   background-size: cover;
 }
 
-html.casper .post-card-image-link {
+html.casper .-image-link {
   position: relative;
   display: block;
   overflow: hidden;

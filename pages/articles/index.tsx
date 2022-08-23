@@ -15,7 +15,6 @@ import { seoImage, ISeoImage } from '@meta/seoImage'
 import { BodyClass } from '@helpers/BodyClass'
 import { Search } from '@components/search/search'
 import { TagFilter } from '@components/filters/TagFilter'
-import { HomeLatestArticles } from '@components/home/HomeLatestArticles'
 
 /**
  * Main index page (home page)
@@ -26,8 +25,6 @@ import { HomeLatestArticles } from '@components/home/HomeLatestArticles'
 
 interface CmsData {
   posts: GhostPostsOrPages
-  latestPosts?: GhostPostsOrPages
-  featuredPosts?: GhostPostsOrPages
   settings: GhostSettings
   seoImage: ISeoImage
   previewPosts?: GhostPostsOrPages
@@ -44,7 +41,7 @@ export default function Index({ cmsData }: IndexProps) {
   const router = useRouter()
   if (router.isFallback) return <div>Loading...</div>
 
-  const { settings, posts, latestPosts, featuredPosts, seoImage, bodyClass } = cmsData
+  const { settings, posts, seoImage, bodyClass } = cmsData
   const [filteredPosts, setFilteredPosts] = useState<GhostPostsOrPages>(posts)
 
   return (
@@ -55,13 +52,9 @@ export default function Index({ cmsData }: IndexProps) {
         activeClass="fixed-nav-active"
         render={(sticky) => (
           <Layout {...{ bodyClass, sticky, settings, isHome: true }} header={<HeaderIndex {...{ settings }} />}>
-            {/* <Search {...{ posts, setFilteredPosts }} placeholder="Search articles..." />
+            <Search {...{ posts, setFilteredPosts }} placeholder="Search articles..." />
             <TagFilter {...{ posts, setFilteredPosts }} />
-            <PostView {...{ settings, posts: filteredPosts, isHome: true }} /> */}
-            <div className="articles-section">
-              <HomeLatestArticles {...{ settings, posts: featuredPosts }} />
-              <HomeLatestArticles {...{ settings, posts: latestPosts }} />
-            </div>
+            <PostView {...{ settings, posts: filteredPosts, isHome: true }} />
           </Layout>
         )}
       />
@@ -72,14 +65,10 @@ export default function Index({ cmsData }: IndexProps) {
 export const getStaticProps: GetStaticProps = async () => {
   let settings
   let posts: OptimizedPosts | []
-  let latestPosts: OptimizedPosts | []
-  let featuredPosts: OptimizedPosts | []
 
   try {
     settings = await getOptimizedAllSettings()
     posts = await getOptimizedAllDeveloperPosts()
-    latestPosts = await getOptimizedAllDeveloperPosts({ limit: 5 })
-    featuredPosts = await getOptimizedAllDeveloperPosts({ limit: 6 })
   } catch (error) {
     throw new Error('Index creation failed.')
   }
@@ -87,8 +76,6 @@ export const getStaticProps: GetStaticProps = async () => {
   const cmsData = {
     settings,
     posts,
-    latestPosts,
-    featuredPosts,
     seoImage: await seoImage({ siteUrl: settings.processEnv.siteUrl }),
     bodyClass: BodyClass({ isHome: true }),
   }

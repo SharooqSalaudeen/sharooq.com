@@ -1,0 +1,132 @@
+html.casper .articles-section {
+  display: flex;
+}
+
+html.casper .articles-list {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  margin: 0 25px 50px;
+  padding: 25px;
+  /* background: linear-gradient(color-mod(var(--darkgrey) l(+2%)), color-mod(var(--darkgrey) l(-5%))); */
+  border-radius: 3px;
+}
+
+html.casper .articles-list a {
+  transition: all 0.2s ease-in-out;
+}
+
+html.casper .articles-list a:hover {
+  text-decoration: none;
+}
+
+@media (max-width: 1170px) {
+  html.casper .articles-list {
+    margin-bottom: 5vw;
+  }
+}
+
+@media (max-width: 650px) {
+  html.casper .articles-list {
+    margin: 0 25px;
+    padding: 0;
+    background: none;
+  }
+}
+
+html.casper .articles-list-header h3 {
+  margin: 0;
+  /* color: rgba(255, 255, 255, 0.6); */
+  font-size: 1.2rem;
+  line-height: 1em;
+  font-weight: 300;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+}
+
+html.casper .articles-list-header h3 a {
+  /* color: #fff; */
+  font-weight: 500;
+  text-decoration: none;
+  opacity: 0.8;
+}
+
+html.casper .articles-list-header h3 a:hover {
+  opacity: 1;
+}
+
+html.casper .articles-list-content {
+  font-size: 1.7rem;
+}
+
+html.casper .articles-list-content ul {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+html.casper .articles-list-content li {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin: 0;
+  padding: 20px 0;
+  border-bottom: rgba(255, 255, 255, 0.1);
+}
+
+html.casper .articles-list-content li:last-of-type {
+  padding-bottom: 5px;
+  border: none;
+}
+
+html.casper .articles-list-content h4 {
+  margin: 0;
+  font-size: 1.6rem;
+  line-height: 1.35em;
+  font-weight: 600;
+}
+
+html.casper .articles-list-content li a {
+  display: block;
+  /* color: #fff; */
+  opacity: 0.8;
+}
+
+html.casper .articles-list-content li a:hover {
+  opacity: 1;
+}
+
+html.casper .articles-list-meta {
+  margin-top: 2px;
+  font-size: 1.2rem;
+  line-height: 1.4em;
+  font-weight: 400;
+}
+
+html.casper .articles-list-meta p {
+  margin: 0;
+  /* color: rgba(255, 255, 255, 0.6); */
+}
+
+html.casper .articles-list-footer {
+  position: relative;
+  margin: 40px 0 5px;
+}
+
+html.casper .articles-list-footer a {
+  padding: 7px 12px 8px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  /* color: rgba(255, 255, 255, 0.6); */
+  font-size: 1.3rem;
+  border-radius: 999px;
+  transition: all 0.35s ease-in-out;
+}
+
+html.casper .articles-list-footers a:hover {
+  border-color: var(--yellow);
+  color: var(--yellow);
+  text-decoration: none;
+}
