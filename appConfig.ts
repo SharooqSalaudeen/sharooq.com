@@ -70,4 +70,4 @@ export const staticProfilePicBadge: string = ''
 export const staticSiteMetaImage: string = 'https://res.cloudinary.com/sharooq/image/upload/v1649626966/Blog/app/site-meta_vin5iz.png'
 
 // Article Tags
-export const filters: string[] = ['AWS', 'Docker', 'TypeScript', 'Machine Learning', 'JavaScript', 'ReactJS']
+export const filters: string[] = ['AWS', 'Docker', 'TypeScript', 'Python', 'Machine Learning', 'JavaScript', 'ReactJS']
