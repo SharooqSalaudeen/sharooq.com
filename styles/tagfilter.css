@@ -35,3 +35,17 @@ body.dark .tag-filter {
     background-color: var(--whitegrey);
   }
 }
+
+/* Test home cover */
+
+html.casper .site-cover-contianer {
+  position: relative;
+  padding: 0 5vw;
+  color: #fff;
+}
+
+html.casper .site-cover {
+  position: relative;
+  min-height: 200px;
+  max-height: 340px;
+}
