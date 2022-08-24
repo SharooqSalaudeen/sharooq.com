@@ -6,3 +6,10 @@
   JAMIFY_NEXT_ISR = "false"
   JAMIFY_NEXT_FEATURE_IMAGES = "false"
   JAMIFY_NEXT_INLINE_IMAGES = "false"
+
+
+[[redirects]]
+  from = "/solved"
+  to = "/solved-argument-of-type-x-is-not-assignable-to-parameter-of-type-never"
+  status = 301
+  force = true
