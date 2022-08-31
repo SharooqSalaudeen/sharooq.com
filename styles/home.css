@@ -1,66 +1,102 @@
-html.casper .articles-section {
-  display: flex;
+@import 'global.css';
+
+/************************ Home Topic Cards *************************/
+
+@media (min-width: 701px) {
+  html.casper .home-topic-cards {
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+  }
 }
 
-html.casper .articles-list {
+html.casper .home-topic-card {
+  margin-top: 2rem;
+  display: block;
+  padding: 2rem 1rem;
+  border-radius: 10px;
+  color: black;
+  width: 30%;
+  border: 0 solid rgba(0, 0, 0, 0.125);
+  background-clip: border-box;
+  /* box-shadow: 0 4px 10px #333; */
+  /* box-shadow: 0 20px 27px 0 rgb(0 0 0 / 5%); */
+  box-shadow: 0 5px 20px 0 rgb(0 0 0 / 10%);
+  /* background-color: var(--page-bg); */
+  transition: color 0.3s, transform 0.3s !important;
+}
+
+html.casper .home-topic-card h2 {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+/************************ Post List *************************/
+
+html.casper .post-section {
+  display: flex;
+  justify-content: center;
+}
+
+html.casper .post-list {
   position: relative;
   display: flex;
   flex-direction: column;
   overflow: hidden;
   margin: 0 25px 50px;
   padding: 25px;
-  /* background: linear-gradient(color-mod(var(--darkgrey) l(+2%)), color-mod(var(--darkgrey) l(-5%))); */
   border-radius: 3px;
 }
 
-html.casper .articles-list a {
+html.casper .post-list a {
   transition: all 0.2s ease-in-out;
 }
 
-html.casper .articles-list a:hover {
+html.casper .post-list a:hover {
   text-decoration: none;
 }
 
 @media (max-width: 1170px) {
-  html.casper .articles-list {
+  html.casper .post-list {
     margin-bottom: 5vw;
   }
 }
 
 @media (max-width: 650px) {
-  html.casper .articles-list {
+  html.casper .post-list {
     margin: 0 25px;
     padding: 0;
     background: none;
   }
 }
 
-html.casper .articles-list-header h3 {
+html.casper .post-list-header h3 {
   margin: 0;
   /* color: rgba(255, 255, 255, 0.6); */
-  font-size: 1.2rem;
-  line-height: 1em;
-  font-weight: 300;
   letter-spacing: 0.4px;
   text-transform: uppercase;
+  margin: 0.5em 0 0.4em;
+  font-size: 2.2rem;
+  line-height: 1.25em;
+  font-weight: 600;
 }
 
-html.casper .articles-list-header h3 a {
+html.casper .post-list-header h3 a {
   /* color: #fff; */
   font-weight: 500;
   text-decoration: none;
   opacity: 0.8;
 }
 
-html.casper .articles-list-header h3 a:hover {
+html.casper .post-list-header h3 a:hover {
   opacity: 1;
 }
 
-html.casper .articles-list-content {
+html.casper .post-list-content {
   font-size: 1.7rem;
 }
 
-html.casper .articles-list-content ul {
+html.casper .post-list-content ul {
   display: flex;
   flex-direction: column;
   margin: 0;
@@ -68,65 +104,172 @@ html.casper .articles-list-content ul {
   list-style: none;
 }
 
-html.casper .articles-list-content li {
+html.casper .post-list-content li {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   margin: 0;
-  padding: 20px 0;
-  border-bottom: rgba(255, 255, 255, 0.1);
+  padding: 12px 0;
+  border-bottom: 1px solid rgb(0, 0, 0, 0.1);
 }
 
-html.casper .articles-list-content li:last-of-type {
+html.casper .post-list-content li:last-of-type {
   padding-bottom: 5px;
   border: none;
 }
 
-html.casper .articles-list-content h4 {
+html.casper .post-list-content h4 {
   margin: 0;
   font-size: 1.6rem;
   line-height: 1.35em;
   font-weight: 600;
 }
 
-html.casper .articles-list-content li a {
+html.casper .post-list-content h4 a {
+  color: var(--darkgrey);
+}
+
+html.casper .post-list-content li a {
   display: block;
   /* color: #fff; */
   opacity: 0.8;
 }
 
-html.casper .articles-list-content li a:hover {
+html.casper .post-list-content li a:hover {
   opacity: 1;
 }
 
-html.casper .articles-list-meta {
+html.casper .post-list-tags {
+  display: flex;
+}
+
+html.casper .post-list-tag {
+  margin: 0 0.2em 0.2em;
+  display: flex;
+  color: var(--blue);
+  font-size: 1.2rem;
+  font-weight: 500;
+  letter-spacing: 0.2px;
+  text-transform: uppercase;
+}
+
+html.casper .post-list-tag:first-child {
+  margin: 0 0.2em 0.2em 0;
+}
+
+html.casper .post-list-meta {
   margin-top: 2px;
   font-size: 1.2rem;
   line-height: 1.4em;
   font-weight: 400;
 }
 
-html.casper .articles-list-meta p {
+html.casper .post-list-meta p {
   margin: 0;
   /* color: rgba(255, 255, 255, 0.6); */
 }
 
-html.casper .articles-list-footer {
+html.casper .post-list-footer {
   position: relative;
   margin: 40px 0 5px;
 }
 
-html.casper .articles-list-footer a {
+html.casper .post-list-footer a {
   padding: 7px 12px 8px 14px;
-  border: 1px solid rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(0, 0, 0, 0.6);
   /* color: rgba(255, 255, 255, 0.6); */
   font-size: 1.3rem;
   border-radius: 999px;
   transition: all 0.35s ease-in-out;
 }
 
-html.casper .articles-list-footers a:hover {
-  border-color: var(--yellow);
-  color: var(--yellow);
+html.casper .post-list-footer a:hover {
+  border-color: var(--blue);
+  /* color: var(--yellow); */
   text-decoration: none;
 }
+
+/************************ Post Featured *************************/
+
+html.casper .post-featured-section {
+  display: flex;
+  justify-content: center;
+}
+
+html.casper .post-featured-header h3 {
+  margin: 0;
+  /* color: rgba(255, 255, 255, 0.6); */
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  margin: 0.5em 25px 0.4em;
+  padding: 0 25px;
+  font-size: 2.2rem;
+  line-height: 1.25em;
+  font-weight: 600;
+}
+
+/* @media (min-width: 795px) { */
+html.casper .post-featured-card {
+  flex: 1 1 100%;
+  margin: 0 25px 50px;
+  padding: 25px;
+  flex-direction: row;
+  padding-bottom: 40px;
+  min-height: 280px;
+  border-top: 0;
+  display: flex;
+}
+
+html.casper .post-featured-card:first-child {
+  margin: 0 0 50px 25px;
+}
+
+html.casper .post-featured-card:hover {
+  border-bottom-color: color-mod(var(--lightgrey) l(+10%));
+}
+
+html.casper .post-featured-card:not(.no-image) .post-card-header {
+  margin-top: 0;
+}
+
+html.casper .post-featured-card .post-card-image-link {
+  position: relative;
+  flex: 1 0 160px;
+  margin-bottom: 0;
+  min-height: 120px;
+  max-height: 260px;
+
+  /* height: 100%; */
+}
+
+html.casper .post-featured-card .post-card-image {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: #fff;
+}
+
+html.casper .post-featured-card .post-card-content {
+  flex: 0 1 361px;
+  justify-content: start;
+}
+
+html.casper .post-featured-card .post-card-title {
+  margin-top: 0;
+  font-size: 1.8rem;
+}
+
+html.casper .post-featured-card .post-card-content-link {
+  padding: 0 0 0 30px;
+}
+
+html.casper .post-featured-card .post-card-meta {
+  padding: 0 0 0 30px;
+}
+
+html.casper .post-featured-card .post-card-excerpt p {
+  margin-bottom: 1.5em;
+  font-size: 1.8rem;
+  line-height: 1.5em;
+}
+/* } */

@@ -307,6 +307,16 @@ export async function getOptimizedAllBookSummaries(props?: { limit: number }): P
   return await createOptimizedPosts(bookSummaries)
 }
 
+export async function getFeaturedBookSummaries(props?: { limit: number }): Promise<GhostPostsOrPages> {
+  const posts = await api.posts.browse({
+    ...postAndPageFetchOptions,
+    filter: excludePostOrPageBySlug('tag:book-summary'),
+    ...(props && { ...props }),
+  })
+  const results = await createNextProfileImagesFromPosts(posts)
+  return await createNextFeatureImages(results)
+}
+
 export async function getAllPostSlugs(): Promise<string[]> {
   const posts = await api.posts.browse(postAndPageSlugOptions)
   return posts.map((p) => p.slug)

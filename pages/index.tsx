@@ -7,6 +7,7 @@ import { PostView } from '@components/PostView'
 import { HeaderIndex } from '@components/HeaderIndex'
 import { StickyNavContainer } from '@effects/StickyNavContainer'
 import { SEO } from '@meta/seo'
+// import { Subscribe } from '@components/Subscribe'
 
 import { processEnv } from '@lib/processEnv'
 import { getOptimizedAllDeveloperPosts, getOptimizedAllPosts, getOptimizedAllSettings, GhostPostOrPage, GhostPostsOrPages, GhostSettings, OptimizedPosts } from '@lib/ghost'
@@ -15,7 +16,10 @@ import { seoImage, ISeoImage } from '@meta/seoImage'
 import { BodyClass } from '@helpers/BodyClass'
 import { Search } from '@components/search/search'
 import { TagFilter } from '@components/filters/TagFilter'
-import { HomeLatestArticles } from '@components/home/HomeLatestArticles'
+import { PostLists } from '@components/home/PostLists'
+import { PostFeatured } from '@components/home/PostFeatured'
+import { featuredPosts } from 'appConfig'
+import { HomeTopicCards } from '@components/home/homeTopicCards'
 
 /**
  * Main index page (home page)
@@ -45,6 +49,9 @@ export default function Index({ cmsData }: IndexProps) {
   if (router.isFallback) return <div>Loading...</div>
 
   const { settings, posts, latestPosts, featuredPosts, seoImage, bodyClass } = cmsData
+  const { processEnv } = settings
+  const { nextImages, toc, memberSubscriptions, commenting } = processEnv
+
   const [filteredPosts, setFilteredPosts] = useState<GhostPostsOrPages>(posts)
 
   return (
@@ -58,10 +65,21 @@ export default function Index({ cmsData }: IndexProps) {
             {/* <Search {...{ posts, setFilteredPosts }} placeholder="Search articles..." />
             <TagFilter {...{ posts, setFilteredPosts }} />
             <PostView {...{ settings, posts: filteredPosts, isHome: true }} /> */}
-            <div className="articles-section">
-              <HomeLatestArticles {...{ settings, posts: featuredPosts }} />
-              <HomeLatestArticles {...{ settings, posts: latestPosts }} />
+            <div className="inner">
+              <HomeTopicCards {...{ settings }} />
+              <div className="post-section">
+                <PostLists {...{ settings, posts: featuredPosts, title: 'Featured ' }} />
+                <PostLists {...{ settings, posts: latestPosts, title: 'Latest ' }} />
+              </div>
+              <header className="post-featured-header">
+                <h3>Read My Book Summaries</h3>
+              </header>
+              <div className="post-featured-section">
+                {latestPosts && <PostFeatured {...{ settings, post: latestPosts[0] }} />}
+                {latestPosts && <PostFeatured {...{ settings, post: latestPosts[1] }} />}
+              </div>
             </div>
+            {/* {!memberSubscriptions && <Subscribe {...{ settings }} />} */}
           </Layout>
         )}
       />
@@ -74,12 +92,13 @@ export const getStaticProps: GetStaticProps = async () => {
   let posts: OptimizedPosts | []
   let latestPosts: OptimizedPosts | []
   let featuredPosts: OptimizedPosts | []
+  let featuredBooks: OptimizedPosts | []
 
   try {
     settings = await getOptimizedAllSettings()
     posts = await getOptimizedAllDeveloperPosts()
-    latestPosts = await getOptimizedAllDeveloperPosts({ limit: 5 })
-    featuredPosts = await getOptimizedAllDeveloperPosts({ limit: 6 })
+    latestPosts = await getOptimizedAllDeveloperPosts({ limit: 4 })
+    featuredPosts = await getOptimizedAllDeveloperPosts({ limit: 4 })
   } catch (error) {
     throw new Error('Index creation failed.')
   }

@@ -64,7 +64,7 @@ export const PostCard = ({ settings, post, num, isHome }: PostCardProps) => {
               return (
                 <div key={tag.id} className="post-card-tag">
                   <Link href={resolveUrl({ cmsUrl, slug: tag.slug, url: tag.url })}>
-                    <a>{`${tag.name}`}</a>
+                    <a>{`${tag.name}`}&nbsp;</a>
                   </Link>
                   {`  ${post.tags && idx + 1 < post.tags?.slice(0, 3).length ? '-' : ''}`}
                 </div>
