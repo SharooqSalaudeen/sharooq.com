@@ -17,6 +17,7 @@ import {
   getOptimizedAllPosts,
   getOptimizedAllSettings,
   getOptimizedLatestPosts,
+  getPostBySlug,
   GhostPostOrPage,
   GhostPostsOrPages,
   GhostSettings,
@@ -29,7 +30,7 @@ import { Search } from '@components/search/search'
 import { TagFilter } from '@components/filters/TagFilter'
 import { PostLists } from '@components/home/PostLists'
 import { PostFeatured } from '@components/home/PostFeatured'
-import { featuredPosts } from 'appConfig'
+import { featuredBooks } from 'appConfig'
 import { HomeTopicCards } from '@components/home/HomeTopicCards'
 
 /**
@@ -43,6 +44,8 @@ interface CmsData {
   posts: GhostPostsOrPages
   latestPosts?: GhostPostsOrPages
   featuredPosts?: GhostPostsOrPages
+  firstFeaturedBook?: GhostPostOrPage
+  secondFeaturedBook?: GhostPostOrPage
   settings: GhostSettings
   seoImage: ISeoImage
   previewPosts?: GhostPostsOrPages
@@ -59,8 +62,7 @@ export default function Index({ cmsData }: IndexProps) {
   const router = useRouter()
   if (router.isFallback) return <div>Loading...</div>
 
-  const { settings, latestPosts, featuredPosts, seoImage, bodyClass } = cmsData
-  console.log('fetured posts', featuredPosts)
+  const { settings, latestPosts, featuredPosts, firstFeaturedBook, secondFeaturedBook, seoImage, bodyClass } = cmsData
 
   const { processEnv } = settings
   const { nextImages, toc, memberSubscriptions, commenting } = processEnv
@@ -87,12 +89,16 @@ export default function Index({ cmsData }: IndexProps) {
                 <PostLists {...{ settings, posts: featuredPosts, title: 'Featured ' }} />
                 <PostLists {...{ settings, posts: latestPosts, title: 'Latest ' }} />
               </div>
-              <header className="post-featured-header">
-                <h3>Read My Book Summaries</h3>
-              </header>
+
               <div className="post-featured-section">
-                {latestPosts && <PostFeatured {...{ settings, post: latestPosts[0] }} />}
-                {latestPosts && <PostFeatured {...{ settings, post: latestPosts[1] }} />}
+                <header className="post-featured-header">
+                  <h3>Read My Book Summaries</h3>
+                  <hr className="heading-underline" />
+                </header>
+                <div className="post-featured-container">
+                  {firstFeaturedBook && <PostFeatured {...{ settings, post: firstFeaturedBook, imageUrl: featuredBooks[0].imageUrl }} />}
+                  {secondFeaturedBook && <PostFeatured {...{ settings, post: secondFeaturedBook, imageUrl: featuredBooks[1].imageUrl }} />}
+                </div>
               </div>
             </div>
             {/* {!memberSubscriptions && <Subscribe {...{ settings }} />} */}
@@ -108,13 +114,15 @@ export const getStaticProps: GetStaticProps = async () => {
   let posts: OptimizedPosts | []
   let latestPosts: OptimizedPosts | []
   let featuredPosts: OptimizedPosts | []
-  let featuredBooks: OptimizedPosts | []
+  let firstFeaturedBook: GhostPostOrPage | null
+  let secondFeaturedBook: GhostPostOrPage | null
 
   try {
     settings = await getOptimizedAllSettings()
-    // posts = await getOptimizedAllDeveloperPosts()
     latestPosts = await getOptimizedLatestPosts({ limit: 5 })
     featuredPosts = await getOptimizedAllFeaturedPosts({ limit: 5 })
+    firstFeaturedBook = await getPostBySlug(featuredBooks[0].slug)
+    secondFeaturedBook = await getPostBySlug(featuredBooks[1].slug)
   } catch (error) {
     throw new Error('Index creation failed.')
   }
@@ -124,6 +132,8 @@ export const getStaticProps: GetStaticProps = async () => {
     // posts,
     latestPosts,
     featuredPosts,
+    firstFeaturedBook,
+    secondFeaturedBook,
     seoImage: await seoImage({ siteUrl: settings.processEnv.siteUrl }),
     bodyClass: BodyClass({ isHome: true }),
   }

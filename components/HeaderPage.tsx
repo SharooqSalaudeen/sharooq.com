@@ -8,7 +8,7 @@ import { getLang, get } from '@utils/use-lang'
 
 interface HeaderPageProps {
   settings: GhostSettings
-  page: GhostPostOrPage
+  page?: GhostPostOrPage
 }
 
 export const HeaderPage = ({ settings, page }: HeaderPageProps) => {
@@ -18,9 +18,8 @@ export const HeaderPage = ({ settings, page }: HeaderPageProps) => {
   const siteLogo = site.logoImage
   const coverImg = site.cover_image || ''
 
-  const { meta_description, excerpt, title: t, meta_title } = page
-  const title = meta_title || t
-  const description = meta_description || excerpt
+  const title = page?.meta_title || page?.title || ''
+  const description = page?.meta_description || page?.excerpt || ''
 
   const { processEnv } = settings
   const { siteUrl, nextImages } = processEnv

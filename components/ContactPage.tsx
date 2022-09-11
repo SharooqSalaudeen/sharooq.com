@@ -55,7 +55,7 @@ export function Contact({ cmsData }: PageProps) {
   return (
     <>
       <SEO {...{ settings, meta_title, meta_description, seoImage }} />
-      <Layout {...{ settings, bodyClass }} header={<HeaderPage {...{ settings }} />}>
+      <Layout {...{ settings, bodyClass }} header={<HeaderPage {...{ settings, page }} />}>
         <div className="inner">
           <article className={`post-full ${postClass}`}>
             <header className="post-full-header">

@@ -18,8 +18,9 @@ interface PostCardProps {
   post: GhostPostOrPage
   num?: number
   isHome?: boolean
+  imageUrl: string
 }
-export const PostFeatured = ({ settings, post, num, isHome }: PostCardProps) => {
+export const PostFeatured = ({ settings, post, num, isHome, imageUrl }: PostCardProps) => {
   const { nextImages } = settings.processEnv
   const text = get(getLang(settings.lang))
   const cmsUrl = settings.url
@@ -31,7 +32,7 @@ export const PostFeatured = ({ settings, post, num, isHome }: PostCardProps) => 
   const large = (featImg && isHome && num !== undefined && 0 === num % 6 && `post-card-large`) || ``
   const authors = post?.authors?.filter((_, i) => (i < 2 ? true : false))
 
-  const imageUrl = `https://res.cloudinary.com/sharooq/image/upload/v1661407564/Blog/home/featured_books/thumbnail-the-monk-who-sold-his-ferrari_eavd4a.jpg`
+  // const imageUrl = `https://res.cloudinary.com/sharooq/image/upload/v1661407564/Blog/home/featured_books/thumbnail-the-monk-who-sold-his-ferrari_eavd4a.jpg`
   return (
     <>
       <article className={`post-featured-card `}>

@@ -30,6 +30,7 @@ export const PostLists = ({ title, settings, primaryTag, posts }: PreviewPostsPr
           <header className="post-list-header">
             <h3>{title ?? 'Articles'}</h3>
           </header>
+          <hr className="heading-underline" />
           <div className="post-list-content">
             <ul>
               {posts?.map((post, i) => (

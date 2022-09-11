@@ -1,5 +1,11 @@
 @import 'global.css';
 
+html.casper .heading-underline {
+  width: 87px;
+  border: 2px solid var(--lightgrey);
+  margin: 0;
+}
+
 /************************ Home Subscribe Form *************************/
 
 html.casper .home-subscribe-container {
@@ -18,13 +24,11 @@ html.casper .home-author-pic {
 
 html.casper .home-subscribe-form {
   flex: 2;
-  margin: 1.5em 1.5em !important;
-  /* padding: 6.5vw 7vw 8vw; */
-  /* border: hsl(0, 0%, 95.8823529412%) 1px solid; */
+  margin: auto 1.5em !important;
   text-align: start !important;
   border-radius: 3px;
   border: none !important;
-  padding: 0 !important;
+  padding: 1.5em 0 !important;
   background: none !important;
 }
 
@@ -32,14 +36,26 @@ html.casper .home-subscribe-form form {
   margin: 0 !important;
 }
 
+@media (max-width: 701px) {
+  html.casper .home-subscribe-form {
+    margin: auto 0 !important;
+  }
+
+  html.casper .home-subscribe-container {
+    flex-direction: column-reverse;
+  }
+  html.casper .home-author-container {
+    width: 50vw;
+    margin: 1.5em auto;
+  }
+}
+
 /************************ Home Topic Cards *************************/
 
-@media (min-width: 701px) {
-  html.casper .home-topic-cards {
-    display: flex;
-    justify-content: space-between;
-    text-align: center;
-  }
+html.casper .home-topic-cards {
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
 }
 
 html.casper .home-topic-card {
@@ -51,10 +67,7 @@ html.casper .home-topic-card {
   width: 30%;
   border: 0 solid rgba(0, 0, 0, 0.125);
   background-clip: border-box;
-  /* box-shadow: 0 4px 10px #333; */
-  /* box-shadow: 0 20px 27px 0 rgb(0 0 0 / 5%); */
   box-shadow: 0 5px 20px 0 rgb(0 0 0 / 10%);
-  /* background-color: var(--page-bg); */
   transition: color 0.3s, transform 0.3s !important;
 }
 
@@ -68,6 +81,16 @@ html.casper .home-topic-card h2 {
   margin-bottom: 1rem;
 }
 
+@media (max-width: 701px) {
+  html.casper .home-topic-cards {
+    display: block;
+    margin: 0;
+  }
+  html.casper .home-topic-card {
+    width: 100%;
+  }
+}
+
 /************************ Post List *************************/
 
 html.casper .post-section {
@@ -77,10 +100,10 @@ html.casper .post-section {
 
 html.casper .post-list {
   position: relative;
-  display: flex;
+  flex: 1;
   flex-direction: column;
   overflow: hidden;
-  margin: 0 25px 50px;
+  margin: 0 24px 50px;
   padding: 25px;
   border-radius: 3px;
 }
@@ -95,21 +118,27 @@ html.casper .post-list a:hover {
 
 @media (max-width: 1170px) {
   html.casper .post-list {
-    margin-bottom: 5vw;
+    margin: 0 0 50px;
   }
 }
 
-@media (max-width: 650px) {
+@media (max-width: 701px) {
+  html.casper .post-section {
+    display: block;
+  }
+
   html.casper .post-list {
-    margin: 0 25px;
-    padding: 0;
-    background: none;
+    margin: 0;
+    padding: 25px 0;
+  }
+
+  html.casper .post-list:first-of-type {
+    margin: 1.5em 0 0 0;
   }
 }
 
 html.casper .post-list-header h3 {
   margin: 0;
-  /* color: rgba(255, 255, 255, 0.6); */
   letter-spacing: 0.4px;
   text-transform: uppercase;
   margin: 0.5em 0 0.4em;
@@ -119,7 +148,6 @@ html.casper .post-list-header h3 {
 }
 
 html.casper .post-list-header h3 a {
-  /* color: #fff; */
   font-weight: 500;
   text-decoration: none;
   opacity: 0.8;
@@ -168,7 +196,6 @@ html.casper .post-list-content h4 a {
 
 html.casper .post-list-content li a {
   display: block;
-  /* color: #fff; */
   opacity: 0.8;
 }
 
@@ -203,7 +230,6 @@ html.casper .post-list-meta {
 
 html.casper .post-list-meta p {
   margin: 0;
-  /* color: rgba(255, 255, 255, 0.6); */
 }
 
 html.casper .post-list-footer {
@@ -214,7 +240,6 @@ html.casper .post-list-footer {
 html.casper .post-list-footer a {
   padding: 7px 12px 8px 14px;
   border: 1px solid rgba(0, 0, 0, 0.6);
-  /* color: rgba(255, 255, 255, 0.6); */
   font-size: 1.3rem;
   border-radius: 999px;
   transition: all 0.35s ease-in-out;
@@ -222,43 +247,40 @@ html.casper .post-list-footer a {
 
 html.casper .post-list-footer a:hover {
   border-color: var(--blue);
-  /* color: var(--yellow); */
   text-decoration: none;
 }
 
 /************************ Post Featured *************************/
 
 html.casper .post-featured-section {
+  margin: 0 24px;
+}
+
+html.casper .post-featured-container {
   display: flex;
   justify-content: center;
 }
 
+html.casper .post-featured-header {
+  margin: 0.5em 25px 0.4em;
+}
+
 html.casper .post-featured-header h3 {
-  margin: 0;
-  /* color: rgba(255, 255, 255, 0.6); */
   letter-spacing: 0.4px;
   text-transform: uppercase;
-  margin: 0.5em 25px 0.4em;
-  padding: 0 25px;
   font-size: 2.2rem;
   line-height: 1.25em;
   font-weight: 600;
 }
 
-/* @media (min-width: 795px) { */
 html.casper .post-featured-card {
   flex: 1 1 100%;
-  margin: 0 25px 50px;
   padding: 25px;
   flex-direction: row;
   padding-bottom: 40px;
   min-height: 280px;
   border-top: 0;
   display: flex;
-}
-
-html.casper .post-featured-card:first-child {
-  margin: 0 0 50px 25px;
 }
 
 html.casper .post-featured-card:hover {
@@ -275,8 +297,6 @@ html.casper .post-featured-card .post-card-image-link {
   margin-bottom: 0;
   min-height: 120px;
   max-height: 260px;
-
-  /* height: 100%; */
 }
 
 html.casper .post-featured-card .post-card-image {
@@ -287,7 +307,7 @@ html.casper .post-featured-card .post-card-image {
 }
 
 html.casper .post-featured-card .post-card-content {
-  flex: 0 1 361px;
+  flex: 2 1 361px;
   justify-content: start;
 }
 
@@ -309,4 +329,29 @@ html.casper .post-featured-card .post-card-excerpt p {
   font-size: 1.8rem;
   line-height: 1.5em;
 }
-/* } */
+
+@media (max-width: 1170px) {
+  html.casper .post-featured-section {
+    margin: 0;
+  }
+  html.casper .post-featured-container {
+    display: block;
+  }
+
+  html.casper .post-featured-card .post-card-image-link {
+    flex: 1 2 160px;
+  }
+}
+@media (max-width: 701px) {
+  html.casper .post-featured-section {
+    margin: 0;
+  }
+
+  html.casper .post-featured-header {
+    margin: 0.5em 0 0.4em;
+  }
+
+  html.casper .post-featured-card {
+    padding: 25px 0;
+  }
+}

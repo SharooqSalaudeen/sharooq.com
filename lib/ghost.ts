@@ -342,11 +342,13 @@ export async function getOptimizedAllBookSummaries(props?: { limit: number }): P
   return await createOptimizedPosts(bookSummaries)
 }
 
+//All Post Slugs
 export async function getAllPostSlugs(): Promise<string[]> {
   const posts = await api.posts.browse(postAndPageSlugOptions)
   return posts.map((p) => p.slug)
 }
 
+//All Pages
 export async function getAllPages(props?: { limit: number }): Promise<GhostPostsOrPages> {
   const pages = await api.pages.browse({
     ...postAndPageFetchOptions,

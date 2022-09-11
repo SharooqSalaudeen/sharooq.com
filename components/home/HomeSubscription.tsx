@@ -12,7 +12,7 @@ export const HomeSubscription = ({ settings }: { settings: GhostSettings }) => {
           I'm a software engineer by profession. This is the place where I share the things I've learned and created over the years. I won't bother you with ads, affiliate links,
           sponsored posts, and paywall on this space.
         </p>
-        <p>Checkout my monthly newsletter where I share actionable productivity tips, latest advancements in technology and other practical life advice.</p>
+        <p>Checkout my monthly newsletter where I share actionable productivity tips, latest advancements in engineering and other practical life advice.</p>
         <p>Sign up below to join a growing community of friendly readers.</p>
         <SubscribeForm {...{ settings }} />
       </section>
