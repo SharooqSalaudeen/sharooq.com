@@ -63,7 +63,7 @@ export const PostLists = ({ title, settings, primaryTag, posts }: PreviewPostsPr
             </ul>
           </div>
           <footer className="post-list-footer">
-            <Link href={url}>
+            <Link href="/articles">
               <a>See more</a>
             </Link>
           </footer>

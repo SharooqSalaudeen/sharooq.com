@@ -21,8 +21,9 @@ interface HomeTopicCardsProps {
 }
 export const HomeTopicCards = ({ settings, post, num, isHome }: HomeTopicCardsProps) => {
   const { nextImages } = settings.processEnv
+
   // const text = get(getLang(settings.lang))
-  // const cmsUrl = settings.url
+  const cmsUrl = settings.url
   // const collectionPath = collections.getCollectionByNode(post)
   // const url = resolveUrl({ cmsUrl, collectionPath, slug: post.slug, url: post.url })
   // const featImg = post.featureImage
@@ -30,22 +31,22 @@ export const HomeTopicCards = ({ settings, post, num, isHome }: HomeTopicCardsPr
 
   const cards = [
     {
-      link: '',
+      slug: '/articles',
       icon: '/articles.png',
       name: 'Articles',
-      desc: 'something asdaskjnfas fajk s fkas  ka f ask sf addsada asasd',
+      desc: 'I write about a broad spectrum of programming paradigms, bug fixes and solutions ',
     },
     {
-      link: '',
+      slug: 'book-summaries',
       icon: '/books.png',
       name: 'Book Summaries',
-      desc: 'something asdaskjnfas fajk s fkas  ka f ask sf addsada asasd',
+      desc: 'My summary of books that truly inspired and changed the way I view about my life',
     },
     {
-      link: '',
+      slug: 'about',
       icon: '/writer.png',
       name: 'About Me',
-      desc: 'something asdaskjnfas fajk s fkas  ka f ask sf addsada asasd',
+      desc: 'Who I am? what I am working on right now? and Where to contact me?',
     },
   ]
 
@@ -53,13 +54,15 @@ export const HomeTopicCards = ({ settings, post, num, isHome }: HomeTopicCardsPr
     <>
       <div className="home-topic-cards">
         {cards.map((topic, idx) => (
-          <div key={idx} className="home-topic-card">
-            <div className="icon" style={{}}>
-              <Image src={topic.icon} alt={topic.name} layout="fixed" objectFit="fill" quality={nextImages.quality} width="48px" height="48px" />
+          <Link key={idx} href={topic.slug}>
+            <div className="home-topic-card">
+              <div className="icon" style={{}}>
+                <Image src={topic.icon} alt={topic.name} layout="fixed" objectFit="fill" quality={nextImages.quality} width="48px" height="48px" />
+              </div>
+              <h2>{topic.name}</h2>
+              <p>{topic.desc}</p>
             </div>
-            <h2>{topic.name}</h2>
-            <p>{topic.desc}</p>
-          </div>
+          </Link>
         ))}
       </div>
     </>

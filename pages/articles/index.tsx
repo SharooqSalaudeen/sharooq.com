@@ -51,7 +51,10 @@ export default function Index({ cmsData }: IndexProps) {
         throttle={300}
         activeClass="fixed-nav-active"
         render={(sticky) => (
-          <Layout {...{ bodyClass, sticky, settings, isHome: true }} header={<HeaderIndex {...{ settings }} />}>
+          <Layout
+            {...{ bodyClass, sticky, settings, isHome: true }}
+            header={<HeaderIndex {...{ settings, pageTitle: 'Articles', pageDescription: 'Articles on a broad spectrum of programming paradigms, bug fixes and solutions' }} />}
+          >
             <Search {...{ posts, setFilteredPosts }} placeholder="Search articles..." />
             <TagFilter {...{ posts, setFilteredPosts }} />
             <PostView {...{ settings, posts: filteredPosts, isHome: true }} />

@@ -7,10 +7,21 @@ import { PostView } from '@components/PostView'
 import { HeaderIndex } from '@components/HeaderIndex'
 import { StickyNavContainer } from '@effects/StickyNavContainer'
 import { SEO } from '@meta/seo'
-// import { Subscribe } from '@components/Subscribe'
+import { Subscribe } from '@components/Subscribe'
+import { HomeSubscription } from '@components/home/HomeSubscription'
 
 import { processEnv } from '@lib/processEnv'
-import { getOptimizedAllDeveloperPosts, getOptimizedAllPosts, getOptimizedAllSettings, GhostPostOrPage, GhostPostsOrPages, GhostSettings, OptimizedPosts } from '@lib/ghost'
+import {
+  getOptimizedAllDeveloperPosts,
+  getOptimizedAllFeaturedPosts,
+  getOptimizedAllPosts,
+  getOptimizedAllSettings,
+  getOptimizedLatestPosts,
+  GhostPostOrPage,
+  GhostPostsOrPages,
+  GhostSettings,
+  OptimizedPosts,
+} from '@lib/ghost'
 import { seoImage, ISeoImage } from '@meta/seoImage'
 
 import { BodyClass } from '@helpers/BodyClass'
@@ -19,7 +30,7 @@ import { TagFilter } from '@components/filters/TagFilter'
 import { PostLists } from '@components/home/PostLists'
 import { PostFeatured } from '@components/home/PostFeatured'
 import { featuredPosts } from 'appConfig'
-import { HomeTopicCards } from '@components/home/homeTopicCards'
+import { HomeTopicCards } from '@components/home/HomeTopicCards'
 
 /**
  * Main index page (home page)
@@ -48,11 +59,13 @@ export default function Index({ cmsData }: IndexProps) {
   const router = useRouter()
   if (router.isFallback) return <div>Loading...</div>
 
-  const { settings, posts, latestPosts, featuredPosts, seoImage, bodyClass } = cmsData
+  const { settings, latestPosts, featuredPosts, seoImage, bodyClass } = cmsData
+  console.log('fetured posts', featuredPosts)
+
   const { processEnv } = settings
   const { nextImages, toc, memberSubscriptions, commenting } = processEnv
 
-  const [filteredPosts, setFilteredPosts] = useState<GhostPostsOrPages>(posts)
+  // const [filteredPosts, setFilteredPosts] = useState<GhostPostsOrPages>(posts)
 
   return (
     <>
@@ -65,7 +78,10 @@ export default function Index({ cmsData }: IndexProps) {
             {/* <Search {...{ posts, setFilteredPosts }} placeholder="Search articles..." />
             <TagFilter {...{ posts, setFilteredPosts }} />
             <PostView {...{ settings, posts: filteredPosts, isHome: true }} /> */}
+
             <div className="inner">
+              {!memberSubscriptions && <HomeSubscription {...{ settings }} />}
+
               <HomeTopicCards {...{ settings }} />
               <div className="post-section">
                 <PostLists {...{ settings, posts: featuredPosts, title: 'Featured ' }} />
@@ -96,16 +112,16 @@ export const getStaticProps: GetStaticProps = async () => {
 
   try {
     settings = await getOptimizedAllSettings()
-    posts = await getOptimizedAllDeveloperPosts()
-    latestPosts = await getOptimizedAllDeveloperPosts({ limit: 4 })
-    featuredPosts = await getOptimizedAllDeveloperPosts({ limit: 4 })
+    // posts = await getOptimizedAllDeveloperPosts()
+    latestPosts = await getOptimizedLatestPosts({ limit: 5 })
+    featuredPosts = await getOptimizedAllFeaturedPosts({ limit: 5 })
   } catch (error) {
     throw new Error('Index creation failed.')
   }
 
   const cmsData = {
     settings,
-    posts,
+    // posts,
     latestPosts,
     featuredPosts,
     seoImage: await seoImage({ siteUrl: settings.processEnv.siteUrl }),

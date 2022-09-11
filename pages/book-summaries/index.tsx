@@ -51,7 +51,12 @@ export default function Index({ cmsData }: IndexProps) {
         throttle={300}
         activeClass="fixed-nav-active"
         render={(sticky) => (
-          <Layout {...{ bodyClass, sticky, settings, isHome: true }} header={<HeaderIndex {...{ settings }} />}>
+          <Layout
+            {...{ bodyClass, sticky, settings, isHome: true }}
+            header={
+              <HeaderIndex {...{ settings, pageTitle: 'Book Summaries', pageDescription: 'Summary of books that truly inspired and changed the way I view about my life' }} />
+            }
+          >
             <Search {...{ posts, setFilteredPosts }} placeholder="Search books..." />
             <PostView {...{ settings, posts: filteredPosts, isHome: true }} />
           </Layout>
