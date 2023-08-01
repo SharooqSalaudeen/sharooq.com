@@ -26,7 +26,7 @@ export const rssFeed: boolean = true
 export const feedlyRss: boolean = false
 
 // Ghost Member Subscriptions
-export const memberSubscriptions: boolean = false
+export const memberSubscriptions: boolean = true
 
 // Commenting system
 export type CommentingSystem = 'commento' | 'disqus' | null

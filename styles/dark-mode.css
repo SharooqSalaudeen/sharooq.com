@@ -29,6 +29,10 @@ html.casper body.dark .author-profile-image {
   background: var(--darkmode);
 }
 
+html.casper body.dark .post-card-byline-date {
+  color: var(--lightgrey);
+}
+
 html.casper body.dark .post-card-byline-content a {
   color: rgba(255, 255, 255, 0.75);
 }
@@ -46,7 +50,7 @@ html.casper body.dark .post-card-title {
 }
 
 html.casper body.dark .post-card-excerpt {
-  color: color-mod(var(--midgrey) l(+10%));
+  color: color-mod(var(--midgrey) l(+50%));
 }
 
 html.casper body.dark .author-avatar,
@@ -69,7 +73,7 @@ html.casper body.dark .post-full-title {
 }
 
 html.casper body.dark .post-full-custom-excerpt {
-  color: color-mod(var(--midgrey) l(+10%));
+  color: color-mod(var(--midgrey) l(+50%));
 }
 
 html.casper body.dark .post-full-image {
@@ -80,8 +84,12 @@ html.casper body.dark .post-full-byline {
   border-top-color: color-mod(var(--darkmode) l(+15%));
 }
 
+html.casper body.dark .post-full-byline-meta .byline-meta-content {
+  color: color-mod(var(--midgrey) l(+40%));
+}
+
 html.casper body.dark .post-full-byline-meta h4 a {
-  color: rgba(255, 255, 255, 0.75);
+  color: rgba(255, 255, 255, 0.5);
 }
 
 html.casper body.dark .post-full-byline-meta h4 a:hover {

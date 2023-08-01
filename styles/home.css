@@ -10,6 +10,7 @@ html.casper .heading-underline {
 
 html.casper .home-subscribe-container {
   display: flex;
+  padding: 25px;
 }
 
 html.casper .home-author-container {
@@ -36,6 +37,12 @@ html.casper .home-subscribe-form form {
   margin: 0 !important;
 }
 
+@media (max-width: 1170px) {
+  html.casper .home-subscribe-container {
+    padding: 0;
+  }
+}
+
 @media (max-width: 701px) {
   html.casper .home-subscribe-form {
     margin: auto 0 !important;
@@ -45,8 +52,9 @@ html.casper .home-subscribe-form form {
     flex-direction: column-reverse;
   }
   html.casper .home-author-container {
+    display: none;
     width: 50vw;
-    margin: 1.5em auto;
+    margin: 10px auto 0;
   }
 }
 
@@ -56,6 +64,7 @@ html.casper .home-topic-cards {
   display: flex;
   justify-content: space-between;
   text-align: center;
+  margin: 0 0 25px;
 }
 
 html.casper .home-topic-card {
@@ -69,6 +78,11 @@ html.casper .home-topic-card {
   background-clip: border-box;
   box-shadow: 0 5px 20px 0 rgb(0 0 0 / 10%);
   transition: color 0.3s, transform 0.3s !important;
+}
+
+html.casper body.dark .home-topic-card {
+  color: var(--lightgrey);
+  background: var(--darkgrey);
 }
 
 html.casper .home-topic-card:hover {
@@ -103,7 +117,7 @@ html.casper .post-list {
   flex: 1;
   flex-direction: column;
   overflow: hidden;
-  margin: 0 24px 50px;
+  margin: 0 24px 24px;
   padding: 25px;
   border-radius: 3px;
 }
@@ -185,13 +199,17 @@ html.casper .post-list-content li:last-of-type {
 
 html.casper .post-list-content h4 {
   margin: 0;
-  font-size: 1.6rem;
+  font-size: 1.8rem;
   line-height: 1.35em;
   font-weight: 600;
 }
 
 html.casper .post-list-content h4 a {
   color: var(--darkgrey);
+}
+
+html.casper body.dark .post-list-content h4 a {
+  color: var(--lightgrey);
 }
 
 html.casper .post-list-content li a {
@@ -234,7 +252,7 @@ html.casper .post-list-meta p {
 
 html.casper .post-list-footer {
   position: relative;
-  margin: 40px 0 5px;
+  margin: 20px 0 5px;
 }
 
 html.casper .post-list-footer a {
@@ -245,6 +263,10 @@ html.casper .post-list-footer a {
   transition: all 0.35s ease-in-out;
 }
 
+html.casper body.dark .post-list-footer a {
+  border: 1px solid rgba(255, 255, 255, 0.6);
+}
+
 html.casper .post-list-footer a:hover {
   border-color: var(--blue);
   text-decoration: none;
@@ -253,7 +275,7 @@ html.casper .post-list-footer a:hover {
 /************************ Post Featured *************************/
 
 html.casper .post-featured-section {
-  margin: 0 24px;
+  margin: 0 24px 24px;
 }
 
 html.casper .post-featured-container {
@@ -326,27 +348,27 @@ html.casper .post-featured-card .post-card-meta {
 
 html.casper .post-featured-card .post-card-excerpt p {
   margin-bottom: 1.5em;
-  font-size: 1.8rem;
+  font-size: 1.6rem;
   line-height: 1.5em;
+}
+
+html.casper body.dark .post-featured-card .post-card-excerpt p {
+  color: var(--lightgrey);
 }
 
 @media (max-width: 1170px) {
   html.casper .post-featured-section {
-    margin: 0;
+    margin: 0 0 24px;
   }
   html.casper .post-featured-container {
     display: block;
   }
 
   html.casper .post-featured-card .post-card-image-link {
-    flex: 1 2 160px;
+    flex: 1 1 160px;
   }
 }
 @media (max-width: 701px) {
-  html.casper .post-featured-section {
-    margin: 0;
-  }
-
   html.casper .post-featured-header {
     margin: 0.5em 0 0.4em;
   }

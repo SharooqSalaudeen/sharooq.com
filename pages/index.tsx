@@ -82,7 +82,7 @@ export default function Index({ cmsData }: IndexProps) {
             <PostView {...{ settings, posts: filteredPosts, isHome: true }} /> */}
 
             <div className="inner">
-              {!memberSubscriptions && <HomeSubscription {...{ settings }} />}
+              {memberSubscriptions && <HomeSubscription {...{ settings }} />}
 
               <HomeTopicCards {...{ settings }} />
               <div className="post-section">
@@ -101,7 +101,7 @@ export default function Index({ cmsData }: IndexProps) {
                 </div>
               </div>
             </div>
-            {/* {!memberSubscriptions && <Subscribe {...{ settings }} />} */}
+            {memberSubscriptions && <Subscribe {...{ settings }} />}
           </Layout>
         )}
       />
