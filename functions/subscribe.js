@@ -1,7 +1,8 @@
+require('dotenv').config()
 const axios = require('axios')
 var crypto = require('crypto')
 
-const apiRoot = 'https://us19.api.mailchimp.com/3.0/lists/7b1593a11a/members/'
+const apiRoot = process.env.MAILCHIMP_API_ROOT
 
 exports.handler = async (event, context) => {
   try {
@@ -26,8 +27,8 @@ exports.handler = async (event, context) => {
         status: 'subscribed',
       },
       auth: {
-        username: 'sharooqs',
-        password: '2dd51d39f411e2fa92cd2589ae5ac79c-us19',
+        username: process.env.MAILCHIMP_USERNAME,
+        password: process.env.MAILCHIMP_API_KEY,
       },
     })
       .then((res) => {
