@@ -74,6 +74,11 @@ export interface ProcessEnvProps {
   staticProfilePic: string
   staticProfilePicBadge: string
   staticSiteMetaImage: string
+  mailchimp: {
+    apiRoot: String
+    apiUserName: String
+    apiKey: String
+  }
 }
 
 export const processEnv: ProcessEnvProps = {
@@ -118,4 +123,9 @@ export const processEnv: ProcessEnvProps = {
   staticProfilePic: process.env.JAMIFY_NEXT_STATIC_PROFILE_PIC ?? appConfig.staticProfilePic,
   staticProfilePicBadge: process.env.JAMIFY_NEXT_STATIC_PROFILE_PIC_BADGE ?? appConfig.staticProfilePicBadge,
   staticSiteMetaImage: process.env.JAMIFY_NEXT_STATIC_SITE_META_IMAGE ?? appConfig.staticSiteMetaImage,
+  mailchimp: {
+    apiRoot: process.env.MAILCHIMP_API_ROOT || '',
+    apiUserName: process.env.MAILCHIMP_USERNAME || '',
+    apiKey: process.env.MAILCHIMP_API_KEY || '',
+  },
 }
