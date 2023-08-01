@@ -806,10 +806,25 @@
   "resolved" "https://registry.npmjs.org/bytes/-/bytes-3.0.0.tgz"
   "version" "3.0.0"
 
-"call-bind@^1.0.0", "call-bind@^1.0.2":
-  "integrity" "sha512-7O+FbCihrB5WGbFYesctwmTKae6rOiIzmz1icreWJ+0aA7LJfuqhEso2T9ncpcFtzMQtzXf2QGGueWJGTYsqrA=="
-  "resolved" "https://registry.npmjs.org/call-bind/-/call-bind-1.0.2.tgz"
-  "version" "1.0.2"
+camelcase@^6.2.0:
+  version "6.3.0"
+  resolved "https://registry.yarnpkg.com/camelcase/-/camelcase-6.3.0.tgz#5685b95eb209ac9c0c177467778c9c84df58ba9a"
+  integrity sha512-Gmy6FhYlCY7uOElZUSbxo2UCDH8owEk996gkbrpsgGtrJLM3J7jGxl9Ic7Qwwj4ivOE5AWZWRMecDdF7hqGjFA==
+
+caniuse-lite@^1.0.30001283, caniuse-lite@^1.0.30001286, caniuse-lite@^1.0.30001297:
+  version "1.0.30001518"
+  resolved "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30001518.tgz"
+  integrity sha512-rup09/e3I0BKjncL+FesTayKtPrdwKhUufQFd3riFw1hHg8JmIFoInYfB102cFcY/pPgGmdyl/iy+jgiDi2vdA==
+
+ccount@^1.0.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/ccount/-/ccount-1.1.0.tgz#246687debb6014735131be8abab2d93898f8d043"
+  integrity sha512-vlNK021QdI7PNeiUh/lKkC/mNHHfV0m/Ad5JoI0TYtlBnJAslM/JIkm/tGC88bkLIwO6OQ5uV6ztS6kVAtCDlg==
+
+chalk@2.4.1:
+  version "2.4.1"
+  resolved "https://registry.yarnpkg.com/chalk/-/chalk-2.4.1.tgz#18c49ab16a037b6eb0152cc83e3471338215b66e"
+  integrity sha512-ObN6h1v2fTJSmUXoS3nMQ92LbDK9be4TV+6G+omQlGJFdcUX5heKi1LZ1YnRMIgwTLEj3E24bT6tYni50rlCfQ==
   dependencies:
     "function-bind" "^1.1.1"
     "get-intrinsic" "^1.0.2"
