@@ -40,7 +40,10 @@
     "serve": "serve out"
   },
   "dependencies": {
+    "@mailchimp/mailchimp_marketing": "^3.0.78",
+    "@netlify/functions": "^1.2.0",
     "@tryghost/content-api": "^1.6.0",
+    "axios": "^0.27.2",
     "cheerio": "^1.0.0-rc.10",
     "crypto-hash": "^2.0.1",
     "dayjs": "^1.10.7",

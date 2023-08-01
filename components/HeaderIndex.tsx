@@ -8,9 +8,11 @@ import { GhostSettings, NextImage } from '@lib/ghost'
 
 interface HeaderIndexProps {
   settings: GhostSettings
+  pageTitle?: string
+  pageDescription?: string
 }
 
-export const HeaderIndex = ({ settings }: HeaderIndexProps) => {
+export const HeaderIndex = ({ settings, pageTitle, pageDescription }: HeaderIndexProps) => {
   const text = get(getLang(settings.lang))
   const site = settings
   const siteLogo = site.logoImage
@@ -35,7 +37,9 @@ export const HeaderIndex = ({ settings }: HeaderIndexProps) => {
           <SiteNav className="site-nav" {...{ siteUrl, settings }} />
           <div className="site-header-content">
             <h1 className="site-title">
-              {siteLogo && nextFeatureImages ? (
+              {pageTitle ? (
+                pageTitle
+              ) : siteLogo && nextFeatureImages ? (
                 <Link href="/">
                   <a>
                     <div
@@ -61,7 +65,7 @@ export const HeaderIndex = ({ settings }: HeaderIndexProps) => {
                 title
               )}
             </h1>
-            <h2 className="site-description">{site.description}</h2>
+            <h2 className="site-description">{pageDescription ?? site.description}</h2>
           </div>
         </div>
       </HeaderBackground>

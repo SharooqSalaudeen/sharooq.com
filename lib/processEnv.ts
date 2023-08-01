@@ -115,7 +115,7 @@ export const processEnv: ProcessEnvProps = {
     maxNumberOfPosts: resolveNumber(process.env.JAMIFY_NEXT_ISR_MAX_NUMBER_POSTS, appConfig.maxNumberOfPosts),
     maxNumberOfPages: resolveNumber(process.env.JAMIFY_NEXT_ISR_MAX_NUMBER_PAGES, appConfig.maxNumberOfPages),
   },
-  staticProfilePic: process.env.JAMIFY_NEXT_STATIC_PROFILE_PIC || appConfig.staticProfilePic,
-  staticProfilePicBadge: process.env.JAMIFY_NEXT_STATIC_PROFILE_PIC_BADGE || appConfig.staticProfilePicBadge,
-  staticSiteMetaImage: process.env.JAMIFY_NEXT_STATIC_SITE_META_IMAGE || appConfig.staticSiteMetaImage,
+  staticProfilePic: process.env.JAMIFY_NEXT_STATIC_PROFILE_PIC ?? appConfig.staticProfilePic,
+  staticProfilePicBadge: process.env.JAMIFY_NEXT_STATIC_PROFILE_PIC_BADGE ?? appConfig.staticProfilePicBadge,
+  staticSiteMetaImage: process.env.JAMIFY_NEXT_STATIC_SITE_META_IMAGE ?? appConfig.staticSiteMetaImage,
 }

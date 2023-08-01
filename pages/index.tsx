@@ -7,14 +7,31 @@ import { PostView } from '@components/PostView'
 import { HeaderIndex } from '@components/HeaderIndex'
 import { StickyNavContainer } from '@effects/StickyNavContainer'
 import { SEO } from '@meta/seo'
+import { Subscribe } from '@components/Subscribe'
+import { HomeSubscription } from '@components/home/HomeSubscription'
 
 import { processEnv } from '@lib/processEnv'
-import { getOptimizedAllDeveloperPosts, getOptimizedAllPosts, getOptimizedAllSettings, GhostPostOrPage, GhostPostsOrPages, GhostSettings, OptimizedPosts } from '@lib/ghost'
+import {
+  getOptimizedAllDeveloperPosts,
+  getOptimizedAllFeaturedPosts,
+  getOptimizedAllPosts,
+  getOptimizedAllSettings,
+  getOptimizedLatestPosts,
+  getPostBySlug,
+  GhostPostOrPage,
+  GhostPostsOrPages,
+  GhostSettings,
+  OptimizedPosts,
+} from '@lib/ghost'
 import { seoImage, ISeoImage } from '@meta/seoImage'
 
 import { BodyClass } from '@helpers/BodyClass'
 import { Search } from '@components/search/search'
 import { TagFilter } from '@components/filters/TagFilter'
+import { PostLists } from '@components/home/PostLists'
+import { PostFeatured } from '@components/home/PostFeatured'
+import { featuredBooks } from 'appConfig'
+import { HomeTopicCards } from '@components/home/HomeTopicCards'
 
 /**
  * Main index page (home page)
@@ -25,6 +42,10 @@ import { TagFilter } from '@components/filters/TagFilter'
 
 interface CmsData {
   posts: GhostPostsOrPages
+  latestPosts?: GhostPostsOrPages
+  featuredPosts?: GhostPostsOrPages
+  firstFeaturedBook?: GhostPostOrPage
+  secondFeaturedBook?: GhostPostOrPage
   settings: GhostSettings
   seoImage: ISeoImage
   previewPosts?: GhostPostsOrPages
@@ -41,8 +62,12 @@ export default function Index({ cmsData }: IndexProps) {
   const router = useRouter()
   if (router.isFallback) return <div>Loading...</div>
 
-  const { settings, posts, seoImage, bodyClass } = cmsData
-  const [filteredPosts, setFilteredPosts] = useState<GhostPostsOrPages>(posts)
+  const { settings, latestPosts, featuredPosts, firstFeaturedBook, secondFeaturedBook, seoImage, bodyClass } = cmsData
+
+  const { processEnv } = settings
+  const { nextImages, toc, memberSubscriptions, commenting } = processEnv
+
+  // const [filteredPosts, setFilteredPosts] = useState<GhostPostsOrPages>(posts)
 
   return (
     <>
@@ -52,9 +77,31 @@ export default function Index({ cmsData }: IndexProps) {
         activeClass="fixed-nav-active"
         render={(sticky) => (
           <Layout {...{ bodyClass, sticky, settings, isHome: true }} header={<HeaderIndex {...{ settings }} />}>
-            <Search {...{ posts, setFilteredPosts }} placeholder="Search articles..." />
+            {/* <Search {...{ posts, setFilteredPosts }} placeholder="Search articles..." />
             <TagFilter {...{ posts, setFilteredPosts }} />
-            <PostView {...{ settings, posts: filteredPosts, isHome: true }} />
+            <PostView {...{ settings, posts: filteredPosts, isHome: true }} /> */}
+
+            <div className="inner">
+              {memberSubscriptions && <HomeSubscription {...{ settings }} />}
+
+              <HomeTopicCards {...{ settings }} />
+              <div className="post-section">
+                <PostLists {...{ settings, posts: featuredPosts, title: 'Featured ' }} />
+                <PostLists {...{ settings, posts: latestPosts, title: 'Latest ' }} />
+              </div>
+
+              <div className="post-featured-section">
+                <header className="post-featured-header">
+                  <h3>Read My Book Summaries</h3>
+                  <hr className="heading-underline" />
+                </header>
+                <div className="post-featured-container">
+                  {firstFeaturedBook && <PostFeatured {...{ settings, post: firstFeaturedBook, imageUrl: featuredBooks[0].imageUrl }} />}
+                  {secondFeaturedBook && <PostFeatured {...{ settings, post: secondFeaturedBook, imageUrl: featuredBooks[1].imageUrl }} />}
+                </div>
+              </div>
+            </div>
+            {memberSubscriptions && <Subscribe {...{ settings }} />}
           </Layout>
         )}
       />
@@ -65,17 +112,28 @@ export default function Index({ cmsData }: IndexProps) {
 export const getStaticProps: GetStaticProps = async () => {
   let settings
   let posts: OptimizedPosts | []
+  let latestPosts: OptimizedPosts | []
+  let featuredPosts: OptimizedPosts | []
+  let firstFeaturedBook: GhostPostOrPage | null
+  let secondFeaturedBook: GhostPostOrPage | null
 
   try {
     settings = await getOptimizedAllSettings()
-    posts = await getOptimizedAllDeveloperPosts()
+    latestPosts = await getOptimizedLatestPosts({ limit: 5 })
+    featuredPosts = await getOptimizedAllFeaturedPosts({ limit: 5 })
+    firstFeaturedBook = await getPostBySlug(featuredBooks[0].slug)
+    secondFeaturedBook = await getPostBySlug(featuredBooks[1].slug)
   } catch (error) {
     throw new Error('Index creation failed.')
   }
 
   const cmsData = {
     settings,
-    posts,
+    // posts,
+    latestPosts,
+    featuredPosts,
+    firstFeaturedBook,
+    secondFeaturedBook,
     seoImage: await seoImage({ siteUrl: settings.processEnv.siteUrl }),
     bodyClass: BodyClass({ isHome: true }),
   }

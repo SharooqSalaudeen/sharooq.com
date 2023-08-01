@@ -42,12 +42,12 @@ export const Page = ({ cmsData }: PageProps) => {
   return (
     <>
       <SEO {...{ description, settings, seoImage, title }} />
-      <Layout {...{ settings, bodyClass }} header={<HeaderPage {...{ settings }} />}>
+      <Layout {...{ settings, bodyClass }} header={<HeaderPage {...{ settings, page }} />}>
         <div className="inner">
           <article className={`post-full ${postClass}`}>
-            <header className="post-full-header">
+            {/* <header className="post-full-header">
               <h1 className="post-full-title">{page.title}</h1>
-            </header>
+            </header> */}
 
             {featImg &&
               (nextImages.feature && featImg.dimensions ? (

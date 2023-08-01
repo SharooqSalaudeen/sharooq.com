@@ -7,6 +7,7 @@ import { ThemeProvider } from '@components/contexts/themeProvider'
 import { processEnv } from '@lib/processEnv'
 import * as gtag from '../lib/gtag'
 
+import '@styles/home.css'
 import '@styles/screen.css'
 import '@styles/bookmark-fix.css'
 import '@styles/screen-fixings.css'

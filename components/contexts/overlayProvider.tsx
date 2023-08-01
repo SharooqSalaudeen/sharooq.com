@@ -49,12 +49,14 @@ export const OverlayProvider = ({ children }: OverlayProviderProps): ReactElemen
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>, cmsUrl: string = '') => {
     event.preventDefault()
-    const postURL = `${cmsUrl}/members/api/send-magic-link/`
+    const postURL = `/.netlify/functions/subscribe`
+
+    console.log('postURL', postURL)
 
     const values = {
       email,
-      emailType: `subscribe`,
-      labels: [],
+      // emailType: `subscribe`,
+      // labels: [],
     }
 
     try {

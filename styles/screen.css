@@ -374,9 +374,9 @@ html.casper .site-nav-static-logo img {
   height: 30px !important;
 }
 
-html.casper .site-home-header .site-nav-logo {
+/* html.casper .site-home-header .site-nav-logo {
   display: none;
-}
+} */
 
 html.casper .site-nav-content {
   position: relative;
@@ -628,7 +628,7 @@ html.casper .post-card {
   background-size: cover;
 }
 
-html.casper .post-card-image-link {
+html.casper .-image-link {
   position: relative;
   display: block;
   overflow: hidden;
@@ -684,6 +684,10 @@ html.casper .post-card-tag {
   display: inline-block;
 }
 
+html.casper .post-card-tag:first-child {
+  margin: 0 0.2em 0.2em 0;
+}
+
 html.casper .post-card-title {
   margin: 0 0 0.4em;
   line-height: 1.15em;
@@ -703,7 +707,7 @@ html.casper .post-card-content {
 html.casper .post-card-excerpt {
   max-width: 56em;
   color: color-mod(var(--midgrey) l(-8%));
-  font-family: Georgia, serif;
+  /* font-family: Georgia, serif; */
 }
 
 html.casper .post-card-excerpt p {
@@ -870,7 +874,8 @@ make sure this only happens on large viewports / desktop-ish devices.
 
   html.casper .post-card-large .post-card-image-link {
     position: relative;
-    flex: 1 1 auto;
+    flex: 1 1 '200px';
+
     margin-bottom: 0;
     min-height: 380px;
   }
@@ -1747,7 +1752,7 @@ html.casper .subscribe-email {
   width: 100%;
   border: color-mod(var(--lightgrey) l(+7%)) 1px solid;
   color: var(--midgrey);
-  font-size: 1.8rem;
+  font-size: 1.6rem;
   line-height: 1em;
   font-weight: normal;
   user-select: text;

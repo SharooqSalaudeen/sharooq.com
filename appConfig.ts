@@ -26,7 +26,7 @@ export const rssFeed: boolean = true
 export const feedlyRss: boolean = false
 
 // Ghost Member Subscriptions
-export const memberSubscriptions: boolean = false
+export const memberSubscriptions: boolean = true
 
 // Commenting system
 export type CommentingSystem = 'commento' | 'disqus' | null
@@ -71,3 +71,15 @@ export const staticSiteMetaImage: string = 'https://res.cloudinary.com/sharooq/i
 
 // Article Tags
 export const filters: string[] = ['AWS', 'Docker', 'TypeScript', 'Python', 'Machine Learning', 'JavaScript', 'ReactJS']
+
+// Features Posts images
+export const featuredBooks: { slug: string; imageUrl: string }[] = [
+  {
+    slug: 'atomic-habits-james-clear-summary-notes-quotes-highlights',
+    imageUrl: 'https://res.cloudinary.com/sharooq/image/upload/v1661407560/Blog/home/featured_books/thumbnail-atomic-habits_m7lrpt.jpg',
+  },
+  {
+    slug: 'the-monk-who-sold-his-ferrari-robin-sharma-summary-notes-quotes-highlights',
+    imageUrl: 'https://res.cloudinary.com/sharooq/image/upload/v1661407564/Blog/home/featured_books/thumbnail-the-monk-who-sold-his-ferrari_eavd4a.jpg',
+  },
+]

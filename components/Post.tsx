@@ -15,7 +15,7 @@ import { PreviewPosts } from '@components/PreviewPosts'
 import { RenderContent } from '@components/RenderContent'
 // import { CommentoComments } from '@components/CommentoComments'
 // import { DisqusComments } from '@components/DisqusComments'
-// import { Subscribe } from '@components/Subscribe'
+import { Subscribe } from '@components/Subscribe'
 import { TableOfContents } from '@components/toc/TableOfContents'
 
 import { StickyNavContainer } from '@effects/StickyNavContainer'
@@ -166,7 +166,7 @@ export const Post = ({ cmsData }: PostProps) => {
                   </div>
                 </section>
 
-                {/* {memberSubscriptions && <Subscribe {...{ settings }} />} */}
+                {memberSubscriptions && <Subscribe {...{ settings }} />}
 
                 {/* {commenting.system === 'commento' && <CommentoComments {...{ id: post.id, url: commenting.commentoUrl }} />} */}
 
