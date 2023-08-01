@@ -1,4 +1,3 @@
-require('dotenv').config()
 const axios = require('axios')
 var crypto = require('crypto')
 
