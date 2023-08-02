@@ -80,8 +80,11 @@ export const Layout = ({ settings, header, children, isHome, sticky, previewPost
             </section>
 
             <nav className="site-footer-nav">
-              <Link href="/">
+              {/* <Link href="/">
                 <a>{text(`LATEST_POSTS`)}</a>
+              </Link> */}
+              <Link href="/privacy-policy">
+                <a>{text(`PRIVACY_POLICY`)}</a>
               </Link>
               {/* {site.facebook && (
                 <a href={facebookUrl} target="_blank" rel="noopener noreferrer">

@@ -36,9 +36,9 @@ export const lang: KeyObjectMap = {
     GREAT: `Great`,
     SUBSCRIBE: `Subscribe`,
     // SUBSCRIBE_OVERLAY: `Stay up to date! Get all the latest & greatest posts delivered straight to your inbox`,
-    SUBSCRIBE_OVERLAY: `Stay up to date! Join my monthly newsletter and get the latest productivity tips, engineering advancements and practical life advice directly to your inbox.`,
+    SUBSCRIBE_OVERLAY: `Stay up to date! Join my monthly newsletter and get the latest productivity tips, engineering advancements and practical life advice directly to your inbox.`, //New
     // SUBSCRIBE_SECTION: `Get the latest posts delivered right to your inbox`,
-    SUBSCRIBE_SECTION: `Join the growing community of friendly readers through my monthly newsletter.`,
+    SUBSCRIBE_SECTION: `Join the growing community of friendly readers through my monthly newsletter.`, //New
     SUBSCRIBE_TO: `Subscribe to`,
     SUBSCRIBED_FAILED: `Could not sign up! Invalid sign up link.`,
     YOUR_EMAIL: `youremail@example.com`,
@@ -61,6 +61,7 @@ export const lang: KeyObjectMap = {
     SUBMIT: `Submit`,
     YOUR_MESSAGE: `Your message`,
     TABLE_OF_CONTENTS: `Table of Contents`,
+    PRIVACY_POLICY: `Privacy Policy`, //New
   },
   ptBR: {
     A_COLLECTION_OF: `Uma coleção de`,
