@@ -46,7 +46,7 @@ export default function Index({ cmsData }: IndexProps) {
 
   return (
     <>
-      <SEO {...{ settings, seoImage }} />
+      <SEO {...{ settings, seoImage, title: 'Articles' }} />
       <StickyNavContainer
         throttle={300}
         activeClass="fixed-nav-active"
