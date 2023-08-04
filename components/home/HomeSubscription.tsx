@@ -9,10 +9,13 @@ export const HomeSubscription = ({ settings }: { settings: GhostSettings }) => {
     <div className="home-subscribe-container">
       <section className="home-subscribe-form subscribe-form">
         <p>
-          My name is Sharooq Salaudeen and I'm a software engineer by profession. This is the place where I share the things I've learned and created over the years. I won't bother
-          you with ads, affiliate links, and paywall on this space.
+          Hello, I'm Sharooq Salaudeen, a dedicated software engineer and data scientist. This blog is my canvas where I paint with my learnings and creations, accumulated over my
+          professional journey. It's more than just a blog - it's a resource for the community, a spark for inspiration, and a repository for future reference.
         </p>
-        <p>Checkout my monthly newsletter where I share actionable productivity tips, latest advancements in engineering and other practical life advice.</p>
+        <p>
+          I invite you to subscribe to my monthly newsletter. It's a concentrated dose of productivity hacks, updates on the latest technological advancements, and practical advice
+          to navigate life's complexities.
+        </p>
         <p>Sign up below to join our growing community of friendly readers.</p>
         <SubscribeForm {...{ settings }} />
       </section>
