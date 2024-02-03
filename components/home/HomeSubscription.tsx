@@ -21,7 +21,7 @@ export const HomeSubscription = ({ settings }: { settings: GhostSettings }) => {
       </section>
       <div className="home-author-container">
         <Image
-          src={'https://res.cloudinary.com/sharooq/image/upload/v1659299906/Blog/app/blogavatar_xomoot.jpg'}
+          src={'https://res.cloudinary.com/sharooq/image/upload/v1706975508/Blog/app/fitwo0fnk6njprddprgv.jpg'}
           alt="Sharooq Salaudeen"
           layout="responsive"
           objectFit="fill"
