@@ -16,7 +16,7 @@ export const HomeSubscription = ({ settings }: { settings: GhostSettings }) => {
           I invite you to subscribe to my monthly newsletter. It's a concentrated dose of productivity hacks, updates on the latest technological advancements, and practical advice
           to navigate life's complexities.
         </p>
-        <p>Sign up below to join our growing community of friendly readers.</p>
+        <p>Sign up below to join my growing community of friendly readers.</p>
         <SubscribeForm {...{ settings }} />
       </section>
       <div className="home-author-container">
