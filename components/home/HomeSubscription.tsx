@@ -19,7 +19,7 @@ export const HomeSubscription = ({ settings }: { settings: GhostSettings }) => {
         <p>Sign up below to join my growing community of friendly readers.</p>
         <SubscribeForm {...{ settings }} />
       </section>
-      <div className="home-author-container">
+      {/* <div className="home-author-container">
         <Image
           src={'https://res.cloudinary.com/sharooq/image/upload/v1706975508/Blog/app/fitwo0fnk6njprddprgv.jpg'}
           alt="Sharooq Salaudeen"
@@ -30,7 +30,7 @@ export const HomeSubscription = ({ settings }: { settings: GhostSettings }) => {
           height="48px"
           className="home-author-pic"
         />
-      </div>
+      </div> */}
     </div>
   )
 }
