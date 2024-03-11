@@ -12,6 +12,24 @@ interface HeaderIndexProps {
   pageDescription?: string
 }
 
+const socials = [
+  {
+    icon: '/github.png',
+    name: 'Github',
+    link: 'https://github.com/SharooqSalaudeen',
+  },
+  {
+    icon: '/linkedin.png',
+    name: 'Linkedin',
+    link: 'https://www.linkedin.com/in/sharooq-salaudeen/',
+  },
+  {
+    icon: '/portfolio.png',
+    name: 'Portfolio',
+    link: 'https://sharooqsalaudeen.github.io',
+  },
+]
+
 export const HeaderIndex = ({ settings, pageTitle, pageDescription }: HeaderIndexProps) => {
   const text = get(getLang(settings.lang))
   const site = settings
@@ -65,6 +83,18 @@ export const HeaderIndex = ({ settings, pageTitle, pageDescription }: HeaderInde
                 title
               )}
             </h1>
+            <nav className="home-social-links">
+              {socials.map((social, idx) => (
+                <span className="home-social-link">
+                  <span className="icon" style={{}}>
+                    <Image src={social.icon} alt={social.name} layout="fixed" objectFit="fill" quality={nextImages.quality} width="18px" height="18px" />
+                  </span>
+                  <a href={social.link} target="_blank" rel="noopener noreferrer">
+                    {social.name}
+                  </a>
+                </span>
+              ))}
+            </nav>
             <h2 className="site-description">{pageDescription ?? site.description}</h2>
           </div>
         </div>

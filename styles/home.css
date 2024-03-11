@@ -6,6 +6,47 @@ html.casper .heading-underline {
   margin: 0;
 }
 
+/************************ Home Social Links *************************/
+
+html.casper .home-social-links {
+  margin: 2rem 0 1rem;
+  display: flex;
+  justify-content: center;
+}
+
+html.casper .home-social-link {
+  display: flex;
+  background: #ffffff;
+  border-radius: 44px;
+  border: #fff 1px solid;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.2);
+  padding: 1px 8px;
+  margin: 0 20px;
+  line-height: 1.5em;
+  border-radius: 10px;
+  opacity: 0.9;
+}
+
+html.casper .home-social-link:hover {
+  opacity: 0.99;
+  transition: opacity 0.15s ease-in-out;
+}
+
+html.casper .home-social-links a {
+  position: relative;
+  color: #000;
+  font-size: 14px;
+  margin-left: 6px;
+  text-decoration: none;
+  align-items: center;
+  opacity: 0.99;
+}
+
+html.casper .home-social-links .icon {
+  display: flex;
+  align-items: center;
+}
+
 /************************ Home Subscribe Form *************************/
 
 html.casper .home-subscribe-container {
@@ -29,7 +70,7 @@ html.casper .home-subscribe-form {
   text-align: start !important;
   border-radius: 3px;
   border: none !important;
-  padding: 1.5em 0 !important;
+  padding: 0 0 1.5em !important;
   background: none !important;
 }
 
@@ -67,6 +108,24 @@ html.casper .home-topic-cards {
   margin: 0 0 25px;
 }
 
+/* New version where home topic cards is disabled on mobile */
+@media (max-width: 701px) {
+  html.casper .home-topic-cards {
+    display: none;
+  }
+}
+
+/* Older version where mobile view of home topic cards was enabled */
+/* @media (max-width: 701px) {
+  html.casper .home-topic-cards {
+    display: none;
+    margin: 0;
+  }
+  html.casper .home-topic-card {
+    width: 100%;
+  }
+} */
+
 html.casper .home-topic-card {
   margin-top: 2rem;
   display: block;
@@ -93,16 +152,6 @@ html.casper .home-topic-card:hover {
 html.casper .home-topic-card h2 {
   margin-top: 1rem;
   margin-bottom: 1rem;
-}
-
-@media (max-width: 701px) {
-  html.casper .home-topic-cards {
-    display: block;
-    margin: 0;
-  }
-  html.casper .home-topic-card {
-    width: 100%;
-  }
 }
 
 /************************ Post List *************************/
@@ -275,7 +324,7 @@ html.casper .post-list-footer a:hover {
 /************************ Post Featured *************************/
 
 html.casper .post-featured-section {
-  margin: 0 24px 24px;
+  margin: 0 24px;
 }
 
 html.casper .post-featured-container {

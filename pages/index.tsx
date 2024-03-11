@@ -32,6 +32,7 @@ import { PostLists } from '@components/home/PostLists'
 import { PostFeatured } from '@components/home/PostFeatured'
 import { featuredBooks } from 'appConfig'
 import { HomeTopicCards } from '@components/home/HomeTopicCards'
+import ProjectFeatured from '@components/home/ProjectFeatured'
 
 /**
  * Main index page (home page)
@@ -85,11 +86,17 @@ export default function Index({ cmsData }: IndexProps) {
               {memberSubscriptions && <HomeSubscription {...{ settings }} />}
 
               <HomeTopicCards {...{ settings }} />
-              <div className="post-section">
-                <PostLists {...{ settings, posts: featuredPosts, title: 'Featured ' }} />
-                <PostLists {...{ settings, posts: latestPosts, title: 'Latest ' }} />
+              <div className="post-featured-section">
+                <header className="post-featured-header">
+                  <h3>Recent Projects</h3>
+                  <hr className="heading-underline" />
+                </header>
+                <div className="post-featured-container">{ProjectFeatured(nextImages)}</div>
               </div>
-
+              <div className="post-section">
+                <PostLists {...{ settings, posts: featuredPosts, title: 'Featured Articles' }} />
+                <PostLists {...{ settings, posts: latestPosts, title: 'Latest Articles' }} />
+              </div>
               <div className="post-featured-section">
                 <header className="post-featured-header">
                   <h3>Read My Book Summaries</h3>
