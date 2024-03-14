@@ -12,19 +12,19 @@ html.casper .home-social-links {
   margin: 2rem 0 1rem;
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
 }
 
 html.casper .home-social-link {
   display: flex;
-  background: #ffffff;
-  border-radius: 44px;
-  border: #fff 1px solid;
+  background: rgba(255, 255, 255, 0.85);
   box-shadow: 0 0 25px rgba(0, 0, 0, 0.2);
   padding: 1px 8px;
-  margin: 0 20px;
+  margin: 6px 20px;
   line-height: 1.5em;
   border-radius: 10px;
-  opacity: 0.9;
+  opacity: 0.85;
+  border: 1px solid rgba(255, 255, 255, 1);
 }
 
 html.casper .home-social-link:hover {
@@ -45,6 +45,16 @@ html.casper .home-social-links a {
 html.casper .home-social-links .icon {
   display: flex;
   align-items: center;
+}
+
+@media (max-width: 701px) {
+  html.casper .home-social-links {
+    margin: 1rem 0;
+  }
+
+  html.casper .home-social-link {
+    margin: 6px 4px;
+  }
 }
 
 /************************ Home Subscribe Form *************************/
@@ -70,7 +80,7 @@ html.casper .home-subscribe-form {
   text-align: start !important;
   border-radius: 3px;
   border: none !important;
-  padding: 0 0 1.5em !important;
+  padding: 1.5em 0 !important;
   background: none !important;
 }
 

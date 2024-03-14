@@ -10,7 +10,7 @@ export const HomeSubscription = ({ settings }: { settings: GhostSettings }) => {
       <section className="home-subscribe-form subscribe-form">
         <p>
           Hello, I'm Sharooq Salaudeen, a dedicated software engineer and data scientist. This blog is my canvas where I paint with my learnings and creations, accumulated over my
-          professional journey. It's more than just a blog - it's a resource for the community, a spark for inspiration, and a repository for future reference.
+          professional journey as a resource for the community, a spark for inspiration, and a repository for future reference.
         </p>
         <p>
           I invite you to subscribe to my monthly newsletter. It's a concentrated dose of productivity hacks, updates on the latest technological advancements, and practical advice

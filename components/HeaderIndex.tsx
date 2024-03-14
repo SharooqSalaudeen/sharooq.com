@@ -83,18 +83,20 @@ export const HeaderIndex = ({ settings, pageTitle, pageDescription }: HeaderInde
                 title
               )}
             </h1>
-            <nav className="home-social-links">
-              {socials.map((social, idx) => (
-                <span className="home-social-link">
-                  <span className="icon" style={{}}>
-                    <Image src={social.icon} alt={social.name} layout="fixed" objectFit="fill" quality={nextImages.quality} width="18px" height="18px" />
+            {!pageTitle && (
+              <nav className="home-social-links">
+                {socials.map((social, idx) => (
+                  <span className="home-social-link" key={idx}>
+                    <span className="icon" style={{}}>
+                      <Image src={social.icon} alt={social.name} layout="fixed" objectFit="fill" quality={nextImages.quality} width="18px" height="18px" />
+                    </span>
+                    <a href={social.link} target="_blank" rel="noopener noreferrer">
+                      {social.name}
+                    </a>
                   </span>
-                  <a href={social.link} target="_blank" rel="noopener noreferrer">
-                    {social.name}
-                  </a>
-                </span>
-              ))}
-            </nav>
+                ))}
+              </nav>
+            )}
             <h2 className="site-description">{pageDescription ?? site.description}</h2>
           </div>
         </div>
