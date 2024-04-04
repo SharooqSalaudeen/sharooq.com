@@ -83,6 +83,7 @@ export const HeaderIndex = ({ settings, pageTitle, pageDescription }: HeaderInde
                 title
               )}
             </h1>
+            <h2 className="site-description">{pageDescription ?? site.description}</h2>
             {!pageTitle && (
               <nav className="home-social-links">
                 {socials.map((social, idx) => (
@@ -97,7 +98,6 @@ export const HeaderIndex = ({ settings, pageTitle, pageDescription }: HeaderInde
                 ))}
               </nav>
             )}
-            <h2 className="site-description">{pageDescription ?? site.description}</h2>
           </div>
         </div>
       </HeaderBackground>
