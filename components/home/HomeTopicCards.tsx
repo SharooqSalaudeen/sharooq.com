@@ -24,10 +24,10 @@ const cards = [
     desc: 'My summary of books that truly inspired and changed the way I view about my life',
   },
   {
-    slug: 'key-system-design-principles-a-comprehensive-guide',
-    icon: '/system-design.png',
-    name: 'System Design',
-    desc: 'Explore essential system design principles for robust and scalable software applications.',
+    slug: 'about',
+    icon: '/writer.png',
+    name: 'About Me',
+    desc: 'Who I am? what I am working on right now? and Where to contact me?',
   },
 ]
 
