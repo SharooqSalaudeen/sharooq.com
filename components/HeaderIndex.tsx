@@ -12,23 +12,23 @@ interface HeaderIndexProps {
   pageDescription?: string
 }
 
-const socials = [
-  {
-    icon: '/github.png',
-    name: 'Github',
-    link: 'https://github.com/SharooqSalaudeen',
-  },
-  {
-    icon: '/linkedin.png',
-    name: 'Linkedin',
-    link: 'https://www.linkedin.com/in/sharooq-salaudeen/',
-  },
-  {
-    icon: '/portfolio.png',
-    name: 'Portfolio',
-    link: 'https://sharooqsalaudeen.github.io',
-  },
-]
+// const socials = [
+//   {
+//     icon: '/github.png',
+//     name: 'Github',
+//     link: 'https://github.com/SharooqSalaudeen',
+//   },
+//   {
+//     icon: '/linkedin.png',
+//     name: 'Linkedin',
+//     link: 'https://www.linkedin.com/in/sharooq-salaudeen/',
+//   },
+//   {
+//     icon: '/portfolio.png',
+//     name: 'Portfolio',
+//     link: 'https://sharooqsalaudeen.github.io',
+//   },
+// ]
 
 export const HeaderIndex = ({ settings, pageTitle, pageDescription }: HeaderIndexProps) => {
   const text = get(getLang(settings.lang))
@@ -84,7 +84,7 @@ export const HeaderIndex = ({ settings, pageTitle, pageDescription }: HeaderInde
               )}
             </h1>
             <h2 className="site-description">{pageDescription ?? site.description}</h2>
-            {!pageTitle && (
+            {/* {!pageTitle && (
               <nav className="home-social-links">
                 {socials.map((social, idx) => (
                   <span className="home-social-link" key={idx}>
@@ -97,7 +97,7 @@ export const HeaderIndex = ({ settings, pageTitle, pageDescription }: HeaderInde
                   </span>
                 ))}
               </nav>
-            )}
+            )} */}
           </div>
         </div>
       </HeaderBackground>

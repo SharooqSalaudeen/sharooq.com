@@ -2246,7 +2246,7 @@ html.casper .post-full-content .kg-bookmark-container:hover .kg-bookmark-title {
 html.casper .kg-bookmark-description {
   display: -webkit-box;
   overflow-y: hidden;
-  margin-top: 12px;
+  margin-top: 3px;
   max-height: 48px;
   color: color-mod(var(--midgrey) l(-10%));
   font-size: 1.5rem;
@@ -2275,13 +2275,12 @@ html.casper .kg-bookmark-thumbnail img {
 }
 
 html.casper .kg-bookmark-metadata {
+  color: var(--darkgrey);
+  font-size: 1.4rem;
+  font-weight: 500;
   display: flex;
-  flex-wrap: wrap;
   align-items: center;
   margin-top: 14px;
-  color: var(--darkgrey);
-  font-size: 1.5rem;
-  font-weight: 500;
 }
 
 html.casper .post-full-content .kg-bookmark-icon {
@@ -2292,6 +2291,14 @@ html.casper .post-full-content .kg-bookmark-icon {
 
 html.casper .kg-bookmark-author {
   line-height: 1.5em;
+  font-weight: 400;
+
+  /* Rephype calssname bug fix */
+  text-overflow: ellipsis;
+  font-weight: 400;
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 240px;
 }
 
 html.casper .kg-bookmark-author:after {
@@ -2307,6 +2314,8 @@ html.casper .kg-bookmark-publisher {
   white-space: nowrap;
   color: color-mod(var(--midgrey) l(-10%));
   font-weight: 400;
+
+  /* display: block; */
 }
 
 @media (max-width: 800px) {
@@ -2319,6 +2328,10 @@ html.casper .kg-bookmark-publisher {
   html.casper .post-full-content h3 + figure,
   html.casper .post-full-content h4 + figure {
     margin-top: 0.9em;
+  }
+
+  html.casper .kg-bookmark-author {
+    display: none;
   }
 }
 

@@ -139,7 +139,7 @@ html.casper .home-topic-cards {
 html.casper .home-topic-card {
   margin-top: 2rem;
   display: block;
-  padding: 2rem 1rem;
+  padding: 2rem 1rem 3rem;
   border-radius: 10px;
   color: black;
   width: 30%;
