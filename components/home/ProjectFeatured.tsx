@@ -6,7 +6,7 @@ function ProjectFeatured(nextImages: { feature: boolean; inline: boolean; qualit
     <>
       <article className={`post-featured-card `}>
         {/* {featImg && ( */}
-        <Link href="https://readinsight.com" passHref>
+        <Link href="https://github.com/SharooqSalaudeen/readinsight-backend-nodejs" passHref>
           <a className="post-card-image-link" aria-label="Read Insight" target="_blank" rel="noopener noreferrer">
             {/* {nextImages.feature ? ( */}
             <div className="post-card-image">
@@ -28,7 +28,7 @@ function ProjectFeatured(nextImages: { feature: boolean; inline: boolean; qualit
         {/* )} */}
         <div className="post-card-content">
           <div>
-            <Link href="https://readinsight.com" passHref>
+            <Link href="https://github.com/SharooqSalaudeen/readinsight-backend-nodejs" passHref>
               <a className="post-card-content-link" target="_blank" rel="noopener noreferrer">
                 <header className="post-card-header">
                   {/* {post.primary_tag && <div className="post-card-primary-tag">{post.primary_tag.name}</div>} */}
@@ -46,6 +46,7 @@ function ProjectFeatured(nextImages: { feature: boolean; inline: boolean; qualit
             </Link>
           </div>
         </div>
+        v
       </article>
       <article className={`post-featured-card `}>
         {/* {featImg && ( */}
