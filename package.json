@@ -3,31 +3,6 @@
   "description": "Publish flaring fast blogs with Next.js and Ghost CMS",
   "version": "1.0.0",
   "license": "MIT",
-  "keywords": [
-    "nextjs",
-    "next.js",
-    "nextjs-blog",
-    "nextjs-starter",
-    "nextjs-example",
-    "nextjs-starter-ghost",
-    "nextjs-serverless",
-    "gatsby-alternative",
-    "jamify",
-    "jamify-starter",
-    "jamify-starter-ghost",
-    "ghost",
-    "ghost-cms",
-    "ghost-theme",
-    "casper",
-    "casper-ghost",
-    "blogging",
-    "wordpress-alternative",
-    "static-site",
-    "static-site-generator",
-    "lighthouse",
-    "typescript",
-    "react"
-  ],
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -37,7 +12,8 @@
     "format": "prettier --write **/*.{js,ts,tsx}",
     "lint": "eslint . --ext ts --ext tsx --ext js",
     "postbuild": "next-sitemap",
-    "serve": "serve out"
+    "serve": "serve out",
+    "deploy": "cross-env IS_EXPORT=true next build && npm run postbuild && next export && netlify deploy --prod --dir=out"
   },
   "dependencies": {
     "@mailchimp/mailchimp_marketing": "^3.0.78",

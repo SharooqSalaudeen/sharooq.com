@@ -1,5 +1,5 @@
 [build]
-  command = "yarn build"
+  command = "yarn export"
   publish = "out"
   functions = "functions"
 
@@ -7,6 +7,7 @@
   JAMIFY_NEXT_ISR = "false"
   JAMIFY_NEXT_FEATURE_IMAGES = "false"
   JAMIFY_NEXT_INLINE_IMAGES = "false"
+  NETLIFY_NEXT_PLUGIN_SKIP = "true"
 
 
 [[redirects]]
