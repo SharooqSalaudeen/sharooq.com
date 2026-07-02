@@ -112,7 +112,7 @@ export interface OptimizedPosts extends Array<OptimizedPost> {}
 const api = new GhostContentAPI({
   url: ghostAPIUrl,
   key: ghostAPIKey,
-  version: 'v3',
+  version: 'v3.0',
 })
 
 const postAndPageFetchOptions: Params = {
@@ -340,6 +340,22 @@ export async function getAllBookSummaries(props?: { limit: number }): Promise<Gh
 export async function getOptimizedAllBookSummaries(props?: { limit: number }): Promise<OptimizedPosts> {
   const bookSummaries = await getAllBookSummaries(props && { ...props })
   return await createOptimizedPosts(bookSummaries)
+}
+
+//All LeetCode Posts
+export async function getAllLeetcodePosts(props?: { limit: number }): Promise<GhostPostsOrPages> {
+  const posts = await api.posts.browse({
+    ...postAndPageFetchOptions,
+    filter: excludePostOrPageBySlug('tag:leetcode'),
+    ...(props && { ...props }),
+  })
+  const results = await createNextProfileImagesFromPosts(posts)
+  return await createNextFeatureImages(results)
+}
+
+export async function getOptimizedAllLeetcodePosts(props?: { limit: number }): Promise<OptimizedPosts> {
+  const leetcodePosts = await getAllLeetcodePosts(props && { ...props })
+  return await createOptimizedPosts(leetcodePosts)
 }
 
 //All Post Slugs

@@ -18,6 +18,12 @@ const cards = [
     desc: 'I write about a broad spectrum of programming paradigms, bug fixes and solutions ',
   },
   {
+    slug: 'leetcode',
+    icon: '/leetcode-journey.png',
+    name: 'LeetCode Journey',
+    desc: 'My problem-solving practice log, focus patterns, and consistency system',
+  },
+  {
     slug: 'book-summaries',
     icon: '/books.png',
     name: 'Book Summaries',

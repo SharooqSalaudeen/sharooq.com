@@ -113,7 +113,8 @@ html.casper .home-subscribe-form form {
 
 html.casper .home-topic-cards {
   display: flex;
-  justify-content: space-between;
+  gap: 24px;
+  justify-content: center;
   text-align: center;
   margin: 0 0 25px;
 }
@@ -137,12 +138,13 @@ html.casper .home-topic-cards {
 } */
 
 html.casper .home-topic-card {
+  flex: 1 1 220px;
   margin-top: 2rem;
   display: block;
   padding: 2rem 1rem 3rem;
   border-radius: 10px;
   color: black;
-  width: 30%;
+  max-width: 250px;
   border: 0 solid rgba(0, 0, 0, 0.125);
   background-clip: border-box;
   box-shadow: 0 5px 20px 0 rgb(0 0 0 / 10%);
@@ -346,6 +348,19 @@ html.casper .post-featured-header {
   margin: 0.5em 25px 0.4em;
 }
 
+html.casper .post-featured-header a {
+  display: inline-block;
+  margin: 4px 0 10px;
+  color: var(--blue);
+  font-size: 1.3rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+html.casper .post-featured-header a:hover {
+  text-decoration: underline;
+}
+
 html.casper .post-featured-header h3 {
   letter-spacing: 0.4px;
   text-transform: uppercase;
@@ -411,8 +426,79 @@ html.casper .post-featured-card .post-card-excerpt p {
   line-height: 1.5em;
 }
 
+html.casper .project-featured-card .post-card-content > div {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+html.casper .project-featured-card .post-card-content-link {
+  flex: 1;
+}
+
+html.casper .project-featured-card .post-card-excerpt p {
+  display: -webkit-box;
+  overflow: hidden;
+  margin-bottom: 0.75em;
+  min-height: 7.5em;
+  max-height: 7.5em;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 5;
+}
+
+html.casper .project-card-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 0 0 0 30px;
+}
+
+html.casper .project-card-actions a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 36px;
+  padding: 7px 12px 8px;
+  border: 1px solid rgba(0, 0, 0, 0.6);
+  border-radius: 999px;
+  color: var(--darkgrey);
+  font-size: 1.3rem;
+  font-weight: 700;
+  line-height: 1.2;
+  text-decoration: none;
+  transition: border-color 0.2s ease-in-out, color 0.2s ease-in-out;
+}
+
+html.casper .project-card-actions a:hover {
+  border-color: var(--blue);
+  color: var(--blue);
+  text-decoration: none;
+}
+
 html.casper body.dark .post-featured-card .post-card-excerpt p {
   color: var(--lightgrey);
+}
+
+html.casper body.dark .project-card-actions a {
+  border-color: rgba(255, 255, 255, 0.6);
+  color: var(--lightgrey);
+}
+
+/************************ Projects *************************/
+
+html.casper .projects-page {
+  padding: 48px 0 72px;
+}
+
+html.casper .projects-featured-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+}
+
+html.casper .projects-featured-list .post-featured-card {
+  margin-bottom: 0;
+  border-bottom: 1px solid color-mod(var(--lightgrey) l(+12%));
 }
 
 @media (max-width: 1170px) {
@@ -426,6 +512,10 @@ html.casper body.dark .post-featured-card .post-card-excerpt p {
   html.casper .post-featured-card .post-card-image-link {
     flex: 1 1 160px;
   }
+
+  html.casper .projects-featured-list {
+    grid-template-columns: 1fr;
+  }
 }
 @media (max-width: 701px) {
   html.casper .post-featured-header {
@@ -434,5 +524,483 @@ html.casper body.dark .post-featured-card .post-card-excerpt p {
 
   html.casper .post-featured-card {
     padding: 25px 0;
+  }
+
+  html.casper .project-card-actions {
+    padding-left: 0;
+  }
+
+  html.casper .projects-page {
+    padding: 32px 0 56px;
+  }
+
+  html.casper .projects-featured-list {
+    gap: 0;
+  }
+}
+
+/************************ LeetCode Journey *************************/
+
+html.casper .leetcode-journey {
+  padding: 48px 0 72px;
+}
+
+html.casper .leetcode-hero-panel {
+  display: grid;
+  grid-template-columns: minmax(0, 1.6fr) minmax(240px, 0.9fr);
+  gap: 32px;
+  align-items: center;
+  margin-bottom: 30px;
+  padding: 32px;
+  border: 1px solid rgba(21, 23, 26, 0.08);
+  border-radius: 8px;
+  background: linear-gradient(135deg, #ffffff 0%, #f7fbff 55%, #fff9e8 100%);
+  box-shadow: 0 12px 32px rgba(21, 23, 26, 0.08);
+}
+
+html.casper body.dark .leetcode-hero-panel {
+  border-color: rgba(255, 255, 255, 0.08);
+  background: linear-gradient(135deg, color-mod(var(--darkmode) l(+5%)) 0%, color-mod(var(--darkmode) l(+2%)) 100%);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.28);
+}
+
+html.casper .leetcode-kicker {
+  margin: 0 0 10px;
+  color: var(--blue);
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  line-height: 1.3;
+  text-transform: uppercase;
+}
+
+html.casper .leetcode-hero-copy h2,
+html.casper .leetcode-section-heading h2 {
+  margin: 0;
+  color: var(--darkgrey);
+  font-size: 3rem;
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: 1.15;
+}
+
+html.casper body.dark .leetcode-hero-copy h2,
+html.casper body.dark .leetcode-section-heading h2 {
+  color: rgba(255, 255, 255, 0.92);
+}
+
+html.casper .leetcode-hero-copy p {
+  max-width: 650px;
+  margin: 18px 0 0;
+  color: var(--midgrey);
+  font-size: 1.8rem;
+  line-height: 1.6;
+}
+
+html.casper body.dark .leetcode-hero-copy p {
+  color: rgba(255, 255, 255, 0.72);
+}
+
+html.casper .leetcode-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+html.casper .leetcode-actions a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 42px;
+  padding: 10px 16px;
+  border: 1px solid rgba(21, 23, 26, 0.18);
+  border-radius: 999px;
+  color: var(--darkgrey);
+  font-size: 1.4rem;
+  font-weight: 700;
+  line-height: 1.2;
+  text-decoration: none;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+html.casper .leetcode-actions a:first-child {
+  border-color: var(--blue);
+  color: #fff;
+  background: var(--blue);
+}
+
+html.casper .leetcode-actions a:hover {
+  transform: translateY(-2px);
+}
+
+html.casper body.dark .leetcode-actions a {
+  border-color: rgba(255, 255, 255, 0.2);
+  color: rgba(255, 255, 255, 0.86);
+}
+
+html.casper body.dark .leetcode-actions a:first-child {
+  border-color: #4da3e4;
+  color: #fff;
+  background: #0a6ebd;
+}
+
+html.casper .leetcode-hero-visual {
+  position: relative;
+  min-height: 260px;
+}
+
+html.casper .leetcode-hero-visual img {
+  display: block;
+  width: 100%;
+  height: 260px;
+  object-fit: contain;
+}
+
+html.casper .leetcode-section {
+  margin-top: 46px;
+}
+
+html.casper .leetcode-section-heading {
+  margin-bottom: 20px;
+}
+
+html.casper .leetcode-tracker-heading {
+  display: flex;
+  gap: 20px;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+html.casper .leetcode-tracker-heading > span {
+  margin-bottom: 3px;
+  color: var(--midgrey);
+  font-size: 1.35rem;
+  font-weight: 700;
+  line-height: 1.3;
+  white-space: nowrap;
+}
+
+html.casper body.dark .leetcode-tracker-heading > span {
+  color: rgba(255, 255, 255, 0.65);
+}
+
+html.casper .leetcode-practice-tracker {
+  overflow-x: auto;
+  padding: 18px;
+  border: 1px solid rgba(21, 23, 26, 0.08);
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 8px 22px rgba(21, 23, 26, 0.06);
+}
+
+html.casper body.dark .leetcode-practice-tracker {
+  border-color: rgba(255, 255, 255, 0.08);
+  background: color-mod(var(--darkmode) l(+4%));
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.25);
+}
+
+html.casper .leetcode-practice-grid {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 12px;
+  gap: 4px;
+  width: max-content;
+  min-width: 100%;
+}
+
+html.casper .leetcode-practice-week {
+  display: grid;
+  grid-template-rows: repeat(7, 12px);
+  gap: 4px;
+}
+
+html.casper .leetcode-practice-day {
+  display: block;
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  background: #ebedf0;
+}
+
+html.casper .leetcode-practice-day.level-1 {
+  background: #9be9a8;
+}
+
+html.casper .leetcode-practice-day.level-2 {
+  background: #40c463;
+}
+
+html.casper .leetcode-practice-day.level-3 {
+  background: #30a14e;
+}
+
+html.casper .leetcode-practice-day.level-4 {
+  background: #216e39;
+}
+
+html.casper body.dark .leetcode-practice-day {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+html.casper body.dark .leetcode-practice-day.level-1 {
+  background: #0e4429;
+}
+
+html.casper body.dark .leetcode-practice-day.level-2 {
+  background: #006d32;
+}
+
+html.casper body.dark .leetcode-practice-day.level-3 {
+  background: #26a641;
+}
+
+html.casper body.dark .leetcode-practice-day.level-4 {
+  background: #39d353;
+}
+
+html.casper .leetcode-practice-legend {
+  display: flex;
+  gap: 5px;
+  justify-content: flex-end;
+  align-items: center;
+  min-width: max-content;
+  margin-top: 12px;
+  color: var(--midgrey);
+  font-size: 1.2rem;
+  line-height: 1;
+}
+
+html.casper body.dark .leetcode-practice-legend {
+  color: rgba(255, 255, 255, 0.65);
+}
+
+html.casper .leetcode-quick-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+html.casper .leetcode-quick-card {
+  position: relative;
+  display: block;
+  min-height: 168px;
+  padding: 52px 20px 20px;
+  border: 1px solid color-mod(var(--lightgrey) l(+8%));
+  border-radius: 3px;
+  color: var(--darkgrey);
+  background: #fff;
+  text-decoration: none;
+  transition: border-color 0.2s ease-in-out, opacity 0.2s ease-in-out;
+}
+
+html.casper .leetcode-quick-card::before {
+  position: absolute;
+  top: -1px;
+  right: 20px;
+  width: 28px;
+  height: 46px;
+  background: var(--blue);
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 76%, 0 100%);
+  content: '';
+}
+
+html.casper .leetcode-quick-card:hover,
+html.casper .leetcode-quick-card:focus {
+  border-color: color-mod(var(--lightgrey) l(-5%));
+  opacity: 0.9;
+  text-decoration: none;
+}
+
+html.casper .leetcode-quick-card h3 {
+  margin: 0 0 0.4em;
+  color: inherit;
+  font-size: 2rem;
+  font-weight: 600;
+  line-height: 1.15em;
+}
+
+html.casper .leetcode-quick-card p {
+  display: -webkit-box;
+  overflow: hidden;
+  margin: 0;
+  color: color-mod(var(--midgrey) l(-8%));
+  font-size: 1.45rem;
+  line-height: 1.5em;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+
+html.casper body.dark .leetcode-quick-card {
+  border-color: rgba(255, 255, 255, 0.08);
+  background: color-mod(var(--darkmode) l(+4%));
+  color: var(--lightgrey);
+}
+
+html.casper body.dark .leetcode-quick-card p {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+html.casper .leetcode-pattern-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+
+html.casper .leetcode-pattern-card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-height: 118px;
+  padding: 18px;
+  border: 1px solid rgba(21, 23, 26, 0.08);
+  border-radius: 8px;
+  color: inherit;
+  background: #fff;
+  box-shadow: 0 8px 22px rgba(21, 23, 26, 0.06);
+  text-decoration: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+html.casper .leetcode-pattern-card:hover,
+html.casper .leetcode-pattern-card:focus {
+  border-color: rgba(54, 179, 126, 0.45);
+  box-shadow: 0 12px 26px rgba(21, 23, 26, 0.1);
+  text-decoration: none;
+  transform: translateY(-2px);
+}
+
+html.casper body.dark .leetcode-pattern-card {
+  border-color: rgba(255, 255, 255, 0.08);
+  background: color-mod(var(--darkmode) l(+4%));
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.25);
+}
+
+html.casper body.dark .leetcode-pattern-card:hover,
+html.casper body.dark .leetcode-pattern-card:focus {
+  border-color: rgba(91, 213, 151, 0.5);
+  box-shadow: 0 12px 26px rgba(0, 0, 0, 0.34);
+}
+
+html.casper .leetcode-pattern-card strong {
+  color: var(--blue);
+  font-size: 3rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+html.casper .leetcode-pattern-card span {
+  color: var(--darkgrey);
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+html.casper body.dark .leetcode-pattern-card span {
+  color: rgba(255, 255, 255, 0.84);
+}
+
+html.casper .leetcode-expand-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  margin-top: 18px;
+  padding: 9px 15px;
+  border: 1px solid rgba(21, 23, 26, 0.18);
+  border-radius: 999px;
+  color: var(--darkgrey);
+  font-size: 1.35rem;
+  font-weight: 700;
+  line-height: 1.2;
+  background: #fff;
+  cursor: pointer;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+html.casper .leetcode-expand-button:hover {
+  border-color: var(--blue);
+  transform: translateY(-1px);
+}
+
+html.casper body.dark .leetcode-expand-button {
+  border-color: rgba(255, 255, 255, 0.18);
+  color: rgba(255, 255, 255, 0.84);
+  background: color-mod(var(--darkmode) l(+4%));
+}
+
+html.casper .leetcode-empty-state {
+  margin: 0;
+  padding: 20px;
+  border: 1px solid rgba(21, 23, 26, 0.08);
+  border-radius: 8px;
+  color: var(--midgrey);
+  font-size: 1.55rem;
+  line-height: 1.5;
+  background: #fff;
+}
+
+html.casper body.dark .leetcode-empty-state {
+  border-color: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.7);
+  background: color-mod(var(--darkmode) l(+4%));
+}
+
+html.casper .leetcode-log-section .posts {
+  max-width: none;
+}
+
+html.casper .leetcode-log-section .post-feed {
+  padding-top: 0;
+}
+
+@media (max-width: 900px) {
+  html.casper .leetcode-hero-panel,
+  html.casper .leetcode-quick-grid,
+  html.casper .leetcode-pattern-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  html.casper .leetcode-hero-visual {
+    min-height: 220px;
+  }
+}
+
+@media (max-width: 701px) {
+  html.casper .leetcode-journey {
+    padding: 32px 0 56px;
+  }
+
+  html.casper .leetcode-hero-panel,
+  html.casper .leetcode-quick-grid,
+  html.casper .leetcode-pattern-grid {
+    grid-template-columns: 1fr;
+  }
+
+  html.casper .leetcode-hero-panel {
+    padding: 24px 18px;
+  }
+
+  html.casper .leetcode-hero-copy h2,
+  html.casper .leetcode-section-heading h2 {
+    font-size: 2.45rem;
+  }
+
+  html.casper .leetcode-hero-copy p {
+    font-size: 1.6rem;
+  }
+
+  html.casper .leetcode-tracker-heading {
+    display: block;
+  }
+
+  html.casper .leetcode-tracker-heading > span {
+    display: block;
+    margin-top: 10px;
+    white-space: normal;
+  }
+
+  html.casper .leetcode-quick-card {
+    min-height: 0;
   }
 }
