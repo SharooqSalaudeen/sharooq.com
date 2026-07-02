@@ -5,7 +5,7 @@ function ProjectFeatured(nextImages: { feature: boolean; inline: boolean; qualit
   return (
     <>
       {projects.slice(0, 2).map((project) => (
-        <ProjectCard imageQuality={nextImages.quality} key={project.url} project={project} />
+        <ProjectCard imageQuality={nextImages.quality} project={project} />
       ))}
     </>
   )

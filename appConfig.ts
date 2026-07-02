@@ -77,7 +77,6 @@ export interface Project {
   title: string
   description: string
   imageUrl: string
-  url: string
   githubUrl?: string
   pageUrl?: string
   label: string
@@ -89,7 +88,6 @@ export const projects: Project[] = [
     description:
       'An A.I.-powered news website using fine-tuned LLM models, Docker, Node.js, and PostgreSQL to automate real-time news aggregation, article generation, and publication on a streamlined frontend.',
     imageUrl: 'https://res.cloudinary.com/sharooq/image/upload/v1707776687/Blog/home/featured_projects/uvorg7oaqucloehcusyy.jpg',
-    url: 'https://github.com/SharooqSalaudeen/readinsight-backend-nodejs',
     githubUrl: 'https://github.com/SharooqSalaudeen/readinsight-backend-nodejs',
     label: 'Read Insight',
   },
@@ -98,8 +96,8 @@ export const projects: Project[] = [
     description:
       'Explore my portfolio website to discover a showcase of my past projects! From web development to graphic design, each creation reflects my passion and expertise.',
     imageUrl: 'https://res.cloudinary.com/sharooq/image/upload/v1707781880/Blog/home/featured_projects/ishw83iftrfnperhniz3.jpg',
-    url: 'https://sharooqsalaudeen.github.io',
     pageUrl: 'https://sharooqsalaudeen.github.io',
+    githubUrl: 'https://github.com/SharooqSalaudeen/sharooqsalaudeen.github.io',
     label: 'Portfolio Website',
   },
 ]
