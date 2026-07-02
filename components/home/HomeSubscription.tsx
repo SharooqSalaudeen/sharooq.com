@@ -12,7 +12,7 @@ export const HomeSubscription = ({ settings }: { settings: GhostSettings }) => {
           Hello, I'm Sharooq Salaudeen, a dedicated software engineer and data scientist. This blog is my canvas where I paint with my learnings and creations, accumulated over my
           professional journey as a resource for the community, a spark for inspiration, and a repository for future reference.
         </p>
-        <p>Sign up below to join my growing community of friendly readers.</p>
+        <p className="home-subscribe-cta">Sign up below to join my growing community of friendly readers.</p>
         <SubscribeForm {...{ settings }} />
       </section>
       {/* <div className="home-author-container">

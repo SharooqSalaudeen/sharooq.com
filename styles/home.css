@@ -88,6 +88,10 @@ html.casper .home-subscribe-form form {
   /* margin: 0 !important; */
 }
 
+html.casper .home-subscribe-cta {
+  text-align: center;
+}
+
 @media (max-width: 1170px) {
   html.casper .home-subscribe-container {
     padding: 0;
