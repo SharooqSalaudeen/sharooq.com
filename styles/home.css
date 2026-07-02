@@ -972,9 +972,12 @@ html.casper .leetcode-log-section .post-feed {
   }
 
   html.casper .leetcode-hero-panel,
-  html.casper .leetcode-quick-grid,
-  html.casper .leetcode-pattern-grid {
+  html.casper .leetcode-quick-grid {
     grid-template-columns: 1fr;
+  }
+
+  html.casper .leetcode-pattern-grid {
+    grid-template-columns: 1f 1fr;
   }
 
   html.casper .leetcode-hero-panel {
