@@ -487,7 +487,7 @@ html.casper body.dark .project-card-actions a {
 /************************ Projects *************************/
 
 html.casper .projects-page {
-  padding: 48px 0 72px;
+  padding: 48px 0 24px;
 }
 
 html.casper .projects-featured-list {
@@ -531,7 +531,7 @@ html.casper .projects-featured-list .post-featured-card {
   }
 
   html.casper .projects-page {
-    padding: 32px 0 56px;
+    padding: 32px 0 20px;
   }
 
   html.casper .projects-featured-list {
@@ -542,7 +542,7 @@ html.casper .projects-featured-list .post-featured-card {
 /************************ LeetCode Journey *************************/
 
 html.casper .leetcode-journey {
-  padding: 48px 0 72px;
+  padding: 48px 0 24px;
 }
 
 html.casper .leetcode-hero-panel {
@@ -968,7 +968,7 @@ html.casper .leetcode-log-section .post-feed {
 
 @media (max-width: 701px) {
   html.casper .leetcode-journey {
-    padding: 32px 0 56px;
+    padding: 32px 0 20px;
   }
 
   html.casper .leetcode-hero-panel,

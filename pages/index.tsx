@@ -7,7 +7,6 @@ import { PostView } from '@components/PostView'
 import { HeaderIndex } from '@components/HeaderIndex'
 import { StickyNavContainer } from '@effects/StickyNavContainer'
 import { SEO } from '@meta/seo'
-import { Subscribe } from '@components/Subscribe'
 import { HomeSubscription } from '@components/home/HomeSubscription'
 
 import { processEnv } from '@lib/processEnv'
@@ -108,7 +107,6 @@ export default function Index({ cmsData }: IndexProps) {
                 </div>
               </div>
             </div>
-            {memberSubscriptions && <Subscribe {...{ settings }} />}
           </Layout>
         )}
       />

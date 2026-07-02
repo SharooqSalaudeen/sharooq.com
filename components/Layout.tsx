@@ -3,6 +3,7 @@ import Link from 'next/link'
 
 import { DocumentHead } from '@components/DocumentHead'
 import { StickyNav } from '@components/StickyNav'
+import { Subscribe } from '@components/Subscribe'
 import { SubscribeOverlay } from '@components/SubscribeOverlay'
 import { SubscribeSuccess } from '@components/SubscribeSuccess'
 
@@ -60,6 +61,7 @@ export const Layout = ({ settings, header, children, isHome, sticky, previewPost
         {isHome && <StickyNav className={`site-nav ${sticky && sticky.state.currentClass}`} {...{ siteUrl, settings }} />}
         {/* Links to Previous/Next posts */}
         {previewPosts}
+        {memberSubscriptions && <Subscribe {...{ settings }} />}
 
         {/* The footer at the very bottom of the screen */}
         <footer className="site-footer outer">
