@@ -354,7 +354,7 @@ html.casper .post-featured-header {
 
 html.casper .post-featured-header a {
   display: inline-block;
-  margin: 4px 0 10px;
+  margin: 1.5em 0 0 0;
   color: var(--blue);
   font-size: 1.3rem;
   font-weight: 700;
@@ -363,6 +363,13 @@ html.casper .post-featured-header a {
 
 html.casper .post-featured-header a:hover {
   text-decoration: underline;
+}
+
+html.casper .post-featured-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
 }
 
 html.casper .post-featured-header h3 {
@@ -540,6 +547,81 @@ html.casper .projects-featured-list .post-featured-card {
 
   html.casper .projects-featured-list {
     gap: 0;
+  }
+}
+
+/************************ Home LeetCode Tracker *************************/
+
+html.casper .home-leetcode-tracker {
+  margin: 12px 24px 0;
+}
+
+html.casper .home-leetcode-tracker-header {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 12px;
+}
+
+html.casper .home-leetcode-tracker-header h3 {
+  margin: 0 0 6px;
+}
+
+html.casper .home-leetcode-tracker-subtitle {
+  margin: 0;
+  color: var(--midgrey);
+  font-size: 1.5rem;
+  line-height: 1.5;
+}
+
+html.casper body.dark .home-leetcode-tracker-subtitle {
+  color: rgba(255, 255, 255, 0.65);
+}
+
+html.casper .home-leetcode-tracker-link {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 16px;
+  border: 1px solid var(--blue);
+  border-radius: 999px;
+  color: var(--blue);
+  font-size: 1.4rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+  white-space: nowrap;
+}
+
+html.casper .home-leetcode-tracker-link:hover {
+  background: var(--blue);
+  color: #fff;
+  text-decoration: none;
+  transform: translateY(-2px);
+}
+
+html.casper body.dark .home-leetcode-tracker-link {
+  border-color: #4da3e4;
+  color: #4da3e4;
+}
+
+html.casper body.dark .home-leetcode-tracker-link:hover {
+  background: #0a6ebd;
+  border-color: #0a6ebd;
+  color: #fff;
+}
+
+@media (max-width: 767px) {
+  html.casper .home-leetcode-tracker {
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  html.casper .home-leetcode-tracker-header {
+    flex-direction: column;
+    align-items: flex-start;
   }
 }
 

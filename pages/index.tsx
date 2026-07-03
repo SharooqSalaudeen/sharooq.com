@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { GetStaticProps } from 'next'
 import { useRouter } from 'next/router'
+import Link from 'next/link'
 
 import { Layout } from '@components/Layout'
 import { PostView } from '@components/PostView'
@@ -13,6 +14,7 @@ import { processEnv } from '@lib/processEnv'
 import {
   getOptimizedAllDeveloperPosts,
   getOptimizedAllFeaturedPosts,
+  getOptimizedAllLeetcodePosts,
   getOptimizedAllPosts,
   getOptimizedAllSettings,
   getOptimizedLatestPosts,
@@ -32,6 +34,8 @@ import { PostFeatured } from '@components/home/PostFeatured'
 import { featuredBooks } from 'appConfig'
 import { HomeTopicCards } from '@components/home/HomeTopicCards'
 import ProjectFeatured from '@components/home/ProjectFeatured'
+import { LeetcodeTrackerGrid } from '@components/leetcode/LeetcodeTrackerGrid'
+import { getPracticeTracker } from '@components/leetcode/leetcodeUtils'
 
 /**
  * Main index page (home page)
@@ -46,6 +50,7 @@ interface CmsData {
   featuredPosts?: GhostPostsOrPages
   firstFeaturedBook?: GhostPostOrPage
   secondFeaturedBook?: GhostPostOrPage
+  leetcodePosts?: GhostPostsOrPages
   settings: GhostSettings
   seoImage: ISeoImage
   previewPosts?: GhostPostsOrPages
@@ -62,10 +67,11 @@ export default function Index({ cmsData }: IndexProps) {
   const router = useRouter()
   if (router.isFallback) return <div>Loading...</div>
 
-  const { settings, latestPosts, featuredPosts, firstFeaturedBook, secondFeaturedBook, seoImage, bodyClass } = cmsData
+  const { settings, latestPosts, featuredPosts, firstFeaturedBook, secondFeaturedBook, leetcodePosts, seoImage, bodyClass } = cmsData
 
   const { processEnv } = settings
   const { nextImages, toc, memberSubscriptions, commenting } = processEnv
+  const practiceTracker = leetcodePosts ? getPracticeTracker(leetcodePosts) : null
 
   // const [filteredPosts, setFilteredPosts] = useState<GhostPostsOrPages>(posts)
 
@@ -85,6 +91,26 @@ export default function Index({ cmsData }: IndexProps) {
               {memberSubscriptions && <HomeSubscription {...{ settings }} />}
 
               <HomeTopicCards {...{ settings }} />
+              {practiceTracker && (
+                <div className="post-featured-section">
+                  <header className="post-featured-header">
+                    <div className="post-featured-header-row">
+                      <h3>Leetcode Tracker</h3>
+                      <Link href="/leetcode">
+                        <a className="home-leetcode-tracker-link">View full journey →</a>
+                      </Link>
+                    </div>
+                    <hr className="heading-underline" />
+                    <p className="home-leetcode-tracker-subtitle">
+                      {practiceTracker.totalWriteUps} {practiceTracker.totalWriteUps === 1 ? 'write-up' : 'write-ups'} across {practiceTracker.activeDays} active{' '}
+                      {practiceTracker.activeDays === 1 ? 'day' : 'days'} in the last year — holding myself accountable.
+                    </p>
+                  </header>
+                  <div className="home-leetcode-tracker">
+                    <LeetcodeTrackerGrid tracker={practiceTracker} />
+                  </div>
+                </div>
+              )}
               <div className="post-featured-section">
                 <header className="post-featured-header">
                   <h3>Recent Projects</h3>
@@ -121,6 +147,7 @@ export const getStaticProps: GetStaticProps = async () => {
   let featuredPosts: OptimizedPosts | []
   let firstFeaturedBook: GhostPostOrPage | null
   let secondFeaturedBook: GhostPostOrPage | null
+  let leetcodePosts: OptimizedPosts | []
 
   try {
     settings = await getOptimizedAllSettings()
@@ -128,6 +155,7 @@ export const getStaticProps: GetStaticProps = async () => {
     featuredPosts = await getOptimizedAllFeaturedPosts({ limit: 5 })
     firstFeaturedBook = await getPostBySlug(featuredBooks[0].slug)
     secondFeaturedBook = await getPostBySlug(featuredBooks[1].slug)
+    leetcodePosts = await getOptimizedAllLeetcodePosts()
   } catch (error) {
     throw new Error('Index creation failed.')
   }
@@ -139,6 +167,7 @@ export const getStaticProps: GetStaticProps = async () => {
     featuredPosts,
     firstFeaturedBook,
     secondFeaturedBook,
+    leetcodePosts,
     seoImage: await seoImage({ siteUrl: settings.processEnv.siteUrl }),
     bodyClass: BodyClass({ isHome: true }),
   }
