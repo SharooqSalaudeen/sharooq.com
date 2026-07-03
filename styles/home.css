@@ -531,7 +531,7 @@ html.casper .projects-featured-list .post-featured-card {
   }
 
   html.casper .project-card-actions {
-    padding-left: 0;
+    padding-left: 30px;
   }
 
   html.casper .projects-page {
@@ -676,26 +676,43 @@ html.casper .leetcode-tracker-heading {
   align-items: flex-end;
 }
 
-html.casper .leetcode-tracker-heading > span {
-  margin-bottom: 3px;
-  color: var(--midgrey);
-  font-size: 1.35rem;
-  font-weight: 700;
-  line-height: 1.3;
-  white-space: nowrap;
-}
-
-html.casper body.dark .leetcode-tracker-heading > span {
-  color: rgba(255, 255, 255, 0.65);
-}
-
 html.casper .leetcode-practice-tracker {
-  overflow-x: auto;
   padding: 18px;
   border: 1px solid rgba(21, 23, 26, 0.08);
   border-radius: 8px;
   background: #fff;
   box-shadow: 0 8px 22px rgba(21, 23, 26, 0.06);
+}
+
+html.casper .leetcode-practice-scroll {
+  overflow-x: auto;
+  text-align: center;
+}
+
+html.casper .tracker-mobile {
+  display: none;
+}
+
+html.casper .tracker-period-mobile {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  html.casper .tracker-desktop {
+    display: none;
+  }
+
+  html.casper .tracker-mobile {
+    display: block;
+  }
+
+  html.casper .tracker-period-desktop {
+    display: none;
+  }
+
+  html.casper .tracker-period-mobile {
+    display: inline;
+  }
 }
 
 html.casper body.dark .leetcode-practice-tracker {
@@ -705,24 +722,47 @@ html.casper body.dark .leetcode-practice-tracker {
 }
 
 html.casper .leetcode-practice-grid {
-  display: grid;
-  grid-auto-flow: column;
-  grid-auto-columns: 12px;
-  gap: 4px;
-  width: max-content;
-  min-width: 100%;
+  display: inline-grid;
+  grid-template-columns: 28px repeat(var(--week-count), 13px);
+  grid-template-rows: 16px repeat(7, 13px);
+  gap: 3px;
 }
 
 html.casper .leetcode-practice-week {
-  display: grid;
-  grid-template-rows: repeat(7, 12px);
-  gap: 4px;
+  display: contents;
 }
 
+html.casper .leetcode-day-label {
+  font-size: 1rem;
+  color: var(--midgrey);
+  text-align: right;
+  padding-right: 4px;
+  line-height: 13px;
+  white-space: nowrap;
+  align-self: center;
+}
+
+html.casper body.dark .leetcode-day-label {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+html.casper .leetcode-month-label {
+  font-size: 1.1rem;
+  color: var(--midgrey);
+  text-align: left;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  line-height: 16px;
+}
+
+html.casper body.dark .leetcode-month-label {
+  color: rgba(255, 255, 255, 0.5);
+}
 html.casper .leetcode-practice-day {
   display: block;
-  width: 12px;
-  height: 12px;
+  width: 13px;
+  height: 13px;
   border-radius: 3px;
   background: #ebedf0;
 }
@@ -763,12 +803,24 @@ html.casper body.dark .leetcode-practice-day.level-4 {
   background: #39d353;
 }
 
+@media (max-width: 767px) {
+  html.casper .leetcode-practice-legend {
+    min-width: unset;
+    justify-content: flex-end;
+  }
+
+  html.casper .leetcode-practice-legend .leetcode-practice-day {
+    width: 13px;
+    height: 13px;
+    flex-shrink: 0;
+  }
+}
+
 html.casper .leetcode-practice-legend {
   display: flex;
   gap: 5px;
   justify-content: flex-end;
   align-items: center;
-  min-width: max-content;
   margin-top: 12px;
   color: var(--midgrey);
   font-size: 1.2rem;
@@ -999,12 +1051,6 @@ html.casper .leetcode-log-section .post-feed {
 
   html.casper .leetcode-tracker-heading {
     display: block;
-  }
-
-  html.casper .leetcode-tracker-heading > span {
-    display: block;
-    margin-top: 10px;
-    white-space: normal;
   }
 
   html.casper .leetcode-quick-card {

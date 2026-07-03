@@ -84,6 +84,25 @@ html.casper aside.toc {
     font-size: 1.4rem;
     padding: 0 2.4rem;
     margin-left: 0.2rem;
+    max-height: calc(100vh - 140px);
+    overflow-y: auto;
+  }
+
+  html.casper aside.toc::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  html.casper aside.toc::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  html.casper aside.toc::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 2px;
+  }
+
+  html.casper body.dark aside.toc::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.2);
   }
 }
 

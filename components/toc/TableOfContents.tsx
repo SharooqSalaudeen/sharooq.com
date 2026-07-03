@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
 import { useActiveHash } from '@components/effects/UseActiveHash'
 import { IToC } from '@lib/toc'
@@ -48,6 +48,9 @@ export const TableOfContents = ({ toc, url, maxDepth = 2, lang }: TableOfContent
 
   const [isDesktop, setIsDesktop] = useState(false)
   const activeHash = useActiveHash(getHeadingIds(toc, true, maxDepth))
+  const tocRef = useRef<HTMLElement>(null)
+  const isUserScrolling = useRef(false)
+  const userScrollTimeout = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   useEffect(() => {
     const isDesktopQuery = window.matchMedia(`(min-width: 1170px)`)
@@ -58,10 +61,48 @@ export const TableOfContents = ({ toc, url, maxDepth = 2, lang }: TableOfContent
     return () => isDesktopQuery.removeListener(updateIsDesktop)
   }, [])
 
+  // Detect when the user manually scrolls the TOC so we can pause auto-scroll
+  useEffect(() => {
+    const container = tocRef.current
+    if (!container) return
+
+    const handleUserScroll = () => {
+      isUserScrolling.current = true
+      if (userScrollTimeout.current) clearTimeout(userScrollTimeout.current)
+      userScrollTimeout.current = setTimeout(() => {
+        isUserScrolling.current = false
+      }, 1200)
+    }
+
+    container.addEventListener('wheel', handleUserScroll, { passive: true })
+    container.addEventListener('touchmove', handleUserScroll, { passive: true })
+    return () => {
+      container.removeEventListener('wheel', handleUserScroll)
+      container.removeEventListener('touchmove', handleUserScroll)
+      if (userScrollTimeout.current) clearTimeout(userScrollTimeout.current)
+    }
+  }, [])
+
+  useEffect(() => {
+    if (!isDesktop || !activeHash || !tocRef.current || isUserScrolling.current) return
+    const container = tocRef.current
+    const activeLink = container.querySelector<HTMLElement>('a.active')
+    if (activeLink) {
+      const containerRect = container.getBoundingClientRect()
+      const linkRect = activeLink.getBoundingClientRect()
+      const isAbove = linkRect.top < containerRect.top
+      const isBelow = linkRect.bottom > containerRect.bottom
+      if (isAbove || isBelow) {
+        const offset = linkRect.top - containerRect.top - containerRect.height / 2 + linkRect.height / 2
+        container.scrollTo({ top: container.scrollTop + offset, behavior: 'smooth' })
+      }
+    }
+  }, [activeHash, isDesktop])
+
   return (
     <>
       {toc.length > 0 ? (
-        <aside className="toc">
+        <aside className="toc" ref={tocRef}>
           <nav>
             <h2>{text(`TABLE_OF_CONTENTS`)}</h2>
             <ul className="list">{createItems(toc, url, 1, maxDepth, activeHash, isDesktop)}</ul>

@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
+import type { CSSProperties } from 'react'
 import { GetStaticProps } from 'next'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
@@ -76,6 +77,34 @@ const startOfUtcDay = (date: Date) => new Date(Date.UTC(date.getUTCFullYear(), d
 
 const addDays = (date: Date, days: number) => new Date(date.getTime() + days * dayInMs)
 
+const MONTH_NAMES = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+
+interface MonthLabel {
+  name: string
+  colStart: number
+  colEnd: number
+}
+
+const getMonthLabels = (weeks: PracticeDay[][]): MonthLabel[] => {
+  const labels: MonthLabel[] = []
+  let currentMonth = -1
+
+  weeks.forEach((week, index) => {
+    if (!week[0]) return
+    const month = new Date(week[0].date).getUTCMonth()
+    if (month !== currentMonth) {
+      if (labels.length > 0) labels[labels.length - 1].colEnd = index + 1
+      labels.push({ name: MONTH_NAMES[month], colStart: index + 1, colEnd: weeks.length + 1 })
+      currentMonth = month
+    }
+  })
+
+  // Skip the first label if the month occupies fewer than 2 columns (partial month at range start)
+  if (labels.length > 0 && labels[0].colEnd - labels[0].colStart < 2) labels.shift()
+
+  return labels
+}
+
 const getPracticeCountLevel = (count: number) => {
   if (count === 0) return 0
   if (count === 1) return 1
@@ -136,6 +165,16 @@ export default function LeetcodeJourney({ cmsData }: LeetcodePageProps) {
   const [showAllPatterns, setShowAllPatterns] = useState(false)
   const visiblePatterns = showAllPatterns ? patterns : patterns.slice(0, 4)
   const practiceTracker = getPracticeTracker(posts)
+  const monthLabels = getMonthLabels(practiceTracker.weeks)
+  const recentWeeks = practiceTracker.weeks.slice(practiceTracker.weeks.length - 26)
+  const recentMonthLabels = getMonthLabels(recentWeeks)
+  const desktopScrollRef = useRef<HTMLDivElement>(null)
+  const mobileScrollRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    desktopScrollRef.current && (desktopScrollRef.current.scrollLeft = desktopScrollRef.current.scrollWidth)
+    mobileScrollRef.current && (mobileScrollRef.current.scrollLeft = mobileScrollRef.current.scrollWidth)
+  }, [])
 
   return (
     <>
@@ -158,7 +197,7 @@ export default function LeetcodeJourney({ cmsData }: LeetcodePageProps) {
                 {...{
                   settings,
                   pageTitle: 'LeetCode Journey',
-                  pageDescription: 'Problems solved, patterns practiced, and notes from the process. Every post below is a problem I worked through and wrote about.',
+                  pageDescription: 'Problems solved, patterns practiced, and notes from the process.',
                 }}
               />
             }
@@ -169,24 +208,79 @@ export default function LeetcodeJourney({ cmsData }: LeetcodePageProps) {
                   <div>
                     <p className="leetcode-kicker">Article tracker</p>
                     <h2>
-                      {practiceTracker.totalWriteUps} {practiceTracker.totalWriteUps === 1 ? 'article' : 'articles'} in the last year
+                      {practiceTracker.totalWriteUps} {practiceTracker.totalWriteUps === 1 ? 'leetcode article' : 'leetcode articles'} in the{' '}
+                      <span className="tracker-period-desktop">last year</span>
+                      <span className="tracker-period-mobile">last 6 months</span>
                     </h2>
                   </div>
-                  <span>{practiceTracker.totalWriteUps} LeetCode articles</span>
                 </div>
                 <div className="leetcode-practice-tracker" aria-label="LeetCode articles over the last year">
-                  <div className="leetcode-practice-grid" aria-hidden="true">
+                  {/* Desktop: full year */}
+                  <div className="leetcode-practice-scroll tracker-desktop" ref={desktopScrollRef}>
+                    <div
+                      className="leetcode-practice-grid"
+                      aria-hidden="true"
+                      style={{ '--week-count': practiceTracker.weeks.length } as CSSProperties}
+                    >
+                    <span className="leetcode-day-label" style={{ gridColumn: 1, gridRow: 3 }}>Mon</span>
+                    <span className="leetcode-day-label" style={{ gridColumn: 1, gridRow: 5 }}>Wed</span>
+                    <span className="leetcode-day-label" style={{ gridColumn: 1, gridRow: 7 }}>Fri</span>
+                    {monthLabels.map((label) => (
+                      <span
+                        key={label.name + label.colStart}
+                        className="leetcode-month-label"
+                        style={{ gridColumn: `${label.colStart + 1} / ${label.colEnd + 1}`, gridRow: 1 }}
+                      >
+                        {label.name}
+                      </span>
+                    ))}
                     {practiceTracker.weeks.map((week, weekIndex) => (
-                      <div className="leetcode-practice-week" key={weekIndex}>
-                        {week.map((day) => (
+                      <div key={weekIndex} className="leetcode-practice-week">
+                        {week.map((day, dayIndex) => (
                           <span
                             className={`leetcode-practice-day level-${day.level}`}
                             key={day.date}
+                            style={{ gridColumn: weekIndex + 2, gridRow: dayIndex + 2 }}
                             title={`${day.date}: ${day.count} ${day.count === 1 ? 'article' : 'articles'}`}
                           />
                         ))}
                       </div>
                     ))}
+                    </div>
+                  </div>
+
+                  {/* Mobile: last 6 months */}
+                  <div className="leetcode-practice-scroll tracker-mobile" ref={mobileScrollRef}>
+                    <div
+                      className="leetcode-practice-grid"
+                      aria-hidden="true"
+                      style={{ '--week-count': recentWeeks.length } as CSSProperties}
+                    >
+                    <span className="leetcode-day-label" style={{ gridColumn: 1, gridRow: 3 }}>Mon</span>
+                    <span className="leetcode-day-label" style={{ gridColumn: 1, gridRow: 5 }}>Wed</span>
+                    <span className="leetcode-day-label" style={{ gridColumn: 1, gridRow: 7 }}>Fri</span>
+                    {recentMonthLabels.map((label) => (
+                      <span
+                        key={label.name + label.colStart}
+                        className="leetcode-month-label"
+                        style={{ gridColumn: `${label.colStart + 1} / ${label.colEnd + 1}`, gridRow: 1 }}
+                      >
+                        {label.name}
+                      </span>
+                    ))}
+                    {recentWeeks.map((week, weekIndex) => (
+                      <div key={weekIndex} className="leetcode-practice-week">
+                        {week.map((day, dayIndex) => (
+                          <span
+                            className={`leetcode-practice-day level-${day.level}`}
+                            key={day.date}
+                            style={{ gridColumn: weekIndex + 2, gridRow: dayIndex + 2 }}
+                            title={`${day.date}: ${day.count} ${day.count === 1 ? 'article' : 'articles'}`}
+                          />
+                        ))}
+                      </div>
+                    ))}
+                    </div>
                   </div>
                   <div className="leetcode-practice-legend" aria-hidden="true">
                     <span>Less</span>
