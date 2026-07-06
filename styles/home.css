@@ -613,6 +613,13 @@ html.casper body.dark .home-leetcode-tracker-link:hover {
   color: #fff;
 }
 
+html.casper .home-leetcode-tracker-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
 @media (max-width: 767px) {
   html.casper .home-leetcode-tracker {
     margin-left: 0;
@@ -622,6 +629,10 @@ html.casper body.dark .home-leetcode-tracker-link:hover {
   html.casper .home-leetcode-tracker-header {
     flex-direction: column;
     align-items: flex-start;
+  }
+
+  html.casper .home-leetcode-tracker-actions {
+    flex-wrap: wrap;
   }
 }
 
@@ -756,6 +767,39 @@ html.casper .leetcode-tracker-heading {
   gap: 20px;
   justify-content: space-between;
   align-items: flex-end;
+}
+
+html.casper .leetcode-github-link {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 16px;
+  border: 1px solid var(--blue);
+  border-radius: 999px;
+  color: var(--blue);
+  font-size: 1.4rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+  white-space: nowrap;
+}
+
+html.casper .leetcode-github-link:hover {
+  background: var(--blue);
+  color: #fff;
+  text-decoration: none;
+  transform: translateY(-2px);
+}
+
+html.casper body.dark .leetcode-github-link {
+  border-color: #4da3e4;
+  color: #4da3e4;
+}
+
+html.casper body.dark .leetcode-github-link:hover {
+  background: #0a6ebd;
+  border-color: #0a6ebd;
+  color: #fff;
 }
 
 html.casper .leetcode-practice-tracker {

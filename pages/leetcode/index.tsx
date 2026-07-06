@@ -16,6 +16,7 @@ import { seoImage, ISeoImage } from '@meta/seoImage'
 import { resolveUrl } from '@utils/routing'
 import { getPracticeTracker, getPatternCounts } from '@components/leetcode/leetcodeUtils'
 import { LeetcodeTrackerGrid } from '@components/leetcode/LeetcodeTrackerGrid'
+import { Search } from '@components/search/search'
 
 interface CmsData {
   posts: GhostPostsOrPages
@@ -36,6 +37,7 @@ export default function LeetcodeJourney({ cmsData }: LeetcodePageProps) {
 
   const { settings, posts, seoImage, bodyClass } = cmsData
   const { url: cmsUrl } = settings
+  const [filteredPosts, setFilteredPosts] = useState<GhostPostsOrPages>(posts)
   const patterns = getPatternCounts(posts)
   const quickLookupPosts = posts.filter((post) => post.featured)
   const [showAllPatterns, setShowAllPatterns] = useState(false)
@@ -79,6 +81,9 @@ export default function LeetcodeJourney({ cmsData }: LeetcodePageProps) {
                       <span className="tracker-period-mobile">last 6 months</span>
                     </h2>
                   </div>
+                  <a href="https://github.com/SharooqSalaudeen/data-structures-and-algorithms-solutions" className="leetcode-github-link" target="_blank" rel="noopener noreferrer">
+                    GitHub Solutions ↗
+                  </a>
                 </div>
                 <LeetcodeTrackerGrid tracker={practiceTracker} ariaLabel="LeetCode articles over the last year" />
               </section>
@@ -137,7 +142,12 @@ export default function LeetcodeJourney({ cmsData }: LeetcodePageProps) {
                   <p className="leetcode-kicker">Journey log</p>
                   <h2>LeetCode write-ups</h2>
                 </div>
-                {posts.length > 0 ? <PostView {...{ settings, posts, isHome: true }} /> : <p className="leetcode-empty-state">No LeetCode posts found yet.</p>}
+                <Search {...{ posts, setFilteredPosts }} placeholder="Search leetcode articles..." />
+                {filteredPosts.length > 0 ? (
+                  <PostView {...{ settings, posts: filteredPosts, isHome: true }} />
+                ) : (
+                  <p className="leetcode-empty-state">No LeetCode posts found yet.</p>
+                )}
               </section>
             </div>
           </Layout>

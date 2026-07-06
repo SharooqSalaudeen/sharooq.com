@@ -96,9 +96,19 @@ export default function Index({ cmsData }: IndexProps) {
                   <header className="post-featured-header">
                     <div className="post-featured-header-row">
                       <h3>Leetcode Tracker</h3>
-                      <Link href="/leetcode">
-                        <a className="home-leetcode-tracker-link">View full journey →</a>
-                      </Link>
+                      <div className="home-leetcode-tracker-actions">
+                        <a
+                          href="https://github.com/SharooqSalaudeen/data-structures-and-algorithms-solutions"
+                          className="home-leetcode-tracker-link"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          GitHub Solutions ↗
+                        </a>
+                        <Link href="/leetcode">
+                          <a className="home-leetcode-tracker-link">View full journey →</a>
+                        </Link>
+                      </div>
                     </div>
                     <hr className="heading-underline" />
                     <p className="home-leetcode-tracker-subtitle">
