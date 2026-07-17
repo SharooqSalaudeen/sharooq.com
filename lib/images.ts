@@ -5,8 +5,7 @@ import { createReadStream, createWriteStream, existsSync } from 'fs'
 import { join } from 'path'
 import { processEnv } from '@lib/processEnv'
 import { promisify } from 'util'
-
-import { sha1 } from 'crypto-hash'
+import { createHash } from 'crypto'
 
 const streamPipeline = promisify(require('stream').pipeline)
 
@@ -29,11 +28,19 @@ const maxRetries = 50
 const read_timeout = 3000 // ms
 const response_timeout = 3000 // ms
 
-const calcHash = async (input: ArrayBuffer | string) => await sha1(input)
+const calcHash = (input: ArrayBuffer | string): string => {
+  const hash = createHash('sha1')
+  if (typeof input === 'string') {
+    hash.update(input)
+  } else {
+    hash.update(Buffer.from(input))
+  }
+  return hash.digest('hex')
+}
 
-const genCacheKey = async (url: string, noCache?: boolean) => {
+const genCacheKey = (url: string, noCache?: boolean): string | null => {
   if (noCache) return null
-  return await calcHash(url)
+  return calcHash(url)
 }
 
 export interface Dimensions {
@@ -44,7 +51,7 @@ export interface Dimensions {
 export const imageDimensions = async (url: string | undefined | null, noCache?: boolean): Promise<Dimensions | null> => {
   if (!url) return null
 
-  const cacheKey = await genCacheKey(url, noCache)
+  const cacheKey = genCacheKey(url, noCache)
   const cached = getCache<Dimensions>(cacheKey)
   if (cached) return cached
 
@@ -91,7 +98,7 @@ export const imageDimensions = async (url: string | undefined | null, noCache?: 
 export const imageDimensionsFromFile = async (file: string, noCache?: boolean) => {
   if (!file) return null
 
-  const cacheKey = await genCacheKey(file, noCache)
+  const cacheKey = genCacheKey(file, noCache)
   const cached = getCache<Dimensions>(cacheKey)
   if (cached) return cached
 
