@@ -33,7 +33,7 @@ const calcHash = (input: ArrayBuffer | string): string => {
   if (typeof input === 'string') {
     hash.update(input)
   } else {
-    hash.update(Buffer.from(input))
+    hash.update(Buffer.from(input).toString('utf-8'))
   }
   return hash.digest('hex')
 }
