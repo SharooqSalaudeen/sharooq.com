@@ -116,43 +116,40 @@ html.casper .home-subscribe-cta {
 /************************ Home Topic Cards *************************/
 
 html.casper .home-topic-cards {
-  display: flex;
-  gap: 24px;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 14px;
   text-align: center;
-  margin: 0 0 25px;
+  margin: 0 0 20px;
 }
 
-/* New version where home topic cards is disabled on mobile */
+/* Disabled on mobile */
 @media (max-width: 701px) {
   html.casper .home-topic-cards {
     display: none;
   }
 }
 
-/* Older version where mobile view of home topic cards was enabled */
-/* @media (max-width: 701px) {
-  html.casper .home-topic-cards {
-    display: none;
-    margin: 0;
-  }
-  html.casper .home-topic-card {
-    width: 100%;
-  }
-} */
-
 html.casper .home-topic-card {
-  flex: 1 1 220px;
-  margin-top: 2rem;
+  grid-column: span 2;
   display: block;
-  padding: 2rem 1rem 3rem;
+  padding: 1.35rem 1.5rem 1.55rem;
+  min-height: 200px;
   border-radius: 10px;
   color: black;
-  max-width: 250px;
   border: 0 solid rgba(0, 0, 0, 0.125);
   background-clip: border-box;
   box-shadow: 0 5px 20px 0 rgb(0 0 0 / 10%);
   transition: color 0.3s, transform 0.3s !important;
+}
+
+/* Center the 2 cards in the second row */
+html.casper .home-topic-card:nth-child(4) {
+  grid-column: 2 / span 2;
+}
+
+html.casper .home-topic-card:nth-child(5) {
+  grid-column: 4 / span 2;
 }
 
 html.casper body.dark .home-topic-card {
@@ -166,8 +163,8 @@ html.casper .home-topic-card:hover {
 }
 
 html.casper .home-topic-card h2 {
-  margin-top: 1rem;
-  margin-bottom: 1rem;
+  margin-top: 0.6rem;
+  margin-bottom: 0.5rem;
 }
 
 /************************ Post List *************************/
@@ -632,7 +629,7 @@ html.casper .home-leetcode-tracker-actions {
   }
 
   html.casper .home-leetcode-tracker-actions {
-    flex-wrap: wrap;
+    display: none;
   }
 }
 

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { GetStaticProps } from 'next'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
@@ -35,7 +35,7 @@ import { featuredBooks } from 'appConfig'
 import { HomeTopicCards } from '@components/home/HomeTopicCards'
 import ProjectFeatured from '@components/home/ProjectFeatured'
 import { LeetcodeTrackerGrid } from '@components/leetcode/LeetcodeTrackerGrid'
-import { getPracticeTracker } from '@components/leetcode/leetcodeUtils'
+import { getPracticeTracker, PracticeTracker } from '@components/leetcode/leetcodeUtils'
 
 /**
  * Main index page (home page)
@@ -71,7 +71,11 @@ export default function Index({ cmsData }: IndexProps) {
 
   const { processEnv } = settings
   const { nextImages, toc, memberSubscriptions, commenting } = processEnv
-  const practiceTracker = leetcodePosts ? getPracticeTracker(leetcodePosts) : null
+  const [practiceTracker, setPracticeTracker] = useState<PracticeTracker | null>(null)
+
+  useEffect(() => {
+    if (leetcodePosts) setPracticeTracker(getPracticeTracker(leetcodePosts))
+  }, [])
 
   // const [filteredPosts, setFilteredPosts] = useState<GhostPostsOrPages>(posts)
 

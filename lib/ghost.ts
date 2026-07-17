@@ -131,7 +131,7 @@ const postAndPageSlugOptions: Params = {
   fields: 'slug',
 }
 
-const excludePostOrPageBySlug = (filter?: string) => {
+const buildGhostFilter = (filter?: string) => {
   if (!contactPage) return `${filter ?? ''}`
   return `slug:-contact+${filter ?? ''}`
 }
@@ -266,7 +266,7 @@ export async function getAllAuthors() {
 export async function getAllPosts(props?: { limit: number }): Promise<GhostPostsOrPages> {
   const posts = await api.posts.browse({
     ...postAndPageFetchOptions,
-    filter: excludePostOrPageBySlug(),
+    filter: buildGhostFilter(),
     ...(props && { ...props }),
   })
   const results = await createNextProfileImagesFromPosts(posts)
@@ -282,7 +282,8 @@ export async function getOptimizedAllPosts(props?: { limit: number }): Promise<O
 export async function getAllDeveloperPosts(props?: { limit: number }): Promise<GhostPostsOrPages> {
   const posts = await api.posts.browse({
     ...postAndPageFetchOptions,
-    filter: excludePostOrPageBySlug('tag:-book-summary'),
+    order: ['published_at DESC'],
+    filter: buildGhostFilter('tag:-book-summary'),
     ...(props && { ...props }),
   })
   const results = await createNextProfileImagesFromPosts(posts)
@@ -298,7 +299,7 @@ export async function getOptimizedAllDeveloperPosts(props?: { limit: number }): 
 export async function getLatestPosts(props?: { limit: number }): Promise<GhostPostsOrPages> {
   const posts = await api.posts.browse({
     ...postAndPageFetchOptions,
-    filter: excludePostOrPageBySlug('tag:-book-summary+featured:false'),
+    filter: buildGhostFilter('tag:-book-summary+featured:false'),
     ...(props && { ...props }),
   })
   const results = await createNextProfileImagesFromPosts(posts)
@@ -314,7 +315,7 @@ export async function getOptimizedLatestPosts(props?: { limit: number }): Promis
 export async function getAllFeaturedPosts(props?: { limit: number }): Promise<GhostPostsOrPages> {
   const posts = await api.posts.browse({
     ...postAndPageFetchOptions,
-    filter: excludePostOrPageBySlug('featured:true'),
+    filter: buildGhostFilter('featured:true'),
     ...(props && { ...props }),
   })
   const results = await createNextProfileImagesFromPosts(posts)
@@ -330,7 +331,7 @@ export async function getOptimizedAllFeaturedPosts(props?: { limit: number }): P
 export async function getAllBookSummaries(props?: { limit: number }): Promise<GhostPostsOrPages> {
   const posts = await api.posts.browse({
     ...postAndPageFetchOptions,
-    filter: excludePostOrPageBySlug('tag:book-summary'),
+    filter: buildGhostFilter('tag:book-summary'),
     ...(props && { ...props }),
   })
   const results = await createNextProfileImagesFromPosts(posts)
@@ -346,7 +347,8 @@ export async function getOptimizedAllBookSummaries(props?: { limit: number }): P
 export async function getAllLeetcodePosts(props?: { limit: number }): Promise<GhostPostsOrPages> {
   const posts = await api.posts.browse({
     ...postAndPageFetchOptions,
-    filter: excludePostOrPageBySlug('tag:leetcode'),
+    order: ['published_at DESC'],
+    filter: buildGhostFilter('tag:leetcode'),
     ...(props && { ...props }),
   })
   const results = await createNextProfileImagesFromPosts(posts)
@@ -368,7 +370,7 @@ export async function getAllPostSlugs(): Promise<string[]> {
 export async function getAllPages(props?: { limit: number }): Promise<GhostPostsOrPages> {
   const pages = await api.pages.browse({
     ...postAndPageFetchOptions,
-    filter: excludePostOrPageBySlug(),
+    filter: buildGhostFilter(),
     ...(props && { ...props }),
   })
   return await createNextFeatureImages(pages)

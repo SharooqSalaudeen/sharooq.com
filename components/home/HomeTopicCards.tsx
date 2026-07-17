@@ -24,6 +24,12 @@ const cards = [
     desc: 'My problem-solving practice log, focus patterns, and consistency system',
   },
   {
+    slug: 'tag/system-design',
+    icon: '/system-design.png',
+    name: 'System Design',
+    desc: 'Exploring scalable architectures, design patterns, and real-world system trade-offs',
+  },
+  {
     slug: 'book-summaries',
     icon: '/books.png',
     name: 'Book Summaries',
