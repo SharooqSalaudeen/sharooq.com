@@ -34,7 +34,6 @@ const defaultOptions = withBundleAnalyzer({
  */
 const customImageLoaderOptions = withBundleAnalyzer(
   withImageLoader({
-    ...(process.env.NETLIFY === 'true' && { target: 'serverless' }),
     // https://nextjs.org/docs/api-reference/next/image#loader
     images: {
       loader: 'custom',
