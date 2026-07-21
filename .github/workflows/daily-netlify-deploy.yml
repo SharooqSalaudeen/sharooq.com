@@ -1,0 +1,25 @@
+name: Daily Netlify Deploy
+
+on:
+  schedule:
+    # Every day at 12:22 AM UK time
+    - cron: "22 0 * * *"
+      timezone: "Europe/London"
+
+  # Allows you to test it manually from GitHub
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Trigger Netlify deployment
+        env:
+          NETLIFY_BUILD_HOOK: ${{ secrets.NETLIFY_BUILD_HOOK }}
+        run: |
+          curl --fail \
+            --request POST \
+            --header "Content-Type: application/json" \
+            --data '{}' \
+            "$NETLIFY_BUILD_HOOK"
