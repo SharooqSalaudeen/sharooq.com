@@ -1,4 +1,4 @@
-import { GhostPostsOrPages } from '@lib/ghost'
+import { GhostPostsOrPages, OptimizedPosts } from '@lib/ghost'
 
 // ── Types ──────────────────────────────────────────────────────────────────
 
@@ -27,6 +27,8 @@ export interface PracticeTracker {
   totalWriteUps: number
   weeks: PracticeDay[][]
 }
+
+type TrackablePosts = GhostPostsOrPages | OptimizedPosts
 
 // ── Constants ──────────────────────────────────────────────────────────────
 
@@ -70,7 +72,7 @@ export const getMonthLabels = (weeks: PracticeDay[][]): MonthLabel[] => {
   return labels
 }
 
-export const getPracticeTracker = (posts: GhostPostsOrPages): PracticeTracker => {
+export const getPracticeTracker = (posts: TrackablePosts): PracticeTracker => {
   const today = startOfUtcDay(new Date())
   const rangeStart = addDays(today, -364)
   const calendarStart = addDays(rangeStart, -rangeStart.getUTCDay())
@@ -101,7 +103,7 @@ export const getPracticeTracker = (posts: GhostPostsOrPages): PracticeTracker =>
   return { activeDays, totalWriteUps, weeks }
 }
 
-export const getPatternCounts = (posts: GhostPostsOrPages): PatternCount[] => {
+export const getPatternCounts = (posts: TrackablePosts): PatternCount[] => {
   const patternMap = new Map<string, PatternCount>()
 
   posts.forEach((post) => {

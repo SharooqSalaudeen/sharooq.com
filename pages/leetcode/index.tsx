@@ -8,18 +8,19 @@ import { Layout } from '@components/Layout'
 import { PostView } from '@components/PostView'
 import { StickyNavContainer } from '@effects/StickyNavContainer'
 import { BodyClass } from '@helpers/BodyClass'
-import { getOptimizedAllLeetcodePosts, getOptimizedAllSettings, GhostPostsOrPages, GhostSettings, OptimizedPosts } from '@lib/ghost'
+import { getAllLeetcodePosts, getOptimizedAllLeetcodePosts, getOptimizedAllSettings, GhostPostsOrPages, GhostSettings, OptimizedPosts } from '@lib/ghost'
 import { collections } from '@lib/collections'
 import { processEnv } from '@lib/processEnv'
 import { SEO } from '@meta/seo'
 import { seoImage, ISeoImage } from '@meta/seoImage'
 import { resolveUrl } from '@utils/routing'
-import { getPracticeTracker, getPatternCounts } from '@components/leetcode/leetcodeUtils'
+import { getPracticeTracker, getPatternCounts, PracticeTracker } from '@components/leetcode/leetcodeUtils'
 import { LeetcodeTrackerGrid } from '@components/leetcode/LeetcodeTrackerGrid'
 import { Search } from '@components/search/search'
 
 interface CmsData {
   posts: GhostPostsOrPages
+  practiceTracker: PracticeTracker
   settings: GhostSettings
   seoImage: ISeoImage
   bodyClass: string
@@ -35,14 +36,13 @@ export default function LeetcodeJourney({ cmsData }: LeetcodePageProps) {
   const router = useRouter()
   if (router.isFallback) return <div>Loading...</div>
 
-  const { settings, posts, seoImage, bodyClass } = cmsData
+  const { settings, posts, practiceTracker, seoImage, bodyClass } = cmsData
   const { url: cmsUrl } = settings
   const [filteredPosts, setFilteredPosts] = useState<GhostPostsOrPages>(posts)
   const patterns = getPatternCounts(posts)
   const quickLookupPosts = posts.filter((post) => post.featured)
   const [showAllPatterns, setShowAllPatterns] = useState(false)
   const visiblePatterns = showAllPatterns ? patterns : patterns.slice(0, 4)
-  const practiceTracker = getPracticeTracker(posts)
 
   return (
     <>
@@ -159,17 +159,20 @@ export default function LeetcodeJourney({ cmsData }: LeetcodePageProps) {
 
 export const getStaticProps: GetStaticProps = async () => {
   let settings
-  let posts: OptimizedPosts | []
+  let posts: GhostPostsOrPages
+  let trackerPosts: OptimizedPosts | []
 
   try {
     settings = await getOptimizedAllSettings()
-    posts = await getOptimizedAllLeetcodePosts()
+    posts = await getAllLeetcodePosts()
+    trackerPosts = await getOptimizedAllLeetcodePosts()
   } catch (error) {
     throw new Error('LeetCode journey page creation failed.')
   }
 
   const cmsData = {
     posts,
+    practiceTracker: getPracticeTracker(trackerPosts),
     settings,
     seoImage: await seoImage({ siteUrl: settings.processEnv.siteUrl }),
     bodyClass: BodyClass({ isHome: true }),

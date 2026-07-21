@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { GetStaticProps } from 'next'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
@@ -51,6 +51,7 @@ interface CmsData {
   firstFeaturedBook?: GhostPostOrPage
   secondFeaturedBook?: GhostPostOrPage
   leetcodePosts?: GhostPostsOrPages
+  practiceTracker?: PracticeTracker
   settings: GhostSettings
   seoImage: ISeoImage
   previewPosts?: GhostPostsOrPages
@@ -67,15 +68,10 @@ export default function Index({ cmsData }: IndexProps) {
   const router = useRouter()
   if (router.isFallback) return <div>Loading...</div>
 
-  const { settings, latestPosts, featuredPosts, firstFeaturedBook, secondFeaturedBook, leetcodePosts, seoImage, bodyClass } = cmsData
+  const { settings, latestPosts, featuredPosts, firstFeaturedBook, secondFeaturedBook, practiceTracker, seoImage, bodyClass } = cmsData
 
   const { processEnv } = settings
   const { nextImages, toc, memberSubscriptions, commenting } = processEnv
-  const [practiceTracker, setPracticeTracker] = useState<PracticeTracker | null>(null)
-
-  useEffect(() => {
-    if (leetcodePosts) setPracticeTracker(getPracticeTracker(leetcodePosts))
-  }, [])
 
   // const [filteredPosts, setFilteredPosts] = useState<GhostPostsOrPages>(posts)
 
@@ -182,6 +178,7 @@ export const getStaticProps: GetStaticProps = async () => {
     firstFeaturedBook,
     secondFeaturedBook,
     leetcodePosts,
+    practiceTracker: getPracticeTracker(leetcodePosts),
     seoImage: await seoImage({ siteUrl: settings.processEnv.siteUrl }),
     bodyClass: BodyClass({ isHome: true }),
   }
