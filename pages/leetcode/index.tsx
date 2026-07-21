@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { GetStaticProps } from 'next'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
@@ -23,6 +23,7 @@ interface CmsData {
   settings: GhostSettings
   seoImage: ISeoImage
   bodyClass: string
+  practiceTracker: PracticeTracker
 }
 
 interface LeetcodePageProps {
@@ -35,18 +36,13 @@ export default function LeetcodeJourney({ cmsData }: LeetcodePageProps) {
   const router = useRouter()
   if (router.isFallback) return <div>Loading...</div>
 
-  const { settings, posts, seoImage, bodyClass } = cmsData
+  const { settings, posts, seoImage, bodyClass, practiceTracker } = cmsData
   const { url: cmsUrl } = settings
   const [filteredPosts, setFilteredPosts] = useState<GhostPostsOrPages>(posts)
   const patterns = getPatternCounts(posts)
   const quickLookupPosts = posts.filter((post) => post.featured)
   const [showAllPatterns, setShowAllPatterns] = useState(false)
   const visiblePatterns = showAllPatterns ? patterns : patterns.slice(0, 4)
-  const [practiceTracker, setPracticeTracker] = useState<PracticeTracker | null>(null)
-
-  useEffect(() => {
-    setPracticeTracker(getPracticeTracker(posts))
-  }, [])
 
   return (
     <>
@@ -80,14 +76,8 @@ export default function LeetcodeJourney({ cmsData }: LeetcodePageProps) {
                   <div>
                     <p className="leetcode-kicker">Article tracker</p>
                     <h2>
-                      {practiceTracker ? (
-                        <>
-                          {practiceTracker.totalWriteUps} {practiceTracker.totalWriteUps === 1 ? 'leetcode article' : 'leetcode articles'}
-                        </>
-                      ) : (
-                        '…'
-                      )}{' '}
-                      in the <span className="tracker-period-desktop">last year</span>
+                      {practiceTracker.totalWriteUps} {practiceTracker.totalWriteUps === 1 ? 'leetcode article' : 'leetcode articles'} in the{' '}
+                      <span className="tracker-period-desktop">last year</span>
                       <span className="tracker-period-mobile">last 6 months</span>
                     </h2>
                   </div>
@@ -95,7 +85,7 @@ export default function LeetcodeJourney({ cmsData }: LeetcodePageProps) {
                     GitHub Solutions ↗
                   </a>
                 </div>
-                {practiceTracker && <LeetcodeTrackerGrid tracker={practiceTracker} ariaLabel="LeetCode articles over the last year" />}
+                <LeetcodeTrackerGrid tracker={practiceTracker} ariaLabel="LeetCode articles over the last year" />
               </section>
 
               {quickLookupPosts.length > 0 && (
@@ -183,6 +173,7 @@ export const getStaticProps: GetStaticProps = async () => {
     settings,
     seoImage: await seoImage({ siteUrl: settings.processEnv.siteUrl }),
     bodyClass: BodyClass({ isHome: true }),
+    practiceTracker: getPracticeTracker(posts),
   }
 
   return {
