@@ -14,7 +14,7 @@ import { processEnv } from '@lib/processEnv'
 import { SEO } from '@meta/seo'
 import { seoImage, ISeoImage } from '@meta/seoImage'
 import { resolveUrl } from '@utils/routing'
-import { getPracticeTracker, getPatternCounts, PracticeTracker } from '@components/leetcode/leetcodeUtils'
+import { getPracticeTracker, getPatternCounts } from '@components/leetcode/leetcodeUtils'
 import { LeetcodeTrackerGrid } from '@components/leetcode/LeetcodeTrackerGrid'
 import { Search } from '@components/search/search'
 
@@ -23,7 +23,6 @@ interface CmsData {
   settings: GhostSettings
   seoImage: ISeoImage
   bodyClass: string
-  practiceTracker: PracticeTracker
 }
 
 interface LeetcodePageProps {
@@ -36,13 +35,14 @@ export default function LeetcodeJourney({ cmsData }: LeetcodePageProps) {
   const router = useRouter()
   if (router.isFallback) return <div>Loading...</div>
 
-  const { settings, posts, seoImage, bodyClass, practiceTracker } = cmsData
+  const { settings, posts, seoImage, bodyClass } = cmsData
   const { url: cmsUrl } = settings
   const [filteredPosts, setFilteredPosts] = useState<GhostPostsOrPages>(posts)
   const patterns = getPatternCounts(posts)
   const quickLookupPosts = posts.filter((post) => post.featured)
   const [showAllPatterns, setShowAllPatterns] = useState(false)
   const visiblePatterns = showAllPatterns ? patterns : patterns.slice(0, 4)
+  const practiceTracker = getPracticeTracker(posts)
 
   return (
     <>
@@ -173,7 +173,6 @@ export const getStaticProps: GetStaticProps = async () => {
     settings,
     seoImage: await seoImage({ siteUrl: settings.processEnv.siteUrl }),
     bodyClass: BodyClass({ isHome: true }),
-    practiceTracker: getPracticeTracker(posts),
   }
 
   return {
