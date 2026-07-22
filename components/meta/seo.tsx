@@ -109,9 +109,11 @@ const getJsonLd = ({ title, description, canonical, seoImage, settings, sameAs, 
         ...seoImage.dimensions,
       }),
     },
-    publisher: {
-      '@id': personId,
-    },
+    ...(type === 'WebSite' && {
+      publisher: {
+        '@id': personId,
+      },
+    }),
     mainEntityOfPage: {
       '@type': `WebPage`,
       '@id': isHomePage ? websiteId : siteUrl,
