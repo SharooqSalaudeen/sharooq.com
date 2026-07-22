@@ -71,6 +71,8 @@ interface OptimizedSettings {
     | undefined
   twitter: string | undefined
   facebook: string | undefined
+  linkedin: string | undefined
+  instagram: string | undefined
   meta_title: Nullable<string> | undefined
   meta_description: Nullable<string> | undefined
   logo: string | undefined
@@ -82,6 +84,8 @@ interface OptimizedSettings {
 export interface GhostSettings extends SettingsResponse {
   processEnv: ProcessEnvProps
   secondary_navigation?: NavItem[]
+  linkedin?: string | undefined
+  instagram?: string | undefined
   iconImage?: NextImage
   logoImage?: NextImage
   coverImage?: NextImage
@@ -238,6 +242,8 @@ export async function createoptimizedAllSettings(settings: GhostSettings): Promi
     navigation: settings.navigation,
     twitter: settings.twitter,
     facebook: settings.facebook,
+    instagram: settings.instagram,
+    linkedin: settings.linkedin,
     meta_title: settings.meta_title,
     meta_description: settings.meta_description,
     logo: settings.logo,

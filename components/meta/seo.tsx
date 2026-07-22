@@ -10,7 +10,7 @@ import { siteTitleMeta, siteDescriptionMeta, siteIcon } from '@meta/siteDefaults
 interface SEOProps {
   title?: string
   description?: string
-  sameAs?: string
+  sameAs?: string[]
   settings: GhostSettings
   canonical?: string
   seoImage?: ISeoImage
@@ -18,6 +18,10 @@ interface SEOProps {
 }
 
 const getPublicTags = (tags: Tag[] | undefined) => (tags ? tags.filter((tag) => tag.name?.substr(0, 5) !== 'hash-') : [])
+
+const getPersonId = (siteUrl: string) => `${siteUrl.replace(/\/$/, ``)}/#person`
+
+const getWebsiteId = (siteUrl: string) => `${siteUrl.replace(/\/$/, ``)}/#website`
 
 export const SEO = (props: SEOProps) => {
   const { title: t, description: d, seoImage, settings, article } = props
@@ -29,12 +33,15 @@ export const SEO = (props: SEOProps) => {
   const router = useRouter()
   const siteUrl = settings.processEnv.siteUrl
   const canonical = url.resolve(siteUrl, `${router.basePath}${router.asPath}`)
+  const normalizedSiteUrl = siteUrl.endsWith('/') ? siteUrl : `${siteUrl}/`
+  const normalizedCanonical = canonical.endsWith('/') ? canonical : `${canonical}/`
+  const isHomePage = !article && normalizedCanonical === normalizedSiteUrl
 
   const { twitter, title: settingsTitle, description: settingsDescription, meta_title, meta_description } = settings
   const title = t || meta_title || settingsTitle || siteTitleMeta
   const description = d || meta_description || settingsDescription || siteDescriptionMeta
 
-  const jsonLd = getJsonLd({ ...props, title, description, seoImage })
+  const jsonLd = getJsonLd({ ...props, title, description, seoImage, canonical }, isHomePage)
 
   return (
     <Head>
@@ -75,23 +82,26 @@ export const authorSameAs = (author: Author) => {
   const { website, twitter, facebook } = author
 
   const authorProfiles = [website, twitter && `https://twitter.com/${twitter.replace(/^@/, ``)}/`, facebook && `https://www.facebook.com/${facebook.replace(/^\//, ``)}/`].filter(
-    (element) => !!element
+    (element): element is string => !!element
   )
 
-  return (authorProfiles.length > 0 && `["${authorProfiles.join(`", "`)}"]`) || undefined
+  return authorProfiles.length > 0 ? authorProfiles : undefined
 }
 
-const getJsonLd = ({ title, description, canonical, seoImage, settings, sameAs, article }: SEOProps) => {
+const getJsonLd = ({ title, description, canonical, seoImage, settings, sameAs, article }: SEOProps, isHomePage: boolean) => {
   const siteUrl = settings.processEnv.siteUrl
+  const personId = getPersonId(siteUrl)
+  const websiteId = getWebsiteId(siteUrl)
   const pubLogoUrl = settings.logo || url.resolve(siteUrl, siteIcon)
-  const type = article ? 'Article' : 'WebSite'
+  const type = article ? 'BlogPosting' : 'WebSite'
 
-  return {
+  const jsonLd = {
     '@context': `https://schema.org/`,
     '@type': type,
+    ...(type === 'WebSite' && { '@id': websiteId }),
     sameAs,
     url: canonical,
-    ...(article && { ...getArticleJsonLd(article) }),
+    ...(article && { ...getArticleJsonLd(article, personId) }),
     image: {
       ...(seoImage && {
         '@type': `ImageObject`,
@@ -100,28 +110,47 @@ const getJsonLd = ({ title, description, canonical, seoImage, settings, sameAs, 
       }),
     },
     publisher: {
-      '@type': `Organization`,
-      name: title,
-      logo: {
-        '@type': `ImageObject`,
-        url: pubLogoUrl,
-        width: 60,
-        height: 60,
-      },
+      '@id': personId,
     },
     mainEntityOfPage: {
       '@type': `WebPage`,
-      '@id': siteUrl,
+      '@id': isHomePage ? websiteId : siteUrl,
     },
     description,
   }
+
+  if (!isHomePage) {
+    return jsonLd
+  }
+
+  const personSameAs = [
+    'https://github.com/SharooqSalaudeen',
+    ...(settings.linkedin ? [`https://www.linkedin.com/in/${settings.linkedin.replace(/^\/+|\/+$/g, ``)}/`] : []),
+    ...(settings.instagram ? [`https://www.instagram.com/${settings.instagram.replace(/^@|^\/+|\/+$/g, ``)}/`] : []),
+    ...(settings.twitter ? [`https://twitter.com/${settings.twitter.replace(/^@/, ``)}/`] : []),
+    ...(settings.facebook ? [`https://www.facebook.com/${settings.facebook.replace(/^\//, ``)}/`] : []),
+  ]
+
+  return {
+    '@context': `https://schema.org/`,
+    '@graph': [
+      {
+        '@id': personId,
+        '@type': 'Person',
+        name: 'Sharooq Salaudeen',
+        givenName: 'Sharooq',
+        url: siteUrl,
+        image: pubLogoUrl,
+        jobTitle: 'Software Engineer',
+        sameAs: personSameAs,
+      },
+      { ...jsonLd },
+    ],
+  }
 }
 
-const getArticleJsonLd = (article: PostOrPage) => {
+const getArticleJsonLd = (article: PostOrPage, personId: string) => {
   const { published_at, updated_at, primary_author, tags, meta_title, title } = article
-  const name = primary_author?.name
-  const image = primary_author?.profile_image
-  const sameAs = (primary_author && authorSameAs(primary_author)) || undefined
   const publicTags = getPublicTags(tags)
   const keywords = publicTags?.length ? publicTags.join(`, `) : undefined
   const headline = meta_title || title
@@ -130,10 +159,7 @@ const getArticleJsonLd = (article: PostOrPage) => {
     datePublished: published_at,
     dateModified: updated_at,
     author: {
-      '@type': 'Article',
-      name,
-      image,
-      sameAs,
+      '@id': personId,
     },
     keywords,
     headline,
