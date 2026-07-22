@@ -161,6 +161,7 @@ const getArticleJsonLd = (article: PostOrPage, personId: string) => {
     datePublished: published_at,
     dateModified: updated_at,
     author: {
+      '@type': 'Person',
       '@id': personId,
     },
     keywords,
