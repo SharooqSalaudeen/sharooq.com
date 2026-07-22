@@ -111,6 +111,7 @@ const getJsonLd = ({ title, description, canonical, seoImage, settings, sameAs, 
     },
     ...(type === 'WebSite' && {
       publisher: {
+        '@type': 'Person',
         '@id': personId,
       },
     }),
