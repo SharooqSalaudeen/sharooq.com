@@ -40,6 +40,7 @@ yarn-error.log*
 
 # cache
 /.cache
+*.tsbuildinfo
 
 # Local Netlify folder
 .netlify

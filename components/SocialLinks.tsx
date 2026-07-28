@@ -17,7 +17,8 @@ export const SocialLinks = ({ siteUrl, site }: SocialLinkProps) => {
   const twitterUrl = site.twitter && `https://twitter.com/${site.twitter.replace(/^@/, ``)}`
   const facebookUrl = site.facebook && `https://www.facebook.com/${site.facebook.replace(/^\//, ``)}`
   const linkedinUrl =
-    site.linkedin && `${site.linkedin.startsWith('http://') || site.linkedin.startsWith('https://') ? site.linkedin : `https://${site.linkedin.replace(/^\/+/, ``)}`}`
+    site.linkedin &&
+    `${site.linkedin.startsWith('http://') || site.linkedin.startsWith('https://') ? site.linkedin : `https://www.linkedin.com/in/${site.linkedin.replace(/^\/+/, ``)}`}`
   const instagramUrl =
     site.instagram &&
     `${

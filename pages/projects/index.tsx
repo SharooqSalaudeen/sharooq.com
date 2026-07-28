@@ -58,7 +58,11 @@ export default function ProjectsPage({ cmsData }: ProjectsPageProps) {
             <div className="inner projects-page">
               <div className="projects-featured-list">
                 {projects.map((project) => (
-                  <ProjectCard imageQuality={nextImages.quality} project={project} />
+                  <ProjectCard
+                    key={project.githubUrl || project.pageUrl || project.title}
+                    imageQuality={nextImages.quality}
+                    project={project}
+                  />
                 ))}
               </div>
             </div>
