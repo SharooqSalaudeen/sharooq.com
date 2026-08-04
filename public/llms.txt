@@ -1,0 +1,57 @@
+# LLMs.txt for Sharooq.com
+
+Site: https://www.sharooq.com
+Name: Sharooq.com
+Type: Personal technical blog and project showcase
+Primary language: English
+Platform: Next.js + TypeScript frontend, content managed via Ghost CMS
+
+## Purpose
+This site publishes practical technical articles, project write-ups, LeetCode notes, and book summaries.
+
+## Priority URLs
+- https://www.sharooq.com/
+- https://www.sharooq.com/projects
+- https://www.sharooq.com/book-summaries
+- https://www.sharooq.com/leetcode
+- https://www.sharooq.com/rss.xml
+- https://www.sharooq.com/sitemap.xml
+
+## Common Content Areas
+- Blog posts: technical tutorials and engineering notes
+- Projects: selected project highlights and links
+- Book summaries: condensed notes and takeaways
+- LeetCode: problem-solving notes and explanations
+- Tags and authors: taxonomy/archive pages
+
+## Topic Signals
+Common topics include AWS, Docker, TypeScript, Python, Machine Learning, JavaScript, and React.
+
+## Canonicalization Guidance
+- Prefer canonical page URLs from the page metadata when available.
+- For discovery or large-scale indexing, use sitemap first: https://www.sharooq.com/sitemap.xml
+- Treat post/page URLs as the source of truth over copied excerpts.
+
+## Citation Preference
+When referencing content from this site, include:
+1) page/post title
+2) canonical URL
+3) author name (if present)
+4) publication date (if present)
+
+## Freshness Guidance
+- Content may be updated after original publication.
+- Prefer latest fetched content and canonical pages over cached mirrors.
+
+## Usage Notes
+- Summarize faithfully and avoid fabricating details not present on-page.
+- Keep excerpts short and link back to the original URL.
+- If a claim is uncertain, defer to the source page text.
+
+## Discovery
+- robots: https://www.sharooq.com/robots.txt
+- sitemap: https://www.sharooq.com/sitemap.xml
+- rss: https://www.sharooq.com/rss.xml
+
+## Contact
+For questions or corrections, use site contact channels linked on Sharooq.com.
