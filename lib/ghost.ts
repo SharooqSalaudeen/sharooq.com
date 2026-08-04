@@ -25,6 +25,8 @@ interface BrowseResults<T> extends Array<T> {
   meta: { pagination: Pagination }
 }
 
+const GHOST_MAX_BROWSE_LIMIT = 100
+
 interface OptimizedPost {
   id: string
   authors: Author[] | undefined
@@ -138,6 +140,82 @@ const postAndPageSlugOptions: Params = {
 const buildGhostFilter = (filter?: string) => {
   if (!contactPage) return `${filter ?? ''}`
   return `slug:-contact+${filter ?? ''}`
+}
+
+const parseLimit = (limit: Params['limit']): number | undefined => {
+  if (limit === undefined || limit === null) return undefined
+  if (typeof limit === 'number') return Number.isFinite(limit) ? limit : undefined
+  if (typeof limit === 'string') {
+    if (limit === 'all') return undefined
+    const parsed = parseInt(limit, 10)
+    return Number.isNaN(parsed) ? undefined : parsed
+  }
+  return undefined
+}
+
+const parsePage = (page: Params['page']): number => {
+  if (typeof page === 'number' && Number.isFinite(page)) return page
+  if (typeof page === 'string') {
+    const parsed = parseInt(page, 10)
+    return Number.isNaN(parsed) ? 1 : parsed
+  }
+  return 1
+}
+
+async function browseAll<T>(browse: (options: Params) => Promise<BrowseResults<T>>, options: Params = {}): Promise<BrowseResults<T>> {
+  const requestedLimit = parseLimit(options.limit)
+  const { limit: _limit, page: optionPage, ...baseOptions } = options
+  const firstPage = parsePage(optionPage)
+
+  if (requestedLimit !== undefined && requestedLimit <= GHOST_MAX_BROWSE_LIMIT) {
+    return browse({
+      ...baseOptions,
+      page: firstPage,
+      limit: `${requestedLimit}`,
+    })
+  }
+
+  const pageSize = requestedLimit ? Math.min(requestedLimit, GHOST_MAX_BROWSE_LIMIT) : GHOST_MAX_BROWSE_LIMIT
+  let page = firstPage
+  let hasNextPage = true
+  let total = 0
+  const results: T[] = []
+
+  while (hasNextPage) {
+    const response = await browse({
+      ...baseOptions,
+      page,
+      limit: `${pageSize}`,
+    })
+
+    const records = response as T[]
+    results.push(...records)
+
+    const pagination = response.meta?.pagination
+    total = pagination?.total ?? results.length
+
+    if (requestedLimit !== undefined && results.length >= requestedLimit) {
+      hasNextPage = false
+    } else if (!pagination?.next) {
+      hasNextPage = false
+    } else {
+      page = pagination.next
+    }
+  }
+
+  const slicedResults = requestedLimit !== undefined ? results.slice(0, requestedLimit) : results
+  const mergedMeta = {
+    pagination: {
+      page: 1,
+      limit: slicedResults.length,
+      pages: 1,
+      total,
+      next: null,
+      prev: null,
+    } as Pagination,
+  }
+
+  return Object.assign(slicedResults, { meta: mergedMeta }) as BrowseResults<T>
 }
 
 // helpers
@@ -259,18 +337,18 @@ export async function getOptimizedAllSettings(): Promise<OptimizedSettings> {
 }
 
 export async function getAllTags(): Promise<GhostTags> {
-  const tags = await api.tags.browse(tagAndAuthorFetchOptions)
+  const tags = await browseAll<Tag>(api.tags.browse.bind(api.tags), tagAndAuthorFetchOptions)
   return await createNextFeatureImages(tags)
 }
 
 export async function getAllAuthors() {
-  const authors = await api.authors.browse(tagAndAuthorFetchOptions)
+  const authors = await browseAll<Author>(api.authors.browse.bind(api.authors), tagAndAuthorFetchOptions)
   return await createNextProfileImages(authors)
 }
 
 //All Posts
 export async function getAllPosts(props?: { limit: number }): Promise<GhostPostsOrPages> {
-  const posts = await api.posts.browse({
+  const posts = await browseAll<PostOrPage>(api.posts.browse.bind(api.posts), {
     ...postAndPageFetchOptions,
     filter: buildGhostFilter(),
     ...(props && { ...props }),
@@ -286,7 +364,7 @@ export async function getOptimizedAllPosts(props?: { limit: number }): Promise<O
 
 //Developer Posts
 export async function getAllDeveloperPosts(props?: { limit: number }): Promise<GhostPostsOrPages> {
-  const posts = await api.posts.browse({
+  const posts = await browseAll<PostOrPage>(api.posts.browse.bind(api.posts), {
     ...postAndPageFetchOptions,
     order: ['published_at DESC'],
     filter: buildGhostFilter('tag:-book-summary'),
@@ -303,7 +381,7 @@ export async function getOptimizedAllDeveloperPosts(props?: { limit: number }): 
 
 //Latest Posts
 export async function getLatestPosts(props?: { limit: number }): Promise<GhostPostsOrPages> {
-  const posts = await api.posts.browse({
+  const posts = await browseAll<PostOrPage>(api.posts.browse.bind(api.posts), {
     ...postAndPageFetchOptions,
     filter: buildGhostFilter('tag:-book-summary+featured:false'),
     ...(props && { ...props }),
@@ -319,7 +397,7 @@ export async function getOptimizedLatestPosts(props?: { limit: number }): Promis
 
 //Featured Posts
 export async function getAllFeaturedPosts(props?: { limit: number }): Promise<GhostPostsOrPages> {
-  const posts = await api.posts.browse({
+  const posts = await browseAll<PostOrPage>(api.posts.browse.bind(api.posts), {
     ...postAndPageFetchOptions,
     filter: buildGhostFilter('featured:true'),
     ...(props && { ...props }),
@@ -335,7 +413,7 @@ export async function getOptimizedAllFeaturedPosts(props?: { limit: number }): P
 
 //All Book Summaries
 export async function getAllBookSummaries(props?: { limit: number }): Promise<GhostPostsOrPages> {
-  const posts = await api.posts.browse({
+  const posts = await browseAll<PostOrPage>(api.posts.browse.bind(api.posts), {
     ...postAndPageFetchOptions,
     filter: buildGhostFilter('tag:book-summary'),
     ...(props && { ...props }),
@@ -351,7 +429,7 @@ export async function getOptimizedAllBookSummaries(props?: { limit: number }): P
 
 //All LeetCode Posts
 export async function getAllLeetcodePosts(props?: { limit: number }): Promise<GhostPostsOrPages> {
-  const posts = await api.posts.browse({
+  const posts = await browseAll<PostOrPage>(api.posts.browse.bind(api.posts), {
     ...postAndPageFetchOptions,
     order: ['published_at DESC'],
     filter: buildGhostFilter('tag:leetcode'),
@@ -368,13 +446,13 @@ export async function getOptimizedAllLeetcodePosts(props?: { limit: number }): P
 
 //All Post Slugs
 export async function getAllPostSlugs(): Promise<string[]> {
-  const posts = await api.posts.browse(postAndPageSlugOptions)
+  const posts = await browseAll<PostOrPage>(api.posts.browse.bind(api.posts), postAndPageSlugOptions)
   return posts.map((p) => p.slug)
 }
 
 //All Pages
 export async function getAllPages(props?: { limit: number }): Promise<GhostPostsOrPages> {
-  const pages = await api.pages.browse({
+  const pages = await browseAll<PostOrPage>(api.pages.browse.bind(api.pages), {
     ...postAndPageFetchOptions,
     filter: buildGhostFilter(),
     ...(props && { ...props }),
@@ -445,7 +523,7 @@ export async function getPageBySlug(slug: string): Promise<GhostPostOrPage | nul
 
 // specific data by author/tag slug
 export async function getPostsByAuthor(slug: string): Promise<GhostPostsOrPages> {
-  const posts = await api.posts.browse({
+  const posts = await browseAll<PostOrPage>(api.posts.browse.bind(api.posts), {
     ...postAndPageFetchOptions,
     filter: `authors.slug:${slug}`,
   })
@@ -454,7 +532,7 @@ export async function getPostsByAuthor(slug: string): Promise<GhostPostsOrPages>
 
 export async function getPostsByTag(slug: string, limit?: number, excludeId?: string): Promise<GhostPostsOrPages> {
   const exclude = (excludeId && `+id:-${excludeId}`) || ``
-  const posts = await api.posts.browse({
+  const posts = await browseAll<PostOrPage>(api.posts.browse.bind(api.posts), {
     ...postAndPageFetchOptions,
     ...(limit && { limit: `${limit}` }),
     filter: `tags.slug:${slug}${exclude}`,
