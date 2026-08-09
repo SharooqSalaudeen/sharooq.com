@@ -2,8 +2,8 @@ import React from 'react'
 import rehypeReact, { ComponentProps, ComponentPropsWithNode } from 'rehype-react'
 import unified from 'unified'
 import { Node } from 'unist'
-import ReactGist from 'react-gist'
 
+import { Gist } from '@components/Gist'
 import { NextLink } from '@components/NextLink'
 import { NextImage } from '@components/NextImage'
 
@@ -26,7 +26,7 @@ const options = {
       const myRegexp = new RegExp(gist_regex)
       const match = myRegexp.exec(properties.src)
       if (!!match && match.length > 1) {
-        return <ReactGist id={match[1]} />
+        return <Gist id={match[1]} />
       }
       return null
     },
