@@ -17,8 +17,8 @@ export const ProjectCard = ({ imageQuality, project }: ProjectCardProps) => {
             src={project.imageUrl}
             alt={project.label}
             sizes="(max-width: 640px) 320px, (max-width: 1000px) 500px, 680px"
-            layout="fill"
-            objectFit="contain"
+            fill
+            style={{ objectFit: 'contain' }}
             quality={imageQuality}
           />
         </div>
@@ -36,17 +36,17 @@ export const ProjectCard = ({ imageQuality, project }: ProjectCardProps) => {
           {(project.githubUrl || project.pageUrl) && (
             <div className="project-card-actions">
               {project.githubUrl && (
-                <Link href={project.githubUrl} passHref>
-                  <a target="_blank" rel="noopener noreferrer">
+                <Link href={project.githubUrl} target="_blank" rel="noopener noreferrer">
+                  
                     GitHub
-                  </a>
+                  
                 </Link>
               )}
               {project.pageUrl && (
-                <Link href={project.pageUrl} passHref>
-                  <a target="_blank" rel="noopener noreferrer">
+                <Link href={project.pageUrl} target="_blank" rel="noopener noreferrer">
+                  
                     View page
-                  </a>
+                  
                 </Link>
               )}
             </div>
@@ -54,5 +54,5 @@ export const ProjectCard = ({ imageQuality, project }: ProjectCardProps) => {
         </div>
       </div>
     </article>
-  )
+  );
 }

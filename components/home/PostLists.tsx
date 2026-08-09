@@ -41,16 +41,17 @@ export const PostLists = ({ title, settings, primaryTag, posts }: PreviewPostsPr
                         return (
                           <div key={tag.id} className="post-list-tag">
                             <Link href={resolveUrl({ cmsUrl, slug: tag.slug, url: tag.url })}>
-                              <a>{`${tag.name}`}&nbsp;</a>
+                              {`${tag.name}`}&nbsp;
                             </Link>
                             {`  ${post.tags && idx + 1 < post.tags?.slice(0, 3).length ? '-' : ''}`}
                           </div>
-                        )
+                        );
                       })}
                   </div>
                   <h4>
-                    <Link href={resolveUrl({ cmsUrl, collectionPath: collections.getCollectionByNode(post), slug: post.slug, url: post.url })}>
-                      <a>{post.title}</a>
+                    <Link
+                      href={resolveUrl({ cmsUrl, collectionPath: collections.getCollectionByNode(post), slug: post.slug, url: post.url })}>
+                      {post.title}
                     </Link>
                   </h4>
                   <div className="post-list-meta">
@@ -65,11 +66,11 @@ export const PostLists = ({ title, settings, primaryTag, posts }: PreviewPostsPr
           </div>
           <footer className="post-list-footer">
             <Link href="/articles">
-              <a>See more</a>
+              See more
             </Link>
           </footer>
         </article>
       )}
     </>
-  )
+  );
 }

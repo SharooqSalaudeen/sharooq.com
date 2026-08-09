@@ -26,6 +26,7 @@ export const AuthorList = ({ settings, authors, isPost }: AuthorListProps) => {
       {authors?.map((author, i) => {
         const url = resolveUrl({ cmsUrl, slug: author.slug, url: author.url || undefined })
         const profileImg = author.profileImage
+        const authorName = author.name || ''
 
         return (
           <HoverOnAvatar
@@ -33,7 +34,7 @@ export const AuthorList = ({ settings, authors, isPost }: AuthorListProps) => {
             activeClass="hovered"
             render={(hover) => (
               <li key={i} ref={hover.anchorRef} className="author-list-item">
-                {!isPost && <div className="author-name-tooltip">{author.name}</div>}
+                {!isPost && <div className="author-name-tooltip">{authorName}</div>}
                 {isPost && (
                   <div className={`author-card ${hover.state.currentClass}`}>
                     <div className="author-profile-image">
@@ -41,8 +42,8 @@ export const AuthorList = ({ settings, authors, isPost }: AuthorListProps) => {
                         <Image
                           className="author-profile-image"
                           src={staticProfilePicBadge}
-                          alt={author.name}
-                          layout="responsive"
+                          alt={authorName}
+                          style={{ width: '100%', height: 'auto' }}
                           quality={nextImages.quality}
                           width={200}
                           height={200}
@@ -51,34 +52,34 @@ export const AuthorList = ({ settings, authors, isPost }: AuthorListProps) => {
                         <Image
                           className="author-profile-image"
                           src={profileImg.url}
-                          alt={author.name}
-                          layout="responsive"
+                          alt={authorName}
+                          style={{ width: '100%', height: 'auto' }}
                           quality={nextImages.quality}
                           {...profileImg.dimensions}
                         />
                       ) : (
-                        author.profile_image && <img src={author.profile_image} alt={author.name} />
+                        author.profile_image && <img src={author.profile_image} alt={authorName} />
                       )}
                     </div>
                     <div className="author-info">
                       {author.bio ? (
                         <div className="bio">
-                          <h2>{author.name}</h2>
+                          <h2>{authorName}</h2>
                           <p>{author.bio}</p>
                           <p>
                             <Link href={url}>
-                              <a>{text(`MORE_POSTS`)}</a>
+                              {text(`MORE_POSTS`)}
                             </Link>{' '}
-                            {text(`BY`)} {author.name}.
+                            {text(`BY`)} {authorName}.
                           </p>
                         </div>
                       ) : (
                         <>
-                          <h2>{author.name}</h2>
+                          <h2>{authorName}</h2>
                           <p>
                             {text(`READ`)}{' '}
                             <Link href={url}>
-                              <a>{text(`MORE_POSTS_SM`)}</a>
+                              {text(`MORE_POSTS_SM`)}
                             </Link>{' '}
                             {text(`BY_THIS_AUTHOR`)}.
                           </p>
@@ -87,30 +88,28 @@ export const AuthorList = ({ settings, authors, isPost }: AuthorListProps) => {
                     </div>
                   </div>
                 )}
-                <Link href={url}>
-                  {staticProfilePicBadge ? (
-                    <a className={`${(isPost && `author`) || `static`}-avatar`} aria-label={author.name}>
-                      <Image src={staticProfilePicBadge} alt={author.name} layout="responsive" quality={nextImages.quality} width={200} height={200} />
-                    </a>
-                  ) : profileImg && nextImages.feature ? (
-                    <a className={`${(isPost && `author`) || `static`}-avatar`} aria-label={author.name}>
-                      <Image src={profileImg.url} alt={author.name} layout="responsive" quality={nextImages.quality} {...profileImg.dimensions} />
-                    </a>
-                  ) : author.profile_image ? (
-                    <a className={`${(isPost && `author`) || `static`}-avatar`} aria-label={author.name}>
-                      <img src={author.profile_image} alt={author.name} />
-                    </a>
-                  ) : (
-                    <a className={`${(isPost && `author`) || `static`}-avatar author-profile-image`} aria-label={author.name}>
-                      <AvatarIcon />
-                    </a>
-                  )}
-                </Link>
+                {staticProfilePicBadge ? (
+                  <Link href={url} className={`${(isPost && `author`) || `static`}-avatar`} aria-label={authorName}>
+                    <Image src={staticProfilePicBadge} alt={authorName} style={{ width: '100%', height: 'auto' }} quality={nextImages.quality} width={200} height={200} />
+                  </Link>
+                ) : profileImg && nextImages.feature ? (
+                  <Link href={url} className={`${(isPost && `author`) || `static`}-avatar`} aria-label={authorName}>
+                    <Image src={profileImg.url} alt={authorName} style={{ width: '100%', height: 'auto' }} quality={nextImages.quality} {...profileImg.dimensions} />
+                  </Link>
+                ) : author.profile_image ? (
+                  <Link href={url} className={`${(isPost && `author`) || `static`}-avatar`} aria-label={authorName}>
+                    <img src={author.profile_image} alt={authorName} />
+                  </Link>
+                ) : (
+                  <Link href={url} className={`${(isPost && `author`) || `static`}-avatar author-profile-image`} aria-label={authorName}>
+                    <AvatarIcon />
+                  </Link>
+                )}
               </li>
             )}
           />
-        )
+        );
       })}
     </ul>
-  )
+  );
 }

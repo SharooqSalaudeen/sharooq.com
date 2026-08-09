@@ -32,6 +32,7 @@ export const Page = ({ cmsData }: PageProps) => {
   const { meta_description, excerpt, title: t, meta_title } = page
   const description = meta_description || excerpt
   const title = meta_title || t
+  const pageTitle = page.title || ''
   const { nextImages } = settings.processEnv
 
   const featImg = page.featureImage
@@ -54,9 +55,9 @@ export const Page = ({ cmsData }: PageProps) => {
                 <figure className="post-full-image" style={{ display: 'inherit' }}>
                   <Image
                     src={featImg.url}
-                    alt={page.title}
+                    alt={pageTitle}
                     quality={nextImages.quality}
-                    layout="responsive"
+                    style={{ width: '100%', height: 'auto' }}
                     sizes={`
                               (max-width: 350px) 350px,
                               (max-width: 530px) 530px,
@@ -70,7 +71,7 @@ export const Page = ({ cmsData }: PageProps) => {
               ) : (
                 page.feature_image && (
                   <figure className="post-full-image">
-                    <img src={page.feature_image} alt={page.title} />
+                    <img src={page.feature_image} alt={pageTitle} />
                   </figure>
                 )
               ))}

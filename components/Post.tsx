@@ -87,9 +87,9 @@ export const Post = ({ cmsData }: PostProps) => {
                   {post.tags?.map((tag, idx) => (
                     <section key={tag.id} className="post-full-tags">
                       <Link href={resolveUrl({ cmsUrl, slug: tag.slug, url: tag.url })}>
-                        <a>
-                          {tag.name} {`${post.tags && idx + 1 < post.tags?.length ? ' - ' : ''}`}
-                        </a>
+
+                        {tag.name} {`${post.tags && idx + 1 < post.tags?.length ? ' - ' : ''}`}
+
                       </Link>
                     </section>
                   ))}
@@ -113,8 +113,9 @@ export const Post = ({ cmsData }: PostProps) => {
                           {post.authors?.map((author, i) => (
                             <div key={i}>
                               {i > 0 ? `, ` : ``}
-                              <Link href={resolveUrl({ cmsUrl, slug: author.slug, url: author.url || undefined })}>
-                                <a>{author.name}</a>
+                              <Link
+                                href={resolveUrl({ cmsUrl, slug: author.slug, url: author.url || undefined })}>
+                                {author.name}
                               </Link>
                             </div>
                           ))}
@@ -174,5 +175,5 @@ export const Post = ({ cmsData }: PostProps) => {
         )}
       />
     </>
-  )
+  );
 }

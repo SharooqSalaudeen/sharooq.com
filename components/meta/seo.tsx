@@ -1,11 +1,11 @@
 import { useRouter } from 'next/router'
 import Head from 'next/head'
-import url from 'url'
 
 import { GhostSettings } from '@lib/ghost'
 import { Author, PostOrPage, Tag } from '@tryghost/content-api'
 import { ISeoImage } from '@meta/seoImage'
 import { siteTitleMeta, siteDescriptionMeta, siteIcon } from '@meta/siteDefaults'
+import { resolveUrlPath } from '@utils/url'
 
 interface SEOProps {
   title?: string
@@ -32,7 +32,7 @@ export const SEO = (props: SEOProps) => {
 
   const router = useRouter()
   const siteUrl = settings.processEnv.siteUrl
-  const canonical = url.resolve(siteUrl, `${router.basePath}${router.asPath}`)
+  const canonical = resolveUrlPath(siteUrl, `${router.basePath}${router.asPath}`)
   const normalizedSiteUrl = siteUrl.endsWith('/') ? siteUrl : `${siteUrl}/`
   const normalizedCanonical = canonical.endsWith('/') ? canonical : `${canonical}/`
   const isHomePage = !article && normalizedCanonical === normalizedSiteUrl
@@ -92,7 +92,7 @@ const getJsonLd = ({ title, description, canonical, seoImage, settings, sameAs, 
   const siteUrl = settings.processEnv.siteUrl
   const personId = getPersonId(siteUrl)
   const websiteId = getWebsiteId(siteUrl)
-  const pubLogoUrl = settings.logo || url.resolve(siteUrl, siteIcon)
+  const pubLogoUrl = settings.logo || resolveUrlPath(siteUrl, siteIcon)
   const type = article ? 'BlogPosting' : 'WebSite'
 
   const jsonLd = {

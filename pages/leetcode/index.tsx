@@ -34,8 +34,6 @@ const profileUrl = 'https://leetcode.com/'
 
 export default function LeetcodeJourney({ cmsData }: LeetcodePageProps) {
   const router = useRouter()
-  if (router.isFallback) return <div>Loading...</div>
-
   const { settings, posts, practiceTracker, seoImage, bodyClass } = cmsData
   const { url: cmsUrl } = settings
   const [filteredPosts, setFilteredPosts] = useState<GhostPostsOrPages>(posts)
@@ -43,6 +41,7 @@ export default function LeetcodeJourney({ cmsData }: LeetcodePageProps) {
   const quickLookupPosts = posts.filter((post) => post.featured)
   const [showAllPatterns, setShowAllPatterns] = useState(false)
   const visiblePatterns = showAllPatterns ? patterns : patterns.slice(0, 4)
+  if (router.isFallback) return <div>Loading...</div>
 
   return (
     <>
@@ -96,13 +95,13 @@ export default function LeetcodeJourney({ cmsData }: LeetcodePageProps) {
                   </div>
                   <div className="leetcode-quick-grid">
                     {quickLookupPosts.map((post) => (
-                      <Link href={resolveUrl({ cmsUrl, collectionPath: collections.getCollectionByNode(post), slug: post.slug, url: post.url })} key={post.id}>
-                        <a className="leetcode-quick-card">
-                          <div>
-                            <h3>{post.title}</h3>
-                            {post.excerpt && <p>{post.excerpt}</p>}
-                          </div>
-                        </a>
+                      <Link href={resolveUrl({ cmsUrl, collectionPath: collections.getCollectionByNode(post), slug: post.slug, url: post.url })} key={post.id} className="leetcode-quick-card">
+
+                        <div>
+                          <h3>{post.title}</h3>
+                          {post.excerpt && <p>{post.excerpt}</p>}
+                        </div>
+
                       </Link>
                     ))}
                   </div>
@@ -118,11 +117,15 @@ export default function LeetcodeJourney({ cmsData }: LeetcodePageProps) {
                   <>
                     <div className="leetcode-pattern-grid">
                       {visiblePatterns.map((pattern) => (
-                        <Link href={resolveUrl({ cmsUrl, slug: pattern.slug, url: pattern.url })} key={pattern.slug}>
-                          <a className="leetcode-pattern-card" aria-label={`View posts tagged ${pattern.name}`}>
-                            <strong>{pattern.count}</strong>
-                            <span>{pattern.name}</span>
-                          </a>
+                        <Link
+                          href={resolveUrl({ cmsUrl, slug: pattern.slug, url: pattern.url })}
+                          key={pattern.slug}
+                          className="leetcode-pattern-card"
+                          aria-label={`View posts tagged ${pattern.name}`}>
+
+                          <strong>{pattern.count}</strong>
+                          <span>{pattern.name}</span>
+
                         </Link>
                       ))}
                     </div>
@@ -154,7 +157,7 @@ export default function LeetcodeJourney({ cmsData }: LeetcodePageProps) {
         )}
       />
     </>
-  )
+  );
 }
 
 export const getStaticProps: GetStaticProps = async () => {

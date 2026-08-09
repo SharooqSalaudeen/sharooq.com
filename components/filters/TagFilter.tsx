@@ -19,21 +19,13 @@ export function TagFilter(props: TagFilterProps) {
     }
   }
 
-  const filterPostsByTag = () => {
-    const _posts = posts.filter((post) => {
-      const flag = post?.tags?.some((tag) => tag.name === filter)
-      return flag
-    })
-    return _posts
-  }
-
   useEffect(() => {
     if (filter) {
-      setFilteredPosts(filterPostsByTag)
+      setFilteredPosts(posts.filter((post) => post?.tags?.some((tag) => tag.name === filter)))
     } else {
       setFilteredPosts(posts)
     }
-  }, [filter])
+  }, [filter, posts, setFilteredPosts])
 
   return (
     <div className="tag-filter-container">

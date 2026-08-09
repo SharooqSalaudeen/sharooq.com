@@ -33,7 +33,7 @@ const options = {
   },
 }
 
-const renderAst = unified().use(rehypeReact, options)
+const renderAst = unified().use(rehypeReact, options as any)
 
 interface RenderContentProps {
   htmlAst: Node | null

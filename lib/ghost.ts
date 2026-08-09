@@ -1,4 +1,3 @@
-import { parse as urlParse } from 'url'
 import GhostContentAPI, { Nullable, Params, PostOrPage, SettingsResponse, Pagination, PostsOrPages, Tag, Author } from '@tryghost/content-api'
 import { normalizePost } from '@lib/ghost-normalize'
 import { Node } from 'unist'
@@ -8,6 +7,7 @@ import { Collections } from '@lib/collections'
 import { ghostAPIUrl, ghostAPIKey, processEnv, ProcessEnvProps } from '@lib/processEnv'
 import { imageDimensions, normalizedImageUrl, Dimensions } from '@lib/images'
 import { IToC } from '@lib/toc'
+import { parseAbsoluteUrl } from '@utils/url'
 
 import { contactPage, DarkMode } from '@appConfig'
 
@@ -491,7 +491,7 @@ export async function getPostBySlug(slug: string): Promise<GhostPostOrPage | nul
     if (!post) return null
 
     const { url } = await getAllSettings()
-    result = await normalizePost(post, (url && urlParse(url)) || undefined)
+    result = await normalizePost(post, (url && parseAbsoluteUrl(url)) || undefined)
   } catch (e) {
     const error = e as { response?: { status: number } }
     if (error.response?.status === 404) return null
@@ -512,7 +512,7 @@ export async function getPageBySlug(slug: string): Promise<GhostPostOrPage | nul
     if (!page) return null
 
     const { url } = await getAllSettings()
-    result = await normalizePost(page, (url && urlParse(url)) || undefined)
+    result = await normalizePost(page, (url && parseAbsoluteUrl(url)) || undefined)
   } catch (e) {
     const error = e as { response?: { status: number } }
     if (error.response?.status === 404) return null

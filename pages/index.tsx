@@ -105,8 +105,8 @@ export default function Index({ cmsData }: IndexProps) {
                         >
                           GitHub Solutions ↗
                         </a>
-                        <Link href="/leetcode">
-                          <a className="home-leetcode-tracker-link">View full journey →</a>
+                        <Link href="/leetcode" className="home-leetcode-tracker-link">
+                          View full journey →
                         </Link>
                       </div>
                     </div>
@@ -147,7 +147,7 @@ export default function Index({ cmsData }: IndexProps) {
         )}
       />
     </>
-  )
+  );
 }
 
 export const getStaticProps: GetStaticProps = async () => {

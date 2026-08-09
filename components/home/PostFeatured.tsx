@@ -31,46 +31,47 @@ export const PostFeatured = ({ settings, post, num, isHome, imageUrl }: PostCard
   const postClass = PostClass({ tags: post.tags, isFeatured: post.featured, isImage: !!featImg })
   const large = (featImg && isHome && num !== undefined && 0 === num % 6 && `post-card-large`) || ``
   const authors = post?.authors?.filter((_, i) => (i < 2 ? true : false))
+  const postTitle = post.title || ''
 
   // const imageUrl = `https://res.cloudinary.com/sharooq/image/upload/v1661407564/Blog/home/featured_books/thumbnail-the-monk-who-sold-his-ferrari_eavd4a.jpg`
   return (
     <>
       <article className={`post-featured-card `}>
         {/* {featImg && ( */}
-        <Link href={url}>
-          <a className="post-card-image-link" aria-label={post.title}>
-            {/* {nextImages.feature ? ( */}
-            <div className="post-card-image">
-              <Image
-                src={imageUrl}
-                alt={post.title}
-                sizes="(max-width: 640px) 320px, (max-width: 1000px) 500px, 680px"
-                layout="fill"
-                objectFit="contain"
-                quality={nextImages.quality}
-              />
-            </div>
-            {/* ) : ( */}
-            {/* post.feature_image &&  */}
-            {/* <img className="post-card-image" src={imageUrl} alt={post.title} /> */}
-            {/* )} */}
-          </a>
+        <Link href={url} className="post-card-image-link" aria-label={postTitle}>
+
+          {/* {nextImages.feature ? ( */}
+          <div className="post-card-image">
+            <Image
+              src={imageUrl}
+              alt={postTitle}
+              sizes="(max-width: 640px) 320px, (max-width: 1000px) 500px, 680px"
+              fill
+              style={{ objectFit: 'contain' }}
+              quality={nextImages.quality}
+            />
+          </div>
+          {/* ) : ( */}
+          {/* post.feature_image &&  */}
+          {/* <img className="post-card-image" src={imageUrl} alt={post.title} /> */}
+          {/* )} */}
+
         </Link>
         {/* )} */}
         <div className="post-card-content">
           <div>
-            <Link href={url}>
-              <a className="post-card-content-link">
-                <header className="post-card-header">
-                  {/* {post.primary_tag && <div className="post-card-primary-tag">{post.primary_tag.name}</div>} */}
+            <Link href={url} className="post-card-content-link">
 
-                  <h2 className="post-card-title">{post.title}</h2>
-                </header>
-                <section className="post-card-excerpt">
-                  {/* post.excerpt *is* an excerpt and does not need to be truncated any further */}
-                  <p>{post.excerpt}</p>
-                </section>
-              </a>
+              <header className="post-card-header">
+                {/* {post.primary_tag && <div className="post-card-primary-tag">{post.primary_tag.name}</div>} */}
+
+                <h2 className="post-card-title">{post.title}</h2>
+              </header>
+              <section className="post-card-excerpt">
+                {/* post.excerpt *is* an excerpt and does not need to be truncated any further */}
+                <p>{post.excerpt}</p>
+              </section>
+
             </Link>
           </div>
 
@@ -85,5 +86,5 @@ export const PostFeatured = ({ settings, post, num, isHome, imageUrl }: PostCard
         </div>
       </article>
     </>
-  )
+  );
 }

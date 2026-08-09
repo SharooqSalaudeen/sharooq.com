@@ -1,7 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import Image from 'next/image'
 import Link from 'next/link'
-import { resolve } from 'url'
 
 import { Navigation } from '@components/Navigation'
 import { SocialLinks } from '@components/SocialLinks'
@@ -64,31 +63,31 @@ export const SiteNav = ({ settings, className, postTitle }: SiteNavProps) => {
     <nav className={className}>
       <div className="site-nav-left-wrapper">
         <div className="site-nav-left">
-          <Link href="/">
-            {siteLogo && nextImages.feature ? (
-              <a className="site-nav-logo">
-                <div
-                  style={{
-                    height: `${targetHeight}px`,
-                    width: `${calcSiteLogoWidth(siteLogo, targetHeight)}px`,
-                  }}
-                >
-                  <Image className="site-nav-logo" src={siteLogo.url} alt={title} layout="responsive" quality={nextImages.quality} {...siteLogo.dimensions} />
-                </div>
-              </a>
-            ) : site.logo ? (
-              <a className="site-nav-logo">
-                <img src={site.logo} alt={title} />
-              </a>
-            ) : siteStaticLogo ? (
-              <a className="site-nav-logo site-nav-static-logo">
-                {/* eslint-disable @next/next/no-img-element */}
-                <img src={siteStaticLogo} alt={title} />
-              </a>
-            ) : (
-              <a className="site-nav-logo">{title}</a>
-            )}
-          </Link>
+          {siteLogo && nextImages.feature ? (
+            <Link href="/" className="site-nav-logo">
+              <div
+                style={{
+                  height: `${targetHeight}px`,
+                  width: `${calcSiteLogoWidth(siteLogo, targetHeight)}px`,
+                }}
+              >
+                <Image className="site-nav-logo" src={siteLogo.url} alt={title} style={{ width: '100%', height: 'auto' }} quality={nextImages.quality} {...siteLogo.dimensions} />
+              </div>
+            </Link>
+          ) : site.logo ? (
+            <Link href="/" className="site-nav-logo">
+              <img src={site.logo} alt={title} />
+            </Link>
+          ) : siteStaticLogo ? (
+            <Link href="/" className="site-nav-logo site-nav-static-logo">
+              {/* eslint-disable @next/next/no-img-element */}
+              <img src={siteStaticLogo} alt={title} />
+            </Link>
+          ) : (
+            <Link href="/" className="site-nav-logo">
+              {title}
+            </Link>
+          )}
           <div className="site-nav-content">
             <Navigation data={navigation} />
             {postTitle && <span className={`nav-post-title ${site.logo ? `` : `dash`}`}>{postTitle}</span>}
@@ -107,5 +106,5 @@ export const SiteNav = ({ settings, className, postTitle }: SiteNavProps) => {
         {memberSubscriptions && <SubscribeButton {...{ lang: settings.lang }} />}
       </div>
     </nav>
-  )
+  );
 }

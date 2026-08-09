@@ -23,8 +23,8 @@ const supportsDarkMode = () => typeof window !== 'undefined' && window.matchMedi
 const supportsLightMode = () => typeof window !== 'undefined' && window.matchMedia(`(prefers-color-scheme: light)`).matches === true
 
 const getLocalStoragelsDark = () => {
-  if (typeof localStorage === 'undefined') return null
-  const dark = localStorage.getItem(`dark`)
+  if (typeof window === 'undefined' || typeof window.localStorage === 'undefined') return null
+  const dark = window.localStorage.getItem(`dark`)
   if (!dark) return null
   return dark === 'dark' ? 'dark' : 'light'
 }
@@ -63,9 +63,9 @@ export const ThemeProvider = ({ defaultMode, overrideOS, children }: SitesProvid
   }, [defaultMode, overrideOS])
 
   const toggleDark = () => {
-    if (dark === null) return
+    if (dark === null || typeof window === 'undefined') return
     const toggle = dark === 'dark' ? 'light' : 'dark'
-    localStorage.setItem(`dark`, toggle)
+    window.localStorage.setItem(`dark`, toggle)
     setDark(toggle)
   }
 

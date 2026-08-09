@@ -48,6 +48,7 @@ export function Contact({ cmsData }: PageProps) {
   }
 
   const featImg = page.featureImage
+  const pageTitle = page.title || ''
   const postClass = PostClass({ tags: page.tags, isPage: page && true, isImage: !!featImg })
   //const htmlAst = page.htmlAst
   //if (htmlAst === undefined) throw Error('Page.tsx: htmlAst must be defined.')
@@ -59,7 +60,7 @@ export function Contact({ cmsData }: PageProps) {
         <div className="inner">
           <article className={`post-full ${postClass}`}>
             <header className="post-full-header">
-              <h1 className="post-full-title">{page.title}</h1>
+              <h1 className="post-full-title">{pageTitle}</h1>
 
               {page.custom_excerpt && <p className="post-full-custom-excerpt">{page.custom_excerpt}</p>}
             </header>
@@ -69,9 +70,9 @@ export function Contact({ cmsData }: PageProps) {
                 <figure className="post-full-image" style={{ display: 'inherit' }}>
                   <Image
                     src={featImg.url}
-                    alt={page.title}
+                    alt={pageTitle}
                     quality={nextImages.quality}
-                    layout="responsive"
+                    style={{ width: '100%', height: 'auto' }}
                     sizes={`
                               (max-width: 350px) 350px,
                               (max-width: 530px) 530px,
@@ -86,7 +87,7 @@ export function Contact({ cmsData }: PageProps) {
                 page.feature_image && (
                   <figure className="post-full-image">
                     {/* eslint-disable @next/next/no-img-element */}
-                    <img src={page.feature_image} alt={page.title} />
+                    <img src={page.feature_image} alt={pageTitle} />
                   </figure>
                 )
               ))}

@@ -22,6 +22,7 @@ export const HeaderAuthor = ({ settings, author }: HeaderAuthorProps) => {
 
   const coverImg = author.cover_image || ''
   const profileImg = author.profileImage
+  const authorName = author.name || ''
 
   const numberOfPosts = author.count?.posts
 
@@ -37,22 +38,22 @@ export const HeaderAuthor = ({ settings, author }: HeaderAuthorProps) => {
           <div className="site-header-content author-header">
             {staticProfilePic ? (
               <div className="author-profile-image">
-                <Image className="author-profile-image" src={staticProfilePic} alt={author.name} layout="responsive" quality={nextImages.quality} width={500} height={500} />
+                <Image className="author-profile-image" src={staticProfilePic} alt={authorName} style={{ width: '100%', height: 'auto' }} quality={nextImages.quality} width={500} height={500} />
               </div>
             ) : profileImg && nextImages.feature ? (
               <div className="author-profile-image">
-                <Image className="author-profile-image" src={profileImg.url} alt={author.name} layout="responsive" quality={nextImages.quality} {...profileImg.dimensions} />
+                <Image className="author-profile-image" src={profileImg.url} alt={authorName} style={{ width: '100%', height: 'auto' }} quality={nextImages.quality} {...profileImg.dimensions} />
               </div>
             ) : author.profile_image ? (
               /* eslint-disable @next/next/no-img-element */
-              <img className="author-profile-image" src={author.profile_image} alt={author.name} />
+              <img className="author-profile-image" src={author.profile_image} alt={authorName} />
             ) : (
               <div className="author-profile-image">
                 <AvatarIcon />
               </div>
             )}
             <div className="author-header-content">
-              <h1 className="site-title">{author.name}</h1>
+              <h1 className="site-title">{authorName}</h1>
               {author.bio && <h2 className="author-bio">{author.bio}</h2>}
               <div className="author-meta">
                 {author.location && <div className="author-location">{author.location}</div>}

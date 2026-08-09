@@ -38,7 +38,7 @@ export function Search(props: SearchProps) {
     } else {
       setFilteredPosts(posts)
     }
-  }, [results])
+  }, [posts, query, results, setFilteredPosts])
 
   return (
     <div className="search-container" ref={searchRef}>

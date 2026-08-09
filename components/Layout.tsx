@@ -1,4 +1,4 @@
-import { ReactFragment } from 'react'
+import { ReactNode } from 'react'
 import Link from 'next/link'
 
 import { DocumentHead } from '@components/DocumentHead'
@@ -9,9 +9,9 @@ import { SubscribeSuccess } from '@components/SubscribeSuccess'
 
 import { getLang, get } from '@utils/use-lang'
 import { GhostSettings } from '@lib/ghost'
+import { resolveUrlPath } from '@utils/url'
 
 import { StickyNavContainer } from '@effects/StickyNavContainer'
-import { resolve } from 'url'
 
 /**
  * Main layout component
@@ -24,11 +24,11 @@ import { resolve } from 'url'
 
 interface LayoutProps {
   settings: GhostSettings
-  header: ReactFragment
-  children: ReactFragment
+  header: ReactNode
+  children: ReactNode
   isHome?: boolean
   sticky?: StickyNavContainer
-  previewPosts?: ReactFragment
+  previewPosts?: ReactNode
   bodyClass: string
   errorClass?: string
 }
@@ -67,7 +67,7 @@ export const Layout = ({ settings, header, children, isHome, sticky, previewPost
         <footer className="site-footer outer">
           <div className="site-footer-content inner">
             <section className="copyright">
-              <a href={resolve(siteUrl, '')}>{title}</a> &copy; {new Date().getFullYear()}
+              <a href={resolveUrlPath(siteUrl)}>{title}</a> &copy; {new Date().getFullYear()}
               <div>
                 Built with{' '}
                 <a href="https://nextjs.org" target="_blank" rel="noopener noreferrer">
@@ -86,7 +86,7 @@ export const Layout = ({ settings, header, children, isHome, sticky, previewPost
                 <a>{text(`LATEST_POSTS`)}</a>
               </Link> */}
               <Link href="/privacy-policy">
-                <a>{text(`PRIVACY_POLICY`)}</a>
+                {text(`PRIVACY_POLICY`)}
               </Link>
               {/* {site.facebook && (
                 <a href={facebookUrl} target="_blank" rel="noopener noreferrer">
@@ -114,5 +114,5 @@ export const Layout = ({ settings, header, children, isHome, sticky, previewPost
       {/* The big email subscribe modal content */}
       {memberSubscriptions && <SubscribeOverlay {...{ settings }} />}
     </>
-  )
+  );
 }

@@ -1,10 +1,10 @@
-import { ReactFragment } from 'react'
+import { ReactNode } from 'react'
 import { siteCover } from '@meta/siteDefaults'
 import Image from 'next/image'
 import { imageDimensions } from '@lib/images'
 interface HeaderBackgroundProps {
   srcImg: string
-  children: ReactFragment
+  children: ReactNode
 }
 
 export const HeaderBackground = ({ srcImg, children }: HeaderBackgroundProps) => {
@@ -16,7 +16,7 @@ export const HeaderBackground = ({ srcImg, children }: HeaderBackgroundProps) =>
         </div>
       ) : siteCover ? (
         <div className="site-cover-contianer">
-          <Image src={siteCover} layout="fill" objectFit="cover" quality={100} className="site-cover" priority />
+          <Image src={siteCover} alt="" fill style={{ objectFit: 'cover' }} quality={100} className="site-cover" priority />
           {children}
         </div>
       ) : (

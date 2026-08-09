@@ -64,24 +64,24 @@ export const PostCard = ({ settings, post, num, isHome }: PostCardProps) => {
               return (
                 <div key={tag.id} className="post-card-tag">
                   <Link href={resolveUrl({ cmsUrl, slug: tag.slug, url: tag.url })}>
-                    <a>{`${tag.name}`}&nbsp;</a>
+                    {`${tag.name}`}&nbsp;
                   </Link>
                   {`  ${post.tags && idx + 1 < post.tags?.slice(0, 3).length ? '-' : ''}`}
                 </div>
-              )
+              );
             })}
-          <Link href={url}>
-            <a className="post-card-content-link">
-              <header className="post-card-header">
-                {/* {post.primary_tag && <div className="post-card-primary-tag">{post.primary_tag.name}</div>} */}
+          <Link href={url} className="post-card-content-link">
 
-                <h2 className="post-card-title">{post.title}</h2>
-              </header>
-              <section className="post-card-excerpt">
-                {/* post.excerpt *is* an excerpt and does not need to be truncated any further */}
-                <p>{post.excerpt}</p>
-              </section>
-            </a>
+            <header className="post-card-header">
+              {/* {post.primary_tag && <div className="post-card-primary-tag">{post.primary_tag.name}</div>} */}
+
+              <h2 className="post-card-title">{post.title}</h2>
+            </header>
+            <section className="post-card-excerpt">
+              {/* post.excerpt *is* an excerpt and does not need to be truncated any further */}
+              <p>{post.excerpt}</p>
+            </section>
+
           </Link>
         </div>
 
@@ -94,8 +94,9 @@ export const PostCard = ({ settings, post, num, isHome }: PostCardProps) => {
                 {authors?.map((author, i) => (
                   <div key={i}>
                     {i > 0 ? `, ` : ``}
-                    <Link href={resolveUrl({ cmsUrl, slug: author.slug, url: author.url || undefined })}>
-                      <a>{author.name}</a>
+                    <Link
+                      href={resolveUrl({ cmsUrl, slug: author.slug, url: author.url || undefined })}>
+                      {author.name}
                     </Link>
                   </div>
                 ))}
@@ -109,5 +110,5 @@ export const PostCard = ({ settings, post, num, isHome }: PostCardProps) => {
         </footer>
       </div>
     </article>
-  )
+  );
 }

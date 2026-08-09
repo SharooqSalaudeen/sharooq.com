@@ -27,13 +27,13 @@ const createItems = (toc: IToC[], url: string, depth: number, maxDepth: number, 
     return (
       <li key={`${url}#${head.id}-${depth}-${index}`}>
         {head.id && (
-          <Link href={`${url}#${head.id}`}>
-            <a className={isActive ? 'link active' : 'link'}>{head.heading}</a>
+          <Link href={`${url}#${head.id}`} className={isActive ? 'link active' : 'link'}>
+            {head.heading}
           </Link>
         )}
         {head.items && isUnderDepthLimit(depth, maxDepth) && <ul className="sub">{createItems(head.items, url, depth + 1, maxDepth, activeHash, isDesktop)}</ul>}
       </li>
-    )
+    );
   })
 
 interface TableOfContentsProps {

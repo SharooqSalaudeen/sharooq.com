@@ -1,9 +1,9 @@
 import path from 'path'
-import { resolve } from 'url'
 import { existsSync } from 'fs'
 
 import { siteImage } from '@meta/siteDefaults'
 import { imageDimensions, imageDimensionsFromFile, Dimensions } from '@lib/images'
+import { resolveUrlPath } from '@utils/url'
 
 export interface ISeoImage {
   url: string
@@ -29,7 +29,7 @@ export const seoImage = async (props: SeoImageProps): Promise<ISeoImage> => {
   const publicRoot = path.join(process.cwd(), 'public')
   const file = path.join(publicRoot, imageName || siteImage)
 
-  const url = resolve(siteUrl, imageName || siteImage)
+  const url = resolveUrlPath(siteUrl, imageName || siteImage)
   if (existsSync(file)) {
     const dimensions = (await imageDimensionsFromFile(file)) || defaultDimensions
     return { url, dimensions }

@@ -59,25 +59,25 @@ export const HeaderIndex = ({ settings, pageTitle, pageDescription }: HeaderInde
                 pageTitle
               ) : siteLogo && nextFeatureImages ? (
                 <Link href="/">
-                  <a>
-                    <div
-                      className="site-logo"
-                      style={{
-                        marginTop: '8px',
-                        height: `${targetHeight}px`,
-                        width: `${calcSiteLogoWidth(siteLogo, targetHeight)}px`,
-                      }}
-                    >
-                      <Image src={siteLogo.url} alt={title} layout="responsive" quality={imageQuality} {...siteLogo.dimensions} />
-                    </div>
-                  </a>
+
+                  <div
+                    className="site-logo"
+                    style={{
+                      marginTop: '8px',
+                      height: `${targetHeight}px`,
+                      width: `${calcSiteLogoWidth(siteLogo, targetHeight)}px`,
+                    }}
+                  >
+                    <Image src={siteLogo.url} alt={title} style={{ width: '100%', height: 'auto' }} quality={imageQuality} {...siteLogo.dimensions} />
+                  </div>
+
                 </Link>
               ) : site.logo ? (
                 <Link href="/">
-                  <a>
-                    {/* eslint-disable @next/next/no-img-element */}
-                    <img className="site-logo" src={site.logo} alt={title} />
-                  </a>
+
+                  {/* eslint-disable @next/next/no-img-element */}
+                  <img className="site-logo" src={site.logo} alt={title} />
+
                 </Link>
               ) : (
                 title
@@ -102,5 +102,5 @@ export const HeaderIndex = ({ settings, pageTitle, pageDescription }: HeaderInde
         </div>
       </HeaderBackground>
     </header>
-  )
+  );
 }

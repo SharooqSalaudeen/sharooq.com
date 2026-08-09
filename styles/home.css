@@ -116,8 +116,9 @@ html.casper .home-subscribe-cta {
 /************************ Home Topic Cards *************************/
 
 html.casper .home-topic-cards {
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 16px 16px;
   margin: 0 48px;
 }
@@ -142,8 +143,8 @@ html.casper .home-topic-cards {
 }
 
 html.casper .home-topic-card {
-  grid-column: span 2;
   display: flex;
+  flex: 0 1 304px;
   flex-direction: row;
   align-items: center;
   gap: 10px;
@@ -151,19 +152,22 @@ html.casper .home-topic-card {
   justify-content: center;
   border-radius: 40px;
   color: black;
+  text-decoration: none;
   border: 0 solid rgba(0, 0, 0, 0.125);
   background-clip: border-box;
   box-shadow: 0 5px 20px 0 rgb(0 0 0 / 10%);
   transition: color 0.3s, transform 0.3s !important;
 }
 
-/* Center the 2 cards in the second row */
-html.casper .home-topic-card:nth-child(4) {
-  grid-column: 2 / span 2;
+html.casper .home-topic-card .icon {
+  display: flex;
+  flex: 0 0 30px;
+  align-items: center;
+  justify-content: center;
 }
 
-html.casper .home-topic-card:nth-child(5) {
-  grid-column: 4 / span 2;
+html.casper .home-topic-card .icon img {
+  display: block;
 }
 
 html.casper body.dark .home-topic-card {
