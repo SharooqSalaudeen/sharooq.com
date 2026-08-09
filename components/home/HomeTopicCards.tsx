@@ -52,11 +52,10 @@ export const HomeTopicCards = ({ settings }: HomeTopicCardsProps) => {
         {cards.map((topic, idx) => (
           <Link key={idx} href={topic.slug}>
             <div className="home-topic-card">
-              <div className="icon" style={{}}>
-                <Image src={topic.icon} alt={topic.name} layout="fixed" objectFit="fill" quality={nextImages.quality} width="48px" height="48px" />
+              <div className="icon">
+                <Image src={topic.icon} alt={topic.name} layout="fixed" objectFit="fill" quality={nextImages.quality} width="36px" height="36px" />
               </div>
-              <h2>{topic.name}</h2>
-              <p style={{ margin: '0' }}>{topic.desc}</p>
+              <span className="topic-name">{topic.name}</span>
             </div>
           </Link>
         ))}

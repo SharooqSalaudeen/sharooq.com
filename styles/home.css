@@ -118,9 +118,8 @@ html.casper .home-subscribe-cta {
 html.casper .home-topic-cards {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
-  gap: 14px;
-  text-align: center;
-  margin: 0 0 20px;
+  gap: 16px 16px;
+  margin: 0 48px;
 }
 
 /* Disabled on mobile */
@@ -130,12 +129,27 @@ html.casper .home-topic-cards {
   }
 }
 
+@media (max-width: 1170px) {
+  html.casper .home-topic-cards {
+    margin: 0 24px;
+  }
+}
+
+@media (max-width: 767px) {
+  html.casper .home-topic-cards {
+    margin: 0;
+  }
+}
+
 html.casper .home-topic-card {
   grid-column: span 2;
-  display: block;
-  padding: 1.35rem 1.5rem 1.55rem;
-  min-height: 200px;
-  border-radius: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  padding: 0.55rem 1.2rem;
+  justify-content: center;
+  border-radius: 40px;
   color: black;
   border: 0 solid rgba(0, 0, 0, 0.125);
   background-clip: border-box;
@@ -162,9 +176,10 @@ html.casper .home-topic-card:hover {
   cursor: pointer;
 }
 
-html.casper .home-topic-card h2 {
-  margin-top: 0.6rem;
-  margin-bottom: 0.5rem;
+html.casper .home-topic-card .topic-name {
+  font-size: 1.6rem;
+  font-weight: 600;
+  white-space: nowrap;
 }
 
 /************************ Post List *************************/
