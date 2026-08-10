@@ -16,13 +16,18 @@ const imageDomains = [
   'www.sharooq.com',
   'sharooq.com',
   ...(process.env.IMAGE_DOMAINS || '').split(','),
-].filter(Boolean)
+].map((domain) => domain.trim()).filter(Boolean)
+
+const remotePatterns = imageDomains.map((hostname) => ({
+  hostname,
+  pathname: '/**',
+}))
 
 const baseConfig = {
   // ...(process.env.NETLIFY === 'true' && { target: 'serverless' }),
   images: {
     deviceSizes: [320, 500, 680, 1040, 2080, 2048, 3120],
-    domains: imageDomains,
+    remotePatterns,
     qualities: [80, 100],
   },
   reactStrictMode: true,

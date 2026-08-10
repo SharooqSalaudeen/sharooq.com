@@ -168,16 +168,44 @@ const tableOfContents = (htmlAst: Node) => {
 
 interface ImageElement extends Node {
   tagName: string
-  properties: HTMLImageElement
+  properties: HTMLImageElement & NodeProperties
   imageDimensions: Promise<Dimensions | null> | Dimensions
 }
 
 interface ImageParent extends Parent {
+  tagName?: string
   properties?: NodeProperties
+}
+
+const addClassName = (properties: NodeProperties, className: string) => {
+  const classNames = properties.className || []
+  if (!classNames.includes(className)) {
+    properties.className = [...classNames, className]
+  }
+}
+
+const onlyImageChild = (node: ImageParent) => {
+  const meaningfulChildren = node.children.filter((child) => child.type !== 'text' || !!(child as Node).value?.trim())
+  const [child] = meaningfulChildren
+
+  return meaningfulChildren.length === 1 && child && 'tagName' in child && child.tagName === 'img' ? (child as ImageElement) : null
 }
 
 const rewriteInlineImages = async (htmlAst: Node) => {
   let nodes: { node: ImageElement; parent: ImageParent | undefined }[] = []
+
+  visit(htmlAst, { tagName: `p` }, (node: ImageParent, _index: number, parent: Parent | undefined) => {
+    if (parent?.type !== 'root') return
+
+    const image = onlyImageChild(node)
+    if (!image) return
+
+    node.tagName = 'figure'
+    node.properties = node.properties || {}
+    addClassName(node.properties, 'kg-card')
+    addClassName(node.properties, 'kg-image-card')
+    addClassName(image.properties, 'kg-image')
+  })
 
   visit(htmlAst, { tagName: `img` }, (node: ImageElement, _index: number, parent: ImageParent | undefined) => {
     if (nextImages.inline) {
