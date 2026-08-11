@@ -1709,7 +1709,7 @@ html.casper .basic-info .avatar-wrapper svg {
 /* ---------------------------------------------------------- */
 html.casper .subscribe-form {
   margin: 1.5em 0;
-  padding: 6.5vw 7vw 8vw;
+  padding: 4.5vw 7vw 6vw;
   border: color-mod(var(--lightgrey) l(+10%)) 1px solid;
   text-align: center;
   background: linear-gradient(color-mod(var(--whitegrey) l(+6%)), color-mod(var(--whitegrey) l(+4%)));
