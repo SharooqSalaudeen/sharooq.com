@@ -119,8 +119,8 @@ html.casper .home-topic-cards {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 16px 16px;
-  margin: 0 48px;
+  gap: 26px 16px;
+  margin: 0 48px 40px;
 }
 
 /* Disabled on mobile */
