@@ -1226,7 +1226,7 @@ html.casper .post-full-content p code {
 
 html.casper .post-full-content pre {
   overflow-x: auto;
-  margin: 1.5em 0 3em;
+  margin: 0 0 1.5em;
   padding: 20px;
   max-width: 100%;
   border: color-mod(var(--darkgrey) l(-10%)) 1px solid;
@@ -1257,7 +1257,7 @@ html.casper .post-full-content .fluid-width-video-wrapper {
 }
 
 html.casper .post-full-content hr {
-  margin: 2em 0;
+  margin: 0.5em 0;
 }
 
 html.casper .post-full-content hr:after {
